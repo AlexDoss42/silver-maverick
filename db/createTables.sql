@@ -30,18 +30,18 @@ create table pins (
 );
 
 create table trip (
-  group_id serial primary key,
+  trip_id serial primary key,
   group_leader boolean,
-  user_id int references user_id(users),
-  pin_id int references pin_id(pins)
+  user_id int references users(user_id),
+  pin_id int references pins(pin_id)
 );
 
 create table chat (
   chat_id serial primary key,
   message varChar(350),
   ts timestamp, 
-  user_id int references user_id(users),
-  group_id int references group_id(trip)
+  user_id int references users(user_id),
+  group_id int references trip(trip_id)
 );
 
 create table comments (
@@ -50,19 +50,19 @@ create table comments (
   vote int,
   global boolean,
   ts timestamp,
-  pin_id int references pin_id(pins),
-  user_id int references user_id(users),
-  group_id int references group_id(trip)
+  pin_id int references pins(pin_id),
+  user_id int references users(user_id),
+  group_id int references trip(trip_id)
 );
 
 create table gear (
   gear_id serial primary key,
   name varChar(50),
-  group_id int references group_id(trip)
+  group_id int references trip(trip_id)
 );
 
 create table todo (
   todo_id serial primary key,
   task varChar(180),
-  group_id int references group_id(trip)
+  group_id int references trip(trip_id)
 )
