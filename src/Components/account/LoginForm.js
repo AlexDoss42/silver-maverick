@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { updateUserId, updateUsername } from '../../redux/reducer'
+import { updateUserId, updateUsername } from '../../redux/reducers/accountReducer'
 import axios from 'axios'
 
 class LoginForm extends Component {

@@ -3,7 +3,11 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 
-const ctrl = require('./controller')
+const accCtrl = require('./controllers/accountController')
+// const pinCtrl = require('./controllers/pinController')
+// const tripCtrl = require('./controllers/tripController')
+// const todoCtrl = require('./controllers/todoController')
+// const gearCtrl = require('./controllers/gearController')
 
 const app = express()
 
@@ -26,3 +30,11 @@ massive(CONNECTION_STRING)
   console.log(`It's working! IT'S WORKING!!!!`);
   app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I have the ${SERVER_PORT} port`))
 })
+
+// Account Controller requests
+
+app.post('/auth/register', accCtrl.register)
+app.post('/auth/login', accCtrl.login)
+app.get('/auth/logout', accCtrl.logout)
+
+// app.get('/', pinCtrl.getPins)
