@@ -12,8 +12,6 @@ module.exports = {
 
     const { email, firstname, lastname, username, password, phone, facebook, instagram, profilePic } = req.body
 
-    console.log(11111, email, 11111)
-
 // Set up a session
 
     const { session } = req
@@ -48,7 +46,6 @@ module.exports = {
       profilePic
     }).catch(err => console.log(err))
 
-    console.log(22222, user_id, 222222)
 // Creates a sesion user to avoid having to login
 
     session.user = {
@@ -72,13 +69,11 @@ module.exports = {
     try {
       
       let user = await db.account.login({username})
-      console.log(11111, user, 11111)
       
       // Sets the user's session
       
       session.user = user[0]
-      console.log(22222, session.user, 22222)
-      
+     
 // Uses bcypt magic to see if the password is the right one with it's hash and salting
 
       const authenticated = bcrypt.compareSync(req.body.password, user[0].password)

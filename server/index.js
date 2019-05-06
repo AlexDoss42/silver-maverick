@@ -4,7 +4,7 @@ const massive = require('massive')
 const session = require('express-session')
 
 const accCtrl = require('./controllers/accountController')
-// const pinCtrl = require('./controllers/pinController')
+const pinCtrl = require('./controllers/pinController')
 // const tripCtrl = require('./controllers/tripController')
 // const todoCtrl = require('./controllers/todoController')
 // const gearCtrl = require('./controllers/gearController')
@@ -37,4 +37,6 @@ app.post('/auth/register', accCtrl.register)
 app.post('/auth/login', accCtrl.login)
 app.get('/auth/logout', accCtrl.logout)
 
-// app.get('/', pinCtrl.getPins)
+// Pin Controller requests
+
+app.get('/', pinCtrl.getAllPins)
