@@ -10,4 +10,4 @@ set title = ${title},
     state = ${state},
     country = ${country}
 
-where pin_id = ${pin_id}
+where pin_id = ${id};

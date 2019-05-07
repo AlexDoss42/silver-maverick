@@ -95,6 +95,48 @@ module.exports = {
     }
   },
 
+//   updateUser: async (req, res) => {
+
+//     const db = req.app.get('db')
+
+// // Gives you all the goodies you need to set up the account 
+
+//     const { email, firstname, lastname, username, password, phone, facebook, instagram, profilePic } = req.body
+
+// // Set up a session
+
+//     const { session } = req
+
+// // Transforms password into hash for security purposes
+
+//     const salt = bcrypt.genSaltSync(10)
+//     const hash = bcrypt.hashSync(password, salt)
+
+// // Registers a new user
+    
+//     const user_id = await db.account.signUp({
+//       firstname, 
+//       lastname, 
+//       email, 
+//       username, 
+//       hash,
+//       phone,
+//       facebook,
+//       instagram,
+//       profilePic
+//     }).catch(err => console.log(err))
+
+// // Creates a sesion user to avoid having to login
+
+//     session.user = {
+//       username,
+//       hash,
+//       login_id: user_id[0].balance_id
+//     }
+//     res.sendStatus(200)
+
+//   },
+
   logout: (req, res) => {
     req.session.destroy()
     res.sendStatus(200)

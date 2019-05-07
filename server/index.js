@@ -40,3 +40,6 @@ app.get('/auth/logout', accCtrl.logout)
 // Pin Controller requests
 
 app.get('/', pinCtrl.getAllPins)
+app.post('/pin', pinCtrl.createPin)
+app.put('/pin/:id', pinCtrl.updatePin)
+app.delete('/pin/:id', pinCtrl.deletePin)
