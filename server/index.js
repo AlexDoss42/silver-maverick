@@ -5,7 +5,7 @@ const session = require('express-session')
 
 const accCtrl = require('./controllers/accountController')
 const pinCtrl = require('./controllers/pinController')
-// const tripCtrl = require('./controllers/tripController')
+const tripCtrl = require('./controllers/tripController')
 // const todoCtrl = require('./controllers/todoController')
 // const gearCtrl = require('./controllers/gearController')
 
@@ -40,7 +40,13 @@ app.get('/auth/logout', accCtrl.logout)
 
 // Pin Controller requests
 
-app.get('/', pinCtrl.getAllPins)
+app.get('/pin', pinCtrl.getAllPins)
 app.post('/pin', pinCtrl.createPin)
 app.put('/pin/:id', pinCtrl.updatePin)
 app.delete('/pin/:id', pinCtrl.deletePin)
+
+// Trip Controller requests
+
+app.get('/trip', tripCtrl.getTrips)
+app.get('/trip', tripCtrl.getATrip)
+app.delete('/trip/:id', tripCtrl.deleteTrip)
