@@ -35,6 +35,7 @@ massive(CONNECTION_STRING)
 
 app.post('/auth/register', accCtrl.register)
 app.post('/auth/login', accCtrl.login)
+app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 
 // Pin Controller requests

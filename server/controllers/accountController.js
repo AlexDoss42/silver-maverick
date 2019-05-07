@@ -95,47 +95,33 @@ module.exports = {
     }
   },
 
-//   updateUser: async (req, res) => {
+  updateUser: async (req, res) => {
 
-//     const db = req.app.get('db')
+    const db = req.app.get('db')
 
-// // Gives you all the goodies you need to set up the account 
+// Gives you the id of the User you want to update from params
 
-//     const { email, firstname, lastname, username, password, phone, facebook, instagram, profilePic } = req.body
+    const { id } = req.params
 
-// // Set up a session
+// Gives you all the goodies you need to update the account 
 
-//     const { session } = req
+    const { email, firstname, lastname, phone, facebook, instagram, profilePic } = req.body
 
-// // Transforms password into hash for security purposes
-
-//     const salt = bcrypt.genSaltSync(10)
-//     const hash = bcrypt.hashSync(password, salt)
-
-// // Registers a new user
+// updates the user info
     
-//     const user_id = await db.account.signUp({
-//       firstname, 
-//       lastname, 
-//       email, 
-//       username, 
-//       hash,
-//       phone,
-//       facebook,
-//       instagram,
-//       profilePic
-//     }).catch(err => console.log(err))
-
-// // Creates a sesion user to avoid having to login
-
-//     session.user = {
-//       username,
-//       hash,
-//       login_id: user_id[0].balance_id
-//     }
-//     res.sendStatus(200)
-
-//   },
+   db.account.updateUser({
+      id,
+      firstname, 
+      lastname, 
+      email, 
+      phone,
+      facebook,
+      instagram,
+      profilePic
+    })
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+  },
 
   logout: (req, res) => {
     req.session.destroy()

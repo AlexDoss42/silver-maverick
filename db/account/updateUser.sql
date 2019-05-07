@@ -8,4 +8,4 @@ set firstname = ${firstname},
     instagram = ${instagram},
     profilePic = ${profilePic}
 
-where user_id = ${user_id}
+where user_id = ${id}
