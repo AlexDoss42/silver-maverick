@@ -4,34 +4,69 @@ import React, {Component} from 'react';
 class Chat extends Component {
   constructor(){
     super()
-    const socket = io.connect('http://localhost:4242');
 
-    socket.on('chat', function(data){
-      // feedback.innerHTML = ''
-      // output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>'
-    });
+    this.state = {
+      conversation: [],
+      message: '',
+      feedback: '',
+      username: ''
+    }
+
+    this.socket = io.connect('http://localhost:4242');
     
-    socket.on('typing', function(data){
-      // feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-    });
+    this.socket.on('chat',data => this.addMessage(data));
 
   }
 
-  render() {
-    return (
+  addMessage = (data) => {
+    const newConvo = this.state.conversation.slice()
+    console.log(newConvo)
+    newConvo.push(data.message)
+    this.setState({
+      conversation: newConvo
+    })
+  }
 
-      <div id="mario-chat">
+  handleOnClick = () => {
+    this.socket.emit('chat', {
+      message: this.state.message,
+      username: this.state.username
+    })
+
+  }
+
+  handleOnChange = (e) =>{
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  render() {
+    const { conversation } = this.state
+    return (
+      <div id="adventure-chat">
         <div id="chat-window">
-          <div id="output"></div>
-          <div id="feedback"></div>
+          <div id="output">{ conversation.map((message) => {
+            return (<p>{message}</p>)
+          }) }</div>
         </div>
-        <input id='handle' type="text" placeholder="Handle" />
-        <input id='message' type="text" placeholder="Message" />
-        <button id='send'>Send</button>
+        
+        <input 
+        id='message' 
+        name='message' 
+        type="text" 
+        placeholder="Message" 
+        value={ this.state.message }
+        onChange = { this.handleOnChange }/>
+        
+        <button 
+        id='send'
+        onClick={ this.handleOnClick }>
+        Send</button>
+
       </div>
     )
   }
 }
-
 
 export default Chat
