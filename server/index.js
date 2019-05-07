@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
+const socket = require('socket.io')
 
 const accCtrl = require('./controllers/accountController')
 const pinCtrl = require('./controllers/pinController')
@@ -28,8 +29,9 @@ massive(CONNECTION_STRING)
 .then((db) => {
   app.set('db', db)
   console.log(`It's working! IT'S WORKING!!!!`);
-  app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I have the ${SERVER_PORT} port`))
 })
+
+const server = app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I have the ${SERVER_PORT} port`))
 
 // Account Controller requests
 
@@ -49,4 +51,26 @@ app.delete('/pin/:id', pinCtrl.deletePin)
 
 app.get('/trip', tripCtrl.getTrips)
 app.get('/trip', tripCtrl.getATrip)
+app.post('/trip', tripCtrl.createATrip)
 app.delete('/trip/:id', tripCtrl.deleteTrip)
+
+
+// Sockets stuff
+
+const io = socket(server);
+
+io.on('connection', function(socket){
+  console.log('Made contact with the socket', socket.id);
+
+  //Handle Chat Event
+  socket.on('chat', function(data){
+    //Should add the db.something right here for full stack chat and enable persistence 
+    io.sockets.emit('chat', data);
+  });
+
+  //Handle Typing Event
+  socket.on('typing', function(data){
+    socket.broadcast.emit('typing', data)
+  });
+
+});

@@ -1,10 +1,10 @@
 import React from 'react'
-import LoginForm from './LoginForm'
+// import LoginForm from './LoginForm'
 
 const Home = () => (
   <div>
     <h1>Login</h1>
-    <LoginForm />
+    {/* <LoginForm /> */}
   </div>
 )
 
