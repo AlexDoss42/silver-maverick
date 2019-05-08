@@ -7,7 +7,7 @@ import router from './router'
 
 
 import Navbar from './Components/Navbar'
-import Chat from './Components/Chat'
+import Chat from './Components/trip/Chat'
 
 function App() {
  return (

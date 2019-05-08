@@ -13,6 +13,12 @@ const Navbar = ({username}) => (
             <li>
                 <Link to='/login'>Login</Link>
             </li>
+            <li>
+                <Link to='/createATrip'>Create A Trip</Link>
+            </li>
+            <li>
+                <Link to='/myTrips'>My Trips</Link>
+            </li>
         </ul>
     {username && <div>Welcome, {username}</div>}
     </nav>
