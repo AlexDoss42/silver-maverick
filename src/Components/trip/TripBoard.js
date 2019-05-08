@@ -1,7 +1,12 @@
 import React from 'react'
+import PinTile from '../tiles/PinTile'
+const TripBoard = () => (
+  <div>
+    <h4>All ideas of the things to do on this trip</h4>
+    <PinTile />
+  </div>
 
-const TopBoard = () => (
-  <h1>TRIP BOARD WITH ALL THE PINS MAPPED OVER</h1>
+
 )
 
-export default TopBoard
+export default TripBoard

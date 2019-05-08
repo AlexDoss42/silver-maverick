@@ -37,6 +37,7 @@ const server = app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I ha
 
 app.post('/auth/register', accCtrl.register)
 app.post('/auth/login', accCtrl.login)
+// app.post('/auth/details', accCtrl.getDetails)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 

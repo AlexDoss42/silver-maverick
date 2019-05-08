@@ -1,11 +1,28 @@
-import React from 'react'
-// import LoginForm from './LoginForm'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import LoginForm from './LoginForm'
 
-const Home = () => (
-  <div>
-    <h1>Login</h1>
-    {/* <LoginForm /> */}
-  </div>
-)
+class Login extends Component {
+    componentDidMount() {
+        if (this.props.username) {
+            this.props.history.push('/info')
+        }
+    }
+    render() {
+        return (
+            <div>
+                <LoginForm />
+               {this.props.children}
+                
+            </div>
+        )
+    }
+}
 
-export default Home
+const mapStateToProps = (reduxState) => {
+    const { username } = reduxState
+  return { username }
+}
+
+export default connect(mapStateToProps)(withRouter(Login))

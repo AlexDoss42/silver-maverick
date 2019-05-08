@@ -1,28 +1,55 @@
-import axios from 'axios'
-
 const initialState = {
-  email: null,
-  firstName: null,
-  lastName: null
+  user_id: null,
+  username: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
+  facebook: '',
+  instagram: '',
+  profilePic: '',
+  authenticated: false
 }
 
-const REQUEST_USER_DATA = 'REQUEST_USER_DATA'
+const UPDATE_USER_ID = "UPDATE_USER_ID"
+const UPDATE_USERNAME = "UPDATE_USERNAME"
+const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS"
 
-export const requestUserData = () => {
-  const data = axios.get('/auth/user-data')
-  .then(res => res.data);
+
+export function updateUserId(id) {
   return {
-    type: REQUEST_USER_DATA,
-    payload: data
+    type: UPDATE_USER_ID,
+    payload: id
   }
 }
 
-export default function accountReducer(state = initialState, action) {
-  switch (action.type) {
+export function updateUsername(username) {
+  return {
+    type: UPDATE_USERNAME,
+    payload: username
+  }
+}
 
-    case `${REQUEST_USER_DATA}_FULFILLED`:
-      const { email, firstName, lastName } = action.payload.user
-      return  { email, firstName, lastName }
+export function updateUserDetails(obj) {
+  return {
+    type: UPDATE_USER_DETAILS,
+    payload: obj
+  }
+}
+
+export default function reducer(state = initialState, action){
+  const { type, payload } = action
+  switch(type){
+    case UPDATE_USER_ID: 
+      return { ...state, user_id: payload }
+
+    case UPDATE_USERNAME:
+      return { ...state, username: payload }
+
+    case UPDATE_USER_DETAILS:
+    const { firstname, lastname, email, phone, facebook, instagram, profilePic} = payload
+      return { ...state, firstname, lastname, email, phone, facebook, instagram, profilePic }
+    
     default: 
       return state
   }

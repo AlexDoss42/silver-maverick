@@ -10,9 +10,18 @@ const Navbar = ({username}) => (
             <li>
                 <Link to='/'>Home</Link>
             </li>
+
+{/* Render the login/register upon landing on the site */}
+
             <li>
                 <Link to='/login'>Login</Link>
             </li>
+            <li>
+                <Link to='/register'>Register</Link>
+            </li>
+
+{/* Render these once you have logged in */}
+
             <li>
                 <Link to='/createATrip'>Create A Trip</Link>
             </li>
@@ -20,7 +29,9 @@ const Navbar = ({username}) => (
                 <Link to='/myTrips'>My Trips</Link>
             </li>
         </ul>
+
     {username && <div>Welcome, {username}</div>}
+
     </nav>
 )
 

@@ -9,14 +9,14 @@ import Chat from './Chat'
 
 const Trip = () => (
   <div>
-    <h1>MY TRIP</h1>
+    <h1>TRIP</h1>
     <Calendar />
     <Weather />
     <Group />
     <TodoList />
     <Gear />
-    <TripBoard />
     <Chat />
+    <TripBoard />
   </div>
 )
 
