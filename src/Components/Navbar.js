@@ -1,16 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 const Navbar = ({username}) => (
  
     <nav>
         <span>TripDaddy</span>
         <ul>
-            <li>
-                <Link to='/'>Home</Link>
-            </li>
-
 {/* Render the login/register upon landing on the site */}
 
             <li>
@@ -23,23 +19,27 @@ const Navbar = ({username}) => (
 {/* Render these once you have logged in */}
 
             <li>
-                <Link to='/createATrip'>Create A Trip</Link>
+                <Link to='/'>Home</Link>
             </li>
             <li>
-                <Link to='/myTrips'>My Trips</Link>
+                <Link to='/profile'>Profile</Link>
+            </li>
+            <li>
+                <Link to='/logout'>Logout</Link>
             </li>
         </ul>
-
+    
     {username && <div>Welcome, {username}</div>}
-
     </nav>
 )
 
-// const mapStateToProps = (reduxState) => {
-//     const { username } = reduxState
-//     return { username }
-// }
+const mapStateToProps = (reduxState) => {
+    const { username } = reduxState.account
+    console.log(username)
+    console.log(reduxState.account)
+    return { username }
+}
 
-export default Navbar
+// export default Navbar
 
-// export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(Navbar)
