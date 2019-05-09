@@ -41,6 +41,11 @@ app.post('/auth/login', accCtrl.login)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 
+
+// Session management
+
+app.get('/api/session', accCtrl.jamSesh)
+
 // Pin Controller requests
 
 app.get('/pin', pinCtrl.getAllPins)

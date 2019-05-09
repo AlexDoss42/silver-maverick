@@ -64,19 +64,29 @@ module.exports = {
 //  Sets username as an alias for LoginUsername and pulls it off the req body
 
     const { loginUsername : username } = req.body
+
     // Bryan uses try but it works so we are going with it
+
     console.log(req.body)
     try {
       let user = await db.account.login({username})
+
       // Sets the user's session
+
       session.user = user[0]
+
 // Uses bcypt magic to see if the password is the right one with it's hash and salting
+
       const authenticated = bcrypt.compareSync(req.body.loginPassword, user[0].password)
+
 // If the password matches it logs them in
+
       if(authenticated){
         res.status(200).send({authenticated, user_id: user[0].login_id})
       } 
+
 // Or it throws the error if the password doesn't match
+
       else {
         throw new Error(401)
       }
@@ -98,6 +108,10 @@ module.exports = {
     } catch(err) {
       res.sendStatus(500)
     }
+  },
+
+  jamSesh: (req, res) => {
+    res.send(req.session.user)
   },
 
   updateUser: async (req, res) => {
