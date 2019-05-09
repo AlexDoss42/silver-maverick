@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios';
 
-import { updateUserId, updateUsername } from '../redux/reducers/accountReducer'
+import { updateUserId, updateEmail } from '../redux/reducers/accountReducer'
 
 
 class Navbar extends Component {
@@ -11,7 +11,7 @@ class Navbar extends Component {
     componentDidMount() {
         axios.get('/auth/session')
             .then(res => {
-                this.props.updateUsername(res.data.username)
+                this.props.updateEmail(res.data.email)
             })
     }
 
@@ -19,22 +19,23 @@ class Navbar extends Component {
         e.preventDefault()
         axios.get('/auth/logout')
             .then(res => {
-                console.log('YOU HAVE LOGGED OUT... Dueces')
-                this.props.updateUsername(res.data.username)
+                this.props.updateEmail(res.data.email)
                 this.props.updateUserId(res.data.user_id)
+                this.props.history.push('/')
             })
 
 
     }
 
     render() {
-        const { username } = this.props
+        const { email, username } = this.props
         return (
             <nav>
                 <span>TripDaddy</span>
+
                 {/* Render the login/register upon landing on the site */}
 
-                {!username && 
+                {!email && 
                 <div>
                     <ul>
                         <li>
@@ -49,7 +50,7 @@ class Navbar extends Component {
 
                 {/* Render these once you have logged in */}
 
-                {username && 
+                {email && 
                 <div>
                     <h3>
                         Welcome, {username}
@@ -75,17 +76,18 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { username } = reduxState.account
-    console.log(username)
-    console.log(reduxState.account)
-    return { username }
+    const { email, username } = reduxState.account
+    console.log("navbar username: ", username)
+    console.log("navbar email: ", email)
+    console.log("navbar redux State: ", reduxState.account)
+    return { email, username }
 }
 
 const mapDispatchToProps = {
     updateUserId,
-    updateUsername
+    updateEmail
 }
 
 // export default Navbar
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))

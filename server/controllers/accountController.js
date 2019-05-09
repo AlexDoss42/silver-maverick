@@ -49,7 +49,7 @@ module.exports = {
 // Creates a sesion user to avoid having to login
 
     session.user = {
-      username,
+      email,
       hash,
       login_id: user_id[0].balance_id
     }
@@ -61,15 +61,16 @@ module.exports = {
     const db = req.app.get('db')
     const { session } = req
 
-//  Sets username as an alias for LoginUsername and pulls it off the req body
+//   pulls email off the req body
 
-    const { loginUsername : username } = req.body
+    const { loginEmail : email } = req.body
 
     // Bryan uses try but it works so we are going with it
 
     console.log(req.body)
     try {
-      let user = await db.account.login({username})
+      let user = await db.account.login({email})
+      console.log(1111,user,1111)
 
       // Sets the user's session
 

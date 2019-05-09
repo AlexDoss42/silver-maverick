@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const UPDATE_USER_ID = "UPDATE_USER_ID"
-const UPDATE_USERNAME = "UPDATE_USERNAME"
+const UPDATE_EMAIL = "UPDATE_EMAIL"
 const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS"
 
 
@@ -23,10 +23,10 @@ export function updateUserId(id) {
   }
 }
 
-export function updateUsername(username) {
+export function updateEmail(email) {
   return {
-    type: UPDATE_USERNAME,
-    payload: username
+    type: UPDATE_EMAIL,
+    payload: email
   }
 }
 
@@ -43,8 +43,8 @@ export default function reducer(state = initialState, action){
     case UPDATE_USER_ID: 
       return { ...state, user_id: payload }
 
-    case UPDATE_USERNAME:
-      return { ...state, username: payload }
+    case UPDATE_EMAIL:
+      return { ...state, email: payload }
 
     case UPDATE_USER_DETAILS:
     const { firstname, lastname, email, phone, facebook, instagram, profilePic} = payload

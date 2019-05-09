@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { updateUserId, updateUsername } from '../../redux/reducers/accountReducer'
+import { updateUserId, updateEmail } from '../../redux/reducers/accountReducer'
 import axios from 'axios'
 
 class LoginForm extends Component {
     constructor() {
         super()
         this.state = {
-            loginUsername: '',
+            loginEmail: '',
             loginPassword: '',
             loginError: false,
-            loginErrorMessage: 'Username or password is incorrect. Please try again'
+            loginErrorMessage: 'Email or Password is incorrect. Please try again'
         }
     }
 
@@ -24,14 +24,16 @@ class LoginForm extends Component {
 
     handleLoginFormSubmit = async (e) => {
         e.preventDefault()
-        const { loginUsername, loginPassword } = this.state
+        const { loginEmail, loginPassword } = this.state
         try {
-            const res = await axios.post('/auth/login', { loginUsername, loginPassword })
-            this.props.updateUsername(loginUsername)
+            const res = await axios.post('/auth/login', { loginEmail, loginPassword })
+            console.log('TRY!!!!', 'loginEmail: ', loginEmail, 'loginPassword: ', loginPassword)
+            this.props.updateEmail(res.data.loginEmail)
             this.props.updateUserId(res.data.user_id)
             this.props.history.push('/')
         } catch (err) {
-            this.setState({ loginUsername: '', loginPassword: '', loginError: true })
+            console.log('ERROR!!!!', 'loginEmail: ', loginEmail, 'loginPassword: ', loginPassword)
+            this.setState({ loginEmail: '', loginPassword: '', loginError: true })
         }
     }
 
@@ -42,15 +44,15 @@ class LoginForm extends Component {
                 <form onSubmit= {this.handleLoginFormSubmit}>
                     <input
                         type='text'
-                        name='loginUsername'
-                        placeholder='username'
-                        value={this.state.loginUsername}
+                        name='loginEmail'
+                        placeholder='Email'
+                        value={this.state.loginEmail}
                         onChange={this.handleFormInputUpdate}
                     />
                     <input
                         type='text'
                         name='loginPassword'
-                        placeholder='password'
+                        placeholder='Password'
                         value={this.state.loginPassword}
                         onChange={this.handleFormInputUpdate}
                     />
@@ -64,7 +66,7 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = {
   updateUserId,
-  updateUsername
+  updateEmail
 }
 
 export default connect(null, mapDispatchToProps)(withRouter(LoginForm))

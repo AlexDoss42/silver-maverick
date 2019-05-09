@@ -5,7 +5,7 @@ import LoginForm from './LoginForm'
 
 class Login extends Component {
     componentDidMount() {
-        if (this.props.username) {
+        if (this.props.email) {
             this.props.history.push('/')
         }
     }
@@ -21,8 +21,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { username } = reduxState
-  return { username }
+    const { email } = reduxState
+  return { email }
 }
 
 export default connect(mapStateToProps)(withRouter(Login))
