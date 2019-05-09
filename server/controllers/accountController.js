@@ -110,7 +110,7 @@ module.exports = {
     }
   },
 
-  jamSesh: (req, res) => {
+  getSession: (req, res) => {
     res.send(req.session.user)
   },
 

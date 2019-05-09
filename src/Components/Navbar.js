@@ -5,44 +5,71 @@ import axios from 'axios';
 
 import { updateUserId, updateUsername } from '../redux/reducers/accountReducer'
 
+
 class Navbar extends Component {
 
- componentDidMount() {
-     axios.get('/api/session')
-     .then(res => {
-         this.props.updateUsername(res.data.username)
-     })    
- }
-    render(){
+    componentDidMount() {
+        axios.get('/auth/session')
+            .then(res => {
+                this.props.updateUsername(res.data.username)
+            })
+    }
+
+    handleLogoutSubmit = (e) => {
+        e.preventDefault()
+        axios.get('/auth/logout')
+            .then(res => {
+                console.log('YOU HAVE LOGGED OUT... Dueces')
+                this.props.updateUsername(res.data.username)
+                this.props.updateUserId(res.data.user_id)
+            })
+
+
+    }
+
+    render() {
         const { username } = this.props
         return (
             <nav>
-            <span>TripDaddy</span>
-            <ul>
-    {/* Render the login/register upon landing on the site */}
+                <span>TripDaddy</span>
+                {/* Render the login/register upon landing on the site */}
 
-                <li>
-                    <Link to='/login'>Login</Link>
-                </li>
-                <li>
-                    <Link to='/register'>Register</Link>
-                </li>
+                {!username && 
+                <div>
+                    <ul>
+                        <li>
+                            <Link to='/login'>Login</Link>
+                        </li>
+                        <li>
+                            <Link to='/register'>Register</Link>
+                        </li>
+                    </ul>
+                </div>}
 
-    {/* Render these once you have logged in */}
 
-                <li>
-                    <Link to='/'>Home</Link>
-                </li>
-                <li>
-                    <Link to='/profile'>Profile</Link>
-                </li>
-                <li>
-                    <Link to='/logout'>Logout</Link>
-                </li>
-            </ul>
-        
-        {username && <div>Welcome, {username}</div>}
-        </nav>
+                {/* Render these once you have logged in */}
+
+                {username && 
+                <div>
+                    <h3>
+                        Welcome, {username}
+                    </h3>
+                    <ul>
+                        <li>
+                            <Link to='/'>Home</Link>
+                        </li>
+                        <li>
+                            <Link to='/profile'>Profile</Link>
+                        </li>
+                        <li>
+                            <button
+                                onClick={this.handleLogoutSubmit}
+                            >Logout</button>
+                        </li>
+                    </ul>
+                </div>
+                }
+            </nav>
         )
     }
 }

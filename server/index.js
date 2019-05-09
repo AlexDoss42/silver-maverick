@@ -44,7 +44,7 @@ app.get('/auth/logout', accCtrl.logout)
 
 // Session management
 
-app.get('/api/session', accCtrl.jamSesh)
+app.get('/auth/session', accCtrl.getSession)
 
 // Pin Controller requests
 
