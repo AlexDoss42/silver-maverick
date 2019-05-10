@@ -27,12 +27,12 @@ class LoginForm extends Component {
         const { loginEmail, loginPassword } = this.state
         try {
             const res = await axios.post('/auth/login', { loginEmail, loginPassword })
-            console.log('TRY!!!!', 'loginEmail: ', loginEmail, 'loginPassword: ', loginPassword)
+            console.log('res.data from handleLogin: ',res.data)
+            
             this.props.updateEmail(res.data.loginEmail)
             this.props.updateUserId(res.data.user_id)
             this.props.history.push('/')
         } catch (err) {
-            console.log('ERROR!!!!', 'loginEmail: ', loginEmail, 'loginPassword: ', loginPassword)
             this.setState({ loginEmail: '', loginPassword: '', loginError: true })
         }
     }
@@ -56,7 +56,9 @@ class LoginForm extends Component {
                         value={this.state.loginPassword}
                         onChange={this.handleFormInputUpdate}
                     />
-                    <button>Login</button>
+
+                        <button>Login</button>
+
                 </form>
         {this.state.loginError && <h3>{this.state.loginErrorMessage}</h3>}
             </>

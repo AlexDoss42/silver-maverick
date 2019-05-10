@@ -8,12 +8,12 @@ import { updateUserId, updateEmail } from '../redux/reducers/accountReducer'
 
 class Navbar extends Component {
 
-    componentDidMount() {
-        axios.get('/auth/session')
-            .then(res => {
-                this.props.updateEmail(res.data.email)
-            })
-    }
+    // componentDidMount() {
+    //     axios.get('/auth/session')
+    //         .then(res => {
+    //             this.props.updateEmail(res.data.email)
+    //         })
+    // }
 
     handleLogoutSubmit = (e) => {
         e.preventDefault()
@@ -42,7 +42,7 @@ class Navbar extends Component {
                             <Link to='/login'>Login</Link>
                         </li>
                         <li>
-                            <Link to='/register'>Register</Link>
+                            <Link to='/signup'>Sign up</Link>
                         </li>
                     </ul>
                 </div>}
@@ -63,6 +63,7 @@ class Navbar extends Component {
                             <Link to='/profile'>Profile</Link>
                         </li>
                         <li>
+
                             <button
                                 onClick={this.handleLogoutSubmit}
                             >Logout</button>

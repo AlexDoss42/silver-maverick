@@ -10,7 +10,7 @@ module.exports = {
 
 // Gives you all the goodies you need to set up the account 
 
-    const { email, firstname, lastname, username, password, phone, facebook, instagram, profilePic } = req.body
+    const { firstname, lastname, email, username, password, phone, facebook, instagram, profilePic } = req.body
 
 // Set up a session
 
@@ -24,7 +24,7 @@ module.exports = {
     emailTaken = +emailTaken[0].count
     
     if(emailTaken !== 0) {
-      return res.status(409).send(alert('That email is already being used'))
+      return res.sendStatus(409)
     }
     
 // Transforms password into hash for security purposes
@@ -53,7 +53,7 @@ module.exports = {
       hash,
       login_id: user_id[0].balance_id
     }
-    res.sendStatus(200)
+    res.status(200).send(user_id)
 
   },
 
@@ -61,16 +61,17 @@ module.exports = {
     const db = req.app.get('db')
     const { session } = req
 
-//   pulls email off the req body
+//   pulls loginEmail as email off the req body
 
     const { loginEmail : email } = req.body
 
-    // Bryan uses try but it works so we are going with it
+    // Bryan uses 'try' but it works so we are going with it
 
-    console.log(req.body)
+    console.log('req.body: ', req.body)
     try {
       let user = await db.account.login({email})
-      console.log(1111,user,1111)
+      
+      console.log('user from db.account.login: ', user)
 
       // Sets the user's session
 
@@ -79,16 +80,20 @@ module.exports = {
 // Uses bcypt magic to see if the password is the right one with it's hash and salting
 
       const authenticated = bcrypt.compareSync(req.body.loginPassword, user[0].password)
+      console.log('req.body.password: ',req.body.loginPassword)
+      console.log('user0.password: ', user[0].password)
+      console.log('authenticated: ', authenticated)
 
 // If the password matches it logs them in
 
       if(authenticated){
-        res.status(200).send({authenticated, user_id: user[0].login_id})
+        res.status(200).send({authenticated, user_id: user[0].login_id, loginEmail: user[0].email})
       } 
 
 // Or it throws the error if the password doesn't match
 
       else {
+        console.log('This is the else error')
         throw new Error(401)
       }
     } catch(err) {
@@ -100,10 +105,11 @@ module.exports = {
   getDetails: async (req, res) => {
     const db = req.app.get('db')
     const { session } = req
+    console.log('session: ', session)
     try {
-      const {login_id : id } = session.user
-      console.log(id)
-      const data = await db.getUserDetails({id})
+      const { email } = session.user
+      console.log(email)
+      const data = await db.account.getDetails({email})
       console.log(data)
       res.status(200).send(data[0])
     } catch(err) {

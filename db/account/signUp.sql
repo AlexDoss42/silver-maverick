@@ -1,3 +1,13 @@
+insert into user_login (
+  username, 
+  password,
+  email
+) values (
+  ${username},
+  ${hash},
+  ${email}
+);
+
 insert into users (
   firstname, 
   lastname, 
@@ -14,14 +24,5 @@ insert into users (
   ${facebook},
   ${instagram},
   ${profilePic}
-);
+)returning user_id;
 
-insert into user_login (
-  username, 
-  password,
-  email
-) values (
-  ${username},
-  ${hash},
-  ${email}
-) returning username, password, email;

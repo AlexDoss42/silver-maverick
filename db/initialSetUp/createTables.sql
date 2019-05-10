@@ -6,12 +6,12 @@ create table users (
   phone varChar(20),
   facebook varChar(50),
   instagram varChar(50),
+  username varChar(50),
   profilePic text
 );
 
 create table user_login (
   login_id serial primary key,
-  username varChar(50),
   password text,
   email varChar(50)
 );
