@@ -78,9 +78,6 @@ class Navbar extends Component {
 
 const mapStateToProps = (reduxState) => {
     const { email, username } = reduxState.account
-    console.log("navbar username: ", username)
-    console.log("navbar email: ", email)
-    console.log("navbar redux State: ", reduxState.account)
     return { email, username }
 }
 

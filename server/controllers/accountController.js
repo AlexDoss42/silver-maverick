@@ -19,8 +19,7 @@ module.exports = {
 // Checks to see if the email is already in the system
     
     let emailTaken = await db.account.verifyEmail({email})
-    .catch(err => console.log(33333, err, 33333))
-    
+    .catch(err => console.log(33333, err))
     emailTaken = +emailTaken[0].count
     
     if(emailTaken !== 0) {
@@ -67,12 +66,9 @@ module.exports = {
 
     // Bryan uses 'try' but it works so we are going with it
 
-    console.log('req.body: ', req.body)
     try {
       let user = await db.account.login({email})
       
-      console.log('user from db.account.login: ', user)
-
       // Sets the user's session
 
       session.user = user[0]
@@ -80,24 +76,16 @@ module.exports = {
 // Uses bcypt magic to see if the password is the right one with it's hash and salting
 
       const authenticated = bcrypt.compareSync(req.body.loginPassword, user[0].password)
-      console.log('req.body.password: ',req.body.loginPassword)
-      console.log('user0.password: ', user[0].password)
-      console.log('authenticated: ', authenticated)
-
+      
 // If the password matches it logs them in
+// Or it throws the error if the password doesn't match
 
       if(authenticated){
         res.status(200).send({authenticated, user_id: user[0].login_id, loginEmail: user[0].email})
-      } 
-
-// Or it throws the error if the password doesn't match
-
-      else {
-        console.log('This is the else error')
+      } else {
         throw new Error(401)
       }
     } catch(err) {
-      console.log(err)
       res.sendStatus(401)
     }
   },
@@ -105,12 +93,9 @@ module.exports = {
   getDetails: async (req, res) => {
     const db = req.app.get('db')
     const { session } = req
-    console.log('session: ', session)
     try {
       const { email } = session.user
-      console.log(email)
       const data = await db.account.getDetails({email})
-      console.log(data)
       res.status(200).send(data[0])
     } catch(err) {
       res.sendStatus(500)

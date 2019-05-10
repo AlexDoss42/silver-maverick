@@ -1,16 +1,15 @@
 insert into user_login (
-  username, 
   password,
   email
 ) values (
-  ${username},
   ${hash},
   ${email}
 );
 
 insert into users (
   firstname, 
-  lastname, 
+  lastname,
+  username, 
   email,
   phone,
   facebook,
@@ -19,6 +18,7 @@ insert into users (
 ) values (
   ${firstname},
   ${lastname},
+  ${username},
   ${email},
   ${phone},
   ${facebook},

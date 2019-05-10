@@ -40,6 +40,7 @@ class SignUpForm extends Component {
       const { user_id } = res.data[0]
 
       this.props.updateUserDetails({ user_id, firstname, lastname, email, username, password, phone, facebook, instagram, profilePic })
+      this.props.history.push('/')
 
     } catch (err) {
       this.setState({

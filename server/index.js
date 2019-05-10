@@ -29,6 +29,7 @@ massive(CONNECTION_STRING)
 .then((db) => {
   app.set('db', db)
   console.log(`It's working! IT'S WORKING!!!!`);
+  console.log(db.listTables())
 })
 
 const server = app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I have the ${SERVER_PORT} port`))

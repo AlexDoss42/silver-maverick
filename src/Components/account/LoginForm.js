@@ -27,8 +27,6 @@ class LoginForm extends Component {
         const { loginEmail, loginPassword } = this.state
         try {
             const res = await axios.post('/auth/login', { loginEmail, loginPassword })
-            console.log('res.data from handleLogin: ',res.data)
-            
             this.props.updateEmail(res.data.loginEmail)
             this.props.updateUserId(res.data.user_id)
             this.props.history.push('/')

@@ -10,11 +10,10 @@ class Home extends Component {
   componentDidMount(){
     axios.get('/auth/details')
     .then(res => {
-      console.log('res.data from cdm in home: ',res.data)
       this.props.updateUserDetails(res.data)
       
     })
-    .catch(()=> console.log('error in home componentdidmount'))
+    .catch(()=> console.log('error in home componentDidMount'))
   }
   render() {
     return (
@@ -28,11 +27,6 @@ class Home extends Component {
   }
 
 }
-
-// const mapStateToProps = (reduxState) => {
-//   const { user_id } = reduxState.account
-//   return { user_id }
-// }
 
 const MapDispatchToProps = {
   updateUserDetails
