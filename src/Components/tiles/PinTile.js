@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const PinTile = () => (
-  <div>
-    <h1>PinTile</h1>
-    <img src='http://www.cityofmarion.org/Home/ShowPublishedImage/2725/635572571367830000'
-    alt='Dope Pic'
-    style={{width: '200px'}}/>
-  </div>
-)
+class PinTile extends Component {
+
+
+  render() {
+    const { title, media, description, url, price, address, city, state, country } = this.props.pin
+
+    return (
+      <div
+        style={{ border: '1px solid black' }}>
+        <h3>{title}</h3>
+        <h4>${price}</h4>
+        <h6>{city}, {state}, {country}</h6>
+        <img src={media}
+          alt={title}
+          style={{ width: '200px' }} />
+        <h6>{address}</h6>
+        <p>{description}</p>
+      </div>
+    )
+  }
+}
+
+
 
 export default PinTile

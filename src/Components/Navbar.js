@@ -8,13 +8,6 @@ import { updateUserId, updateEmail } from '../redux/reducers/accountReducer'
 
 class Navbar extends Component {
 
-    // componentDidMount() {
-    //     axios.get('/auth/session')
-    //         .then(res => {
-    //             this.props.updateEmail(res.data.email)
-    //         })
-    // }
-
     handleLogoutSubmit = (e) => {
         e.preventDefault()
         axios.get('/auth/logout')

@@ -8,8 +8,7 @@ insert into pins (
   city,
   state,
   country
-) 
-values (
+) values (
   ${title},
   ${media},
   ${description},

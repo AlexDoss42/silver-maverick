@@ -10,8 +10,7 @@ class Home extends Component {
   componentDidMount(){
     axios.get('/auth/details')
     .then(res => {
-      this.props.updateUserDetails(res.data)
-      
+      this.props.updateUserDetails(res.data)      
     })
     .catch(()=> console.log('error in home componentDidMount'))
   }
