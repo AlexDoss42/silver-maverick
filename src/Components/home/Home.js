@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PublicPins from './PublicPins'
-import TopTrips from './TopTripsBoard'
+// import TopTrips from './TopTripsBoard'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -19,7 +19,7 @@ class Home extends Component {
       <div>
         <h1>Home</h1>
 
-        <TopTrips />
+        {/* <TopTrips /> */}
         <PublicPins />
       </div>
     )

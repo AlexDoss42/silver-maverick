@@ -12,23 +12,35 @@ class PublicPins extends Component {
     }
   }
 
-  componentDidMount(){
+  handleDelete = async (deleteId) => {
+    await axios.delete(`/pin/${deleteId}`)
     axios.get('/pin')
     .then(res => {
-      console.log('your Pin res.data: ', res.data)
       this.setState({
         pinboard: res.data
       })
+    })
+  }
+
+  componentDidMount(){
+    axios.get('/pin')
+    .then(res => {
+      this.setState({
+        pinboard: res.data
+      })
+      console.log(this.state)
     })
     .catch(() => console.log('You have an error in your CDM for PublicPins.js'))
   }
 
   render() {
 
-    const Pins = this.state.pinboard.map((pin, i) => (
+    const Pins = this.state.pinboard.map((pin) => (
         <PinTile 
         pin={pin}
-        key={i}/>
+        key={pin.pin_id}
+        deleteId = {pin.pin_id}
+        handleDelete = {this.handleDelete} />
     ))
 
 

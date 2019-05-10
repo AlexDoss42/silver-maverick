@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class PinTile extends Component {
 
@@ -9,14 +10,26 @@ class PinTile extends Component {
     return (
       <div
         style={{ border: '1px solid black' }}>
-        <h3>{title}</h3>
+        <a
+          href={`${url}`}
+          target='_blank'
+          rel="noopener noreferrer"><h2>{title}</h2></a>
         <h4>${price}</h4>
-        <h6>{city}, {state}, {country}</h6>
+        <h4>{city}, {state}, {country}</h4>
         <img src={media}
           alt={title}
           style={{ width: '200px' }} />
-        <h6>{address}</h6>
+        <h4>{address}</h4>
         <p>{description}</p>
+        <div>
+          <Link to='/pin/edit'>
+            <button>Edit</button>
+          </Link>
+          <button
+            onClick={() => { this.props.handleDelete(this.props.deleteId) }}
+          >Delete</button>
+        </div>
+
       </div>
     )
   }
