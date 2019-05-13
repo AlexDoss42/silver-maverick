@@ -32,6 +32,16 @@ module.exports = {
     .catch(err => console.log(err, "You are having a problem with your GetATrip in tripCtrl"))
   },
 
+  getMyTrips: (req, res) => {
+    const db = req.app.get('db')
+    const { user_id } = req.params
+    db.trip.getMyTrips({ user_id })
+    .then((data) => {
+      res.status(200).send(data)
+    })
+    .catch(err => console.log(err, "You are having a problem with your GetATrip in tripCtrl"))
+  },
+
   deleteTrip: (req, res) => {
     const db = req.app.get('db')
     const { id } = req.params

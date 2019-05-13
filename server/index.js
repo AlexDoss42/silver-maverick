@@ -60,6 +60,7 @@ app.delete('/pin/:id', pinCtrl.deletePin)
 app.get('/trip', tripCtrl.getTrips)
 app.post('/trip', tripCtrl.createATrip)
 app.get('/trip/:id', tripCtrl.getATrip)
+app.get('/trip/mytrips/:user_id', tripCtrl.getMyTrips)
 app.delete('/trip/:id', tripCtrl.deleteTrip)
 
 

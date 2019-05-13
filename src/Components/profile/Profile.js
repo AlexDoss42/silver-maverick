@@ -18,7 +18,9 @@ class Profile extends Component {
         <Link to='/pin/create'>
           <button>Create a Pin</button>
         </Link>
+
         <MyTrips />
+        
       </div>
     )
   }

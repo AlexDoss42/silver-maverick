@@ -1,13 +1,53 @@
-import React from 'react'
+import React, { Component } from 'react'
 import TripTile from '../tiles/TripTile'
+import axios from 'axios'
+import { connect } from 'react-redux'
 
-const MyTrips = () => (
-  <div>
-    <h1>Where you have been, where you are, and where you are going</h1>
-    <TripTile />
-    <TripTile />
-    <TripTile />
-  </div>
-)
+class MyTrips extends Component {
+  constructor() {
+    super()
 
-export default MyTrips
+    this.state = {
+      tripboard: []
+    }
+  }
+
+  componentDidMount(){
+    axios.get(`/trip/mytrips/${this.props.user_id}`)
+    .then(res => {
+      console.log('CDM Res.data from axios.get: ', res.data)
+      this.setState({
+        tripboard: res.data
+      })
+      console.log(this.state)
+    })
+    .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
+  }
+
+  render() {
+
+    const Trips = this.state.tripboard.map((trip) => (
+      <TripTile
+      trip = {trip}
+      key = {trip.trip_id}
+      />
+    ))
+
+
+    return (
+      <div
+      style={{border: '1px solid black'}}>
+        <h1>Where you have been, where you are, and where you are going</h1>
+        {Trips}
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (reduxState) => {
+  const { username, user_id } = reduxState.account
+  return { username, user_id}
+}
+
+
+export default connect(mapStateToProps)(MyTrips)
