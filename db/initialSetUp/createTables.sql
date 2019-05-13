@@ -16,6 +16,13 @@ create table user_login (
   email varChar(50)
 );
 
+create table trip (
+  trip_id serial primary key,
+  group_leader boolean,
+  name varChar(50),
+  user_id int references users(user_id)
+);
+
 create table pin (
   pin_id serial primary key,
   title varChar(50),
@@ -29,13 +36,6 @@ create table pin (
   country varChar(50),
   user_id references users(user_id),
   trip_id references trip(trip_id)
-);
-
-create table trip (
-  trip_id serial primary key,
-  group_leader boolean,
-  name varChar(50),
-  user_id int references users(user_id)
 );
 
 create table chat (
@@ -67,6 +67,6 @@ create table gear (
 create table todo (
   todo_id serial primary key,
   task varChar(180),
-  group_id int references trip(trip_id),
+  trip_id int references trip(trip_id),
   user_id int references users(user_id)
 )

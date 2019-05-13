@@ -27,6 +27,8 @@ class TripTile extends Component {
           src='http://s3.amazonaws.com/ht-images.couchsurfing.com/u/4318879/871d1646-2e2b-4907-87cb-7b57a248ef5d'
           alt='Dope Waterfall'
           style={{ width: '200px' }} />
+          <button
+          onClick={() => this.props.handleDelete(this.props.deleteId)}>Delete</button>
       </div>
     )
   }

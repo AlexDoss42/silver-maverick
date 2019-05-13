@@ -24,12 +24,25 @@ class MyTrips extends Component {
     .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
   }
 
+  handleDelete = async (deleteId) => {
+    await axios.delete(`/trip/${deleteId}`)
+    // axios.get('/pin')
+    // .then(res => {
+    //   this.setState({
+    //     tripboard: res.data
+    //   })
+    // })
+    this.componentDidMount()
+  }
+
   render() {
 
     const Trips = this.state.tripboard.map((trip) => (
       <TripTile
       trip = {trip}
       key = {trip.trip_id}
+      deleteId = {trip.trip_id}
+      handleDelete = {this.handleDelete}
       />
     ))
 
