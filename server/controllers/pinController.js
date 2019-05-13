@@ -7,6 +7,17 @@ module.exports = {
     })
   },
 
+// This was initially put together for editing but ditched. Keep it 
+
+  // getPinById: (req, res) => {
+  //   const db = req.app.get('db')
+  //   const { id } = req.params
+  //   db.pins.getPinById({id})
+  //   .then((data) => {
+  //     res.status(200).send(data)
+  //   })
+  // },
+
   createPin: (req, res) => {
     const db = req.app.get('db')
     const {title, media, description, url, price, address, city, state, country} = req.body
