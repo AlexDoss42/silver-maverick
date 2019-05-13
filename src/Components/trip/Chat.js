@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
 
 class Chat extends Component {
   constructor(){
@@ -30,7 +31,7 @@ class Chat extends Component {
   handleOnClick = () => {
     this.socket.emit('chat', {
       message: this.state.message,
-      username: this.state.username
+      username: this.props.username
     })
 
   }
@@ -50,14 +51,6 @@ class Chat extends Component {
             return (<p><em>{data.username}</em>: {data.message}</p>)
           }) }</div>
         </div>
-        
-        <input 
-        id='username' 
-        name='username' 
-        type="text" 
-        placeholder="Username" 
-        value={ this.state.username }
-        onChange = { this.handleOnChange }/>
 
         <input 
         id='message' 
@@ -77,4 +70,10 @@ class Chat extends Component {
   }
 }
 
-export default Chat
+const mapStateToProps = (reduxState) => {
+  const { username } = reduxState.account
+  return { username }
+}
+
+
+export default connect(mapStateToProps)(Chat)

@@ -15,23 +15,15 @@ class MyTrips extends Component {
   componentDidMount(){
     axios.get(`/trip/mytrips/${this.props.user_id}`)
     .then(res => {
-      console.log('CDM Res.data from axios.get: ', res.data)
       this.setState({
         tripboard: res.data
       })
-      console.log(this.state)
     })
     .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
   }
 
   handleDelete = async (deleteId) => {
     await axios.delete(`/trip/${deleteId}`)
-    // axios.get('/pin')
-    // .then(res => {
-    //   this.setState({
-    //     tripboard: res.data
-    //   })
-    // })
     this.componentDidMount()
   }
 

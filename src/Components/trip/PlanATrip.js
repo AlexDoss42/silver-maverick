@@ -28,9 +28,6 @@ class PlanATrip extends Component {
     } = this.state
 
     axios.post('/trip', { group_leader, name, user_id })
-    .then(res => (
-      console.log('You created a trip')
-    ))
     .catch(() => console.log('you did NOT create a trip'))
 
     this.props.history.push('/profile')

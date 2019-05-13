@@ -39,7 +39,7 @@ module.exports = {
     .then((data) => {
       res.status(200).send(data)
     })
-    .catch(err => console.log(err, "You are having a problem with your GetATrip in tripCtrl"))
+    .catch(err => console.log(err, "You are having a problem with your getMyTrips in tripCtrl"))
   },
 
   deleteTrip: (req, res) => {
