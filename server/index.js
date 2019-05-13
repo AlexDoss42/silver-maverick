@@ -58,8 +58,8 @@ app.delete('/pin/:id', pinCtrl.deletePin)
 // Trip Controller requests
 
 app.get('/trip', tripCtrl.getTrips)
-app.get('/trip', tripCtrl.getATrip)
 app.post('/trip', tripCtrl.createATrip)
+app.get('/trip/:id', tripCtrl.getATrip)
 app.delete('/trip/:id', tripCtrl.deleteTrip)
 
 

@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 class PinTile extends Component {
   constructor(props) {
     super(props)
+    
+    console.log('Props on PinTile being passed down from PublicPins: ', this.props)
 
     const { pin_id, title, media, description, url, price, address, city, state, country } = this.props.pin
 

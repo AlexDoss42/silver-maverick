@@ -10,11 +10,16 @@ module.exports = {
 
   createATrip: (req, res) => {
     const db = req.app.get('db')
-    const { group_leader, user_id, pin_id } = req.body
+    const { group_leader, name, user_id } = req.body
 
-    db.trip.createATrip({group_leader, user_id, pin_id})
-    .then(() => res.sendStatus(200))
-    .catch(err => res.status(500).send(err))
+    db.trip.createATrip({group_leader, name, user_id})
+    .then(() => {
+      res.sendStatus(200)
+    })
+    .catch(err => {
+      res.status(500).send(err)
+      console.log(`Error in TripCtrl createatrip`, err)
+    })
   },
 
   getATrip: (req, res) => {

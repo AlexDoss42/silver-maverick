@@ -9,7 +9,8 @@ import Chat from './Chat'
 
 const Trip = () => (
   <div>
-    <h1>TRIP</h1>
+    <h1>TRIP NAME</h1>
+    <button>Invite</button>
     <Calendar />
     <Weather />
     <Group />

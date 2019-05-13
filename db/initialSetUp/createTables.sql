@@ -1,4 +1,4 @@
-create table users (
+create table user (
   user_id serial primary key,
   firstName varChar(50),
   lastName varChar(50),
@@ -16,7 +16,7 @@ create table user_login (
   email varChar(50)
 );
 
-create table pins (
+create table pin (
   pin_id serial primary key,
   title varChar(50),
   media text,
@@ -26,12 +26,14 @@ create table pins (
   address varChar(150),
   city varChar(50),
   state varChar(50),
-  country varChar(50)
+  country varChar(50),
+  user_id references users(user_id)
 );
 
 create table trip (
   trip_id serial primary key,
   group_leader boolean,
+  name varChar(50),
   user_id int references users(user_id),
   pin_id int references pins(pin_id)
 );
@@ -41,10 +43,10 @@ create table chat (
   message varChar(350),
   ts timestamp, 
   user_id int references users(user_id),
-  group_id int references trip(trip_id)
+  trip_id int references trip(trip_id)
 );
 
-create table comments (
+create table comment (
   comment_id serial primary key,
   comment varChar(350),
   vote int,
@@ -52,17 +54,19 @@ create table comments (
   ts timestamp,
   pin_id int references pins(pin_id),
   user_id int references users(user_id),
-  group_id int references trip(trip_id)
+  trip_id int references trip(trip_id)
 );
 
 create table gear (
   gear_id serial primary key,
   name varChar(50),
-  group_id int references trip(trip_id)
+  trip_id int references trip(trip_id),
+  user_id int references users(user_id)
 );
 
 create table todo (
   todo_id serial primary key,
   task varChar(180),
-  group_id int references trip(trip_id)
+  group_id int references trip(trip_id),
+  user_id int references users(user_id)
 )

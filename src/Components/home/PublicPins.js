@@ -55,7 +55,7 @@ class PublicPins extends Component {
 
     return (
       <div>
-        <h1>PINBOARD!!!!</h1>
+        <h1>Need Inspiration?</h1>
         <Link to='/pin/create'>
           <button>Create a Pin</button>
         </Link>
