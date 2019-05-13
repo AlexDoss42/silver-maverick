@@ -22,6 +22,14 @@ class PublicPins extends Component {
     })
   }
 
+  handleEditPinSubmit = async (pin_id, title, media, description, url, price, address, city, state, country) => {
+
+    axios.put(`/pin/${pin_id}`, {title, media, description, url, price, address, city, state, country})
+    .then(res => {
+      this.componentDidMount()
+    })
+  }
+
   componentDidMount(){
     axios.get('/pin')
     .then(res => {
@@ -40,7 +48,8 @@ class PublicPins extends Component {
         pin={pin}
         key={pin.pin_id}
         deleteId = {pin.pin_id}
-        handleDelete = {this.handleDelete} />
+        handleDelete = {this.handleDelete}
+        handleEdit = {this.handleEditPinSubmit} />
     ))
 
 

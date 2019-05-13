@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
 class PinTile extends Component {
   constructor(props) {
@@ -35,14 +34,8 @@ class PinTile extends Component {
       pin_id, title, media, description, url, price, address, city, state, country
     } = this.state
 
-    axios.put(`/pin/${pin_id}`, {title, media, description, url, price, address, city, state, country})
-    .then(res => {
-      console.log('res.data from axios.put: ', res.data)
-      this.setState({
-        pin_id: res.data.pin_id,
-      })
-    })
-    
+    this.props.handleEdit(pin_id, title, media, description, url, price, address, city, state, country)
+
     this.setState({
       edit: false
     })
