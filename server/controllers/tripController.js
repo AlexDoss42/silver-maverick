@@ -25,7 +25,7 @@ module.exports = {
   getATrip: (req, res) => {
     const db = req.app.get('db')
     const { id } = req.params
-    db.trip.getTrips({ id })
+    db.trip.getATrip({ id })
     .then((data) => {
       res.status(200).send(data)
     })

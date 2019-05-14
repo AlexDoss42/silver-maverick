@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import Calendar from './Calendar'
 import Weather from './Weather'
@@ -7,19 +7,57 @@ import TodoList from './TodoList'
 import Gear from './Gear'
 import TripBoard from './TripBoard'
 import Chat from './Chat'
+import { connect } from 'react-redux';
+import axios from 'axios';
 
-const Trip = () => (
-  <div>
-    <h1>TRIP NAME</h1>
-    <button>Invite</button>
-    <Calendar />
-    <Weather />
-    <Group />
-    <TodoList />
-    <Gear />
-    <Chat />
-    <TripBoard />
-  </div>
-)
+class Trip extends Component {
+  constructor(props){
+    super(props)
 
-export default Trip
+    this.state = {
+      trip_id: null,
+      group_leader: true,
+      name: '',
+      user_id: null
+    }
+  }
+
+  componentDidMount() {
+    axios.get(`/trip/${this.props.trip_id}`)
+    .then(res => {
+      this.setState({
+        trip_id: res.data[0].trip_id,
+        group_leader: res.data[0].group_leader,
+        name: res.data[0].name,
+        user_id: res.data[0].user_id
+      })
+    })
+  }
+  
+  render() {
+
+    const { name } = this.state
+    return (
+      <div>
+        <h1> TRIP Name: { name }</h1>
+        <button>Invite</button>
+        <Calendar />
+        <Weather />
+        <Group />
+        <TodoList />
+        <Gear />
+        <Chat />
+        <TripBoard />
+      </div>
+    )
+  }
+
+}
+
+const mapStateToProps = (reduxState, ownProps) => {
+  return {
+    trip_id: ownProps.match.params.trip_id
+  }
+}
+
+export default connect(mapStateToProps)(Trip)

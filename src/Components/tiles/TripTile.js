@@ -6,12 +6,13 @@ class TripTile extends Component {
   constructor(props) {
     super(props)
 
-    const { trip_id, name, user_id } = this.props.trip
+    const { trip_id, group_leader, name, user_id } = this.props.trip
 
     this.state = {
-      trip_id: trip_id,
-      name: name,
-      user_id: user_id
+      trip_id,
+      group_leader,
+      name,
+      user_id
     }
   }
 
@@ -21,7 +22,7 @@ class TripTile extends Component {
 
     return (
       <div>
-        <Link to = {`/trip/${user_id}/${trip_id})`}>
+        <Link to = {`/trip/${user_id}/${trip_id}`}>
           <h1>{name}</h1>
         </Link>
         <img
