@@ -34,8 +34,7 @@ create table pin (
   city varChar(50),
   state varChar(50),
   country varChar(50),
-  user_id references users(user_id),
-  trip_id references trip(trip_id)
+  user_id references users(user_id)
 );
 
 create table chat (

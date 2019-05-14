@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+
+import SavePin from './SavePin'
 
 class PinTile extends Component {
   constructor(props) {
     super(props)
-    
+
     const { pin_id, title, media, description, url, price, address, city, state, country } = this.props.pin
 
     this.state = {
@@ -17,7 +20,8 @@ class PinTile extends Component {
       city: city,
       state: state,
       country: country,
-      edit: false
+      edit: false,
+      save: false
     }
   }
 
@@ -48,116 +52,154 @@ class PinTile extends Component {
     })
   }
 
+  clickSave = (e) => {
+    e.preventDefault()
+    this.setState({
+      save: true
+    })
+  }
+
+  handleSave = (pin_id, trip_id) => {
+    console.log('handleSave Pin_id on pintile.js', pin_id)
+    axios.put('/pinToTrip', { pin_id, trip_id })
+    this.setState({
+      save: false
+    })
+  }
+
   render() {
     const { title, media, description, url, price, address, city, state, country } = this.props.pin
 
-    if (this.state.edit === false) {
+    if (this.state.save === false) {
 
-      return (
-        <div
-          style={{ border: '1px solid black' }}>
-          <a
-            href={`${url}`}
-            target='_blank'
-            rel="noopener noreferrer"><h2>{title}</h2></a>
-          <h4>${price}</h4>
-          <h4>{city}, {state}, {country}</h4>
-          <img src={media}
-            alt={title}
-            style={{ width: '200px' }} />
-          <h4>{address}</h4>
-          <p>{description}</p>
-          <div>
+      if (this.state.edit === false) {
 
-            <button
+        return (
+          <div
+            style={{ border: '1px solid black' }}>
+            <a
+              href={`${url}`}
+              target='_blank'
+              rel="noopener noreferrer"><h2>{title}</h2></a>
+            <h4>${price}</h4>
+            <h4>{city}, {state}, {country}</h4>
+            <img src={media}
+              alt={title}
+              style={{ width: '200px' }} />
+            <h4>{address}</h4>
+            <p>{description}</p>
+            <div>
+
+              <button
+                onClick={() => {
+                  this.setState({
+                    edit: true
+                  })
+                }}>Edit</button>
+
+              <button
               onClick={() => {
                 this.setState({
-                  edit: true
+                  save: true
                 })
-              }}>Edit</button>
+              }}>Save to Trip</button>
+
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div
+            style={{ border: '1px solid black' }}>
+            <h1>Create a Pin</h1>
+
+            <form onSubmit={this.handleEditPinSubmit}>
+
+              <input
+                type='text'
+                name='title'
+                placeholder={this.state.title}
+                value={this.state.title}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='media'
+                placeholder={this.state.media}
+                value={this.state.media}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='description'
+                placeholder={this.state.description}
+                value={this.state.description}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='url'
+                placeholder={this.state.url}
+                value={this.state.url}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='price'
+                placeholder={this.state.price}
+                value={this.state.price}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='address'
+                placeholder={this.state.address}
+                value={this.state.address}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='city'
+                placeholder={this.state.city}
+                value={this.state.city}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='state'
+                placeholder={this.state.state}
+                value={this.state.state}
+                onChange={this.handleFormInputUpdate}
+              />
+              <input
+                type='text'
+                name='country'
+                placeholder={this.state.country}
+                value={this.state.country}
+                onChange={this.handleFormInputUpdate}
+              />
+
+              <button>Submit</button>
+            </form>
+            <button
+              onClick={this.handleCancel}>Cancel</button>
 
             <button
               onClick={() => { this.props.handleDelete(this.props.deleteId) }}
             >Delete</button>
           </div>
-        </div>
-      )
+        )
+      }
     } else {
-      return (
-        <div
-          style={{ border: '1px solid black' }}>
-          <h1>Create a Pin</h1>
-
-          <form onSubmit={this.handleEditPinSubmit}>
-
-            <input
-              type='text'
-              name='title'
-              placeholder={this.state.title}
-              value={this.state.title}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='media'
-              placeholder={this.state.media}
-              value={this.state.media}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='description'
-              placeholder={this.state.description}
-              value={this.state.description}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='url'
-              placeholder={this.state.url}
-              value={this.state.url}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='price'
-              placeholder={this.state.price}
-              value={this.state.price}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='address'
-              placeholder={this.state.address}
-              value={this.state.address}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='city'
-              placeholder={this.state.city}
-              value={this.state.city}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='state'
-              placeholder={this.state.state}
-              value={this.state.state}
-              onChange={this.handleFormInputUpdate}
-            />
-            <input
-              type='text'
-              name='country'
-              placeholder={this.state.country}
-              value={this.state.country}
-              onChange={this.handleFormInputUpdate}
-            />
-
-            <button>Submit</button>
-          </form>
-          <button
-            onClick={this.handleCancel}>Cancel</button>
+      return(
+        <div>
+          <SavePin 
+          title = {this.state.title}
+          media = {this.state.media}
+          description = {this.state.description}
+          pin_id = {this.state.pin_id}
+          handleSave = {this.handleSave}
+          />
         </div>
       )
     }
