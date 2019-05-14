@@ -1,4 +1,4 @@
-insert into pins (
+insert into pin (
   title,
   media,
   description,

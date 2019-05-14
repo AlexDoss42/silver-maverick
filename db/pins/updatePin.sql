@@ -1,4 +1,4 @@
-update pins
+update pin
 
 set title = ${title},
     media = ${media},

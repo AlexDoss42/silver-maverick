@@ -1,3 +1,3 @@
 select *
-from pins
+from pin
 where pin_id = ${id}

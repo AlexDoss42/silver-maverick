@@ -1,2 +1,2 @@
 select *
-from pins
+from pin
