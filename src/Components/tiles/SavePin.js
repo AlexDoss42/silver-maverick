@@ -39,6 +39,8 @@ class SavePin extends Component {
       <div>
         <h2>Choose a Trip</h2>
         {Trips}
+        <button
+        onClick = {this.props.handleCancelSave}>Cancel</button>
       </div>
     )
   }
