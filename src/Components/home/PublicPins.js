@@ -8,7 +8,8 @@ class PublicPins extends Component {
     super()
 
     this.state = {
-      pinboard: []
+      pinboard: [],
+      search_input: ''
     }
   }
   
@@ -40,8 +41,16 @@ class PublicPins extends Component {
     })
   }
 
+  handleSearchInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
 
   render() {
+
+    const { search_input } = this.state
 
     const Pins = this.state.pinboard.map((pin) => (
         <PinTile 
@@ -52,6 +61,21 @@ class PublicPins extends Component {
         handleEdit = {this.handleEditPinSubmit} />
     ))
 
+    const filteredPins = Pins.filter(pin => {
+      const lowerCaseTitle = pin.props.pin.title.toLocaleLowerCase()
+      const lowerCaseDescription = pin.props.pin.description.toLocaleLowerCase()
+      const lowerCaseCity = pin.props.pin.city.toLocaleLowerCase()
+      const lowerCaseState = pin.props.pin.state.toLocaleLowerCase()
+      const lowerCaseCountry = pin.props.pin.country.toLocaleLowerCase()
+      const lowerCaseSearch_input = search_input.toLocaleLowerCase()
+      if(search_input !== ''){
+        return (
+          lowerCaseTitle.includes(lowerCaseSearch_input) || lowerCaseDescription.includes(lowerCaseSearch_input) || lowerCaseCity.includes(lowerCaseSearch_input) || lowerCaseState.includes(lowerCaseSearch_input) || lowerCaseCountry.includes(lowerCaseSearch_input) 
+          )
+        } else {
+          return Pins
+        }
+      })
 
     return (
       <div>
@@ -59,7 +83,12 @@ class PublicPins extends Component {
         <Link to='/pin/create'>
           <button>Create a Pin</button>
         </Link>
-        {Pins}
+        <input
+        name='search_input'
+        value={this.state.search_input}
+        placeholder='Search for your next adventure'
+        onChange = {this.handleSearchInput}></input>
+        {filteredPins}
 
       </div>
     )

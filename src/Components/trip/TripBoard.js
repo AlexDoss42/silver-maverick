@@ -15,49 +15,53 @@ class TripBoard extends Component {
       pinboard: []
     }
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
 
     const { trip_id } = this.state
     console.log('trip_id from CDM in TripBoard.js: ', trip_id)
     axios.get(`/pin/tripPins/${trip_id}`)
-    .then(res => {
-      console.log(res.data)
-      this.setState({
-        pinboard: res.data
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          pinboard: res.data
+        })
       })
-    })
-    .catch(() => console.log('You have an error in your CDM for TripBoard.js'))
+      .catch(() => console.log('You have an error in your CDM for TripBoard.js'))
   }
 
-  handleDelete = async (deleteId) => {
-    await axios.delete(`/pin/${deleteId}`)
-    axios.get('/pin')
-    .then(res => {
-      this.setState({
-        pinboard: res.data
+  //FIX THIS SO IT DOESN'T DELETE PIN JUST REMOVES IT FROM THE TRIP!!!!!
+
+  handleRemove = async (trip_id, removeId) => {
+    await axios.put(`/pin/tripPins/${removeId}`)
+    axios.get(`/pin/tripPins/${trip_id}`)
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          pinboard: res.data
+        })
       })
-    })
   }
 
   handleEditPinSubmit = async (pin_id, title, media, description, url, price, address, city, state, country) => {
 
-    axios.put(`/pin/${pin_id}`, {title, media, description, url, price, address, city, state, country})
-    .then(res => {
-      this.componentDidMount()
-    })
+    axios.put(`/pin/${pin_id}`, { title, media, description, url, price, address, city, state, country })
+      .then(res => {
+        this.componentDidMount()
+      })
   }
 
 
   render() {
 
     const Pins = this.state.pinboard.map((pin) => (
-        <PinTile 
+      <PinTile
         pin={pin}
         key={pin.pin_id}
-        deleteId = {pin.pin_id}
-        handleDelete = {this.handleDelete}
-        handleEdit = {this.handleEditPinSubmit} />
+        removeId={pin.pin_id}
+        trip_id={this.state.trip_id}
+        handleRemove={this.handleRemove}
+        handleEdit={this.handleEditPinSubmit} />
     ))
 
 

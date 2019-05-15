@@ -17,7 +17,7 @@ module.exports = {
     .catch(err => console.log(err))
   },
 
-// This was initially put together for editing but ditched. Keep it 
+// This was initially put together for editing but ditched. Keep it just in case we need it later.
 
   // getPinById: (req, res) => {
   //   const db = req.app.get('db')
