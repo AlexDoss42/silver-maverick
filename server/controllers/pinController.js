@@ -7,6 +7,16 @@ module.exports = {
     })
   },
 
+  getTripPins: (req, res) => {
+    const db = req.app.get('db')
+    const { trip_id } = req.params
+    db.pins.getTripPins({trip_id})
+    .then((data) => {
+      res.status(200).send(data)
+    })
+    .catch(err => console.log(err))
+  },
+
 // This was initially put together for editing but ditched. Keep it 
 
   // getPinById: (req, res) => {

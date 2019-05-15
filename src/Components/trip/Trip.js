@@ -47,7 +47,8 @@ class Trip extends Component {
         <TodoList />
         <Gear />
         <Chat />
-        <TripBoard />
+        <TripBoard 
+        trip_id = {this.props.trip_id}/>
       </div>
     )
   }

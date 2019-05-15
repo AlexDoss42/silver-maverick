@@ -50,6 +50,7 @@ app.get('/auth/session', accCtrl.getSession)
 // Pin Controller requests
 
 app.get('/pin', pinCtrl.getAllPins)
+app.get('/pin/tripPins/:trip_id', pinCtrl.getTripPins)
 // app.get('/pin/:id', pinCtrl.getPinById)
 app.post('/pin', pinCtrl.createPin)
 app.put('/pin/:id', pinCtrl.updatePin)
