@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PinTile from '../tiles/PinTile'
+import PinnedPin from '../tiles/PinnedPins'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 // import { connect } from 'react-redux'
@@ -32,8 +32,8 @@ class TripBoard extends Component {
 
   //FIX THIS SO IT DOESN'T DELETE PIN JUST REMOVES IT FROM THE TRIP!!!!!
 
-  handleRemove = async (trip_id, removeId) => {
-    await axios.put(`/pin/tripPins/${removeId}`)
+  handleRemove = async (pin_id, trip_id) => {
+    await axios.delete(`/pin/trip/${pin_id}/${trip_id}`)
     axios.get(`/pin/tripPins/${trip_id}`)
       .then(res => {
         console.log(res.data)
@@ -43,25 +43,15 @@ class TripBoard extends Component {
       })
   }
 
-  handleEditPinSubmit = async (pin_id, title, media, description, url, price, address, city, state, country) => {
-
-    axios.put(`/pin/${pin_id}`, { title, media, description, url, price, address, city, state, country })
-      .then(res => {
-        this.componentDidMount()
-      })
-  }
-
-
   render() {
 
-    const Pins = this.state.pinboard.map((pin) => (
-      <PinTile
+    const Pins = this.state.pinboard.map((pin, i) => (
+      <PinnedPin
         pin={pin}
-        key={pin.pin_id}
-        removeId={pin.pin_id}
+        key={i}
         trip_id={this.state.trip_id}
         handleRemove={this.handleRemove}
-        handleEdit={this.handleEditPinSubmit} />
+      />
     ))
 
 
@@ -76,14 +66,6 @@ class TripBoard extends Component {
       </div>
     )
   }
-
 }
-// const mapStateToProps = (reduxState, ownProps) => {
-//   return {
-//     trip_id: ownProps.match.params.trip_id
-//   }
-// }
-
-// export default connect(mapStateToProps)(TripBoard)
 
 export default TripBoard

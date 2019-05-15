@@ -64,5 +64,14 @@ module.exports = {
     db.pins.pinToTrips({ pin_id, trip_id })
     .then(()=>res.sendStatus(200))
     .catch(err => console.log(err))
+  },
+
+  RemovePinFromBoard: (req, res) => {
+    const db = req.app.get('db')
+    const { pin_id, trip_id } = req.params
+
+    db.pins.removeFromTrip({ pin_id, trip_id })
+    .then(()=>res.sendStatus(200))
+    .catch(err => console.log(err))
   }
 }

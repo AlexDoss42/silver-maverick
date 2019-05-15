@@ -55,6 +55,7 @@ app.get('/pin/tripPins/:trip_id', pinCtrl.getTripPins)
 app.post('/pin', pinCtrl.createPin)
 app.put('/pin/:id', pinCtrl.updatePin)
 app.delete('/pin/:id', pinCtrl.deletePin)
+app.delete('/pin/trip/:pin_id/:trip_id', pinCtrl.RemovePinFromBoard)
 app.put('/pinToTrip', pinCtrl.PinToBoard)
 
 // Trip Controller requests
