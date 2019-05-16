@@ -146,4 +146,14 @@ module.exports = {
     })
     .catch(() => console.log('err with getAllUsers in accCtrl'))
   },
+
+  inviteToTrip: async (req, res) => {
+    const db = req.app.get('db')
+    const { invited, trip_id } = req.body
+    for(let i = 0; i < invited.length; i++){
+      let user_id = invited[i].user_id
+      await db.account.inviteToTrip({ user_id, trip_id })
+    }
+    res.sendStatus(200)
+  }
 }

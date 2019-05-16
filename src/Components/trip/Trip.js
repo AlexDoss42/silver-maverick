@@ -54,8 +54,7 @@ class Trip extends Component {
       return (
         <div>
 
-          {/* YOU NEED TO CONDITIONALLY RENDER THE INVITE COMPONENT THEN LINK NOT LINK TO IT RIGHT OFF THE BAT. THIS IS HOW YOU PASS ALL THE STATE TO PROPS THEN MAP ALL THE USERS TO PICKAUSER.JS SO YOU CAN PASS PROPS */}
-          <h1> TRIP Name: {name}</h1>
+          <h1>{name}</h1>
 
           <button
             onClick={() => this.handleClick()}>Invite</button>

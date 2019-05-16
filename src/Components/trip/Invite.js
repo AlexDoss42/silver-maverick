@@ -17,8 +17,16 @@ class Invite extends Component {
   componentDidMount() {
     axios.get(`/auth/allUsers`)
       .then(res => {
+        let usersCopy = [...res.data]
+        let findMyUser = usersCopy.filter(user => (this.props.user_id === user.user_id))       
+        if(findMyUser.length === 1) {
+          const myUserIndex = usersCopy.indexOf(findMyUser[0])
+
+          usersCopy.splice(myUserIndex, 1)
+        }
+
         this.setState({
-          users: res.data
+          users: [...usersCopy]
         })
       })
       .catch(() => console.log('You have an error in your CDM for Invite.js'))
@@ -46,18 +54,19 @@ class Invite extends Component {
     }
   }
 
+  AddUsersToTrip = (invited) => {
+    const { trip_id } = this.props
+    axios.post('/auth/invite', {invited, trip_id})
+  }
+
   render() {
 
-    const { trip_id, name, user_id, handleClick, handleInvite } = this.props
+    const { name, handleClick } = this.props
 
     const Users = this.state.users.map((user, i) => (
       <PickAUser
         user={user}
         key={i}
-        trip_id={trip_id}
-        user_id={user_id}
-        handleInvite={handleInvite}
-        handleClick={handleClick}
         addToInvitedList = {this.addToInvitedList}
       />
     ))
@@ -68,7 +77,9 @@ class Invite extends Component {
         <h2>Whose coming with you on {name}?</h2>
         {Users}
         <button
-          onClick={handleClick}>Done</button>
+          onClick={() => {
+            handleClick();
+          this.AddUsersToTrip(this.state.invited)}}>Done</button>
       </div>
     )
   }

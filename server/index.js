@@ -42,6 +42,7 @@ app.get('/auth/details', accCtrl.getDetails)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 app.get('/auth/allUsers', accCtrl.getAllUsers)
+app.post('/auth/invite', accCtrl.inviteToTrip)
 
 
 // Session management
