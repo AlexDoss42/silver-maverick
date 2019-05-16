@@ -43,10 +43,10 @@ class TripBoard extends Component {
 
   render() {
 
-    const Pins = this.state.pinboard.map((pin, i) => (
+    const Pins = this.state.pinboard.map((pin) => (
       <PinnedPin
         pin={pin}
-        key={i}
+        key={pin.pin_id}
         trip_id={this.state.trip_id}
         handleRemove={this.handleRemove}
       />

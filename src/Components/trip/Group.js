@@ -30,10 +30,13 @@ class Group extends Component {
   //FIX THIS SO IT DOESN'T DELETE USER JUST REMOVES IT FROM THE TRIP!!!!!
 
   handleRemove = async (user_id, trip_id) => {
-    await axios.delete(`/pin/trip/${user_id}/${trip_id}`)
-    axios.get(`/group/members/${trip_id}`)
+    console.log('user_id from handleRemove: ', user_id, 'trip_id from handleremove: ', trip_id)
+    await axios.delete(`/group/members/${user_id}/${trip_id}`)
+    // this.componentDidMount()
+    
+    await axios.get(`/group/members/${trip_id}`)
       .then(res => {
-        console.log(res.data)
+        console.log('res.data from HandleRemove on Group.js: ', res.data)
         this.setState({
           group: res.data
         })
@@ -41,15 +44,18 @@ class Group extends Component {
   }
 
   render() {
+    console.log('this needs to happen', 'This.state.group from render: ', this.state.group)
 
-    const members = this.state.group.map((member, i) => (
+    let members = this.state.group.map((member) => (
       <GroupMember
         member={member}
-        key={i}
+        key={member.user_id}
         trip_id={this.state.trip_id}
         handleRemove={this.handleRemove}
       />
     ))
+
+    console.log('members in render: ', members)
     return (
 
       <div>

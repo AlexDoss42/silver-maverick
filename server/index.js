@@ -46,6 +46,7 @@ app.get('/auth/allUsers', accCtrl.getAllUsers)
 // Group Controller requests (Currently on accCtrl due to laziness)
 app.get('/group/members/:trip_id', accCtrl.getTripGroupMembers)
 app.post('/auth/invite', accCtrl.inviteToTrip)
+app.delete('/group/members/:user_id/:trip_id', accCtrl.removeFromGroup)
 
 
 // Session management

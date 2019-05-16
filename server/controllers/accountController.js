@@ -165,5 +165,14 @@ module.exports = {
       res.status(200).send(data)
     })
     .catch(err => console.log(err))
+  },
+
+  removeFromGroup: (req, res) => {
+    const db = req.app.get('db')
+    const { user_id, trip_id } = req.params
+
+    db.group.removeFromGroup({ user_id, trip_id })
+    .then(()=>res.sendStatus(200))
+    .catch(err => console.log(err))
   }
 }
