@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 class PickATrip extends Component {
 
   constructor(props) {

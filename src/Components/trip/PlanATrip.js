@@ -30,6 +30,8 @@ class PlanATrip extends Component {
     axios.post('/trip', { group_leader, name, user_id })
     .catch(() => console.log('you did NOT create a trip'))
 
+
+    // PUSH THIS TO THE TRIP PAGE YOU CAN DO THIS. YOU DID THIS WITH OWNPROPS ONCE. YOU CAN DO IT AGAIN
     this.props.history.push('/profile')
 
   }

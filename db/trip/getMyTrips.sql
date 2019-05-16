@@ -1,3 +1,3 @@
 select *
-from trip
+from TripGroup
 where user_id = ${user_id}

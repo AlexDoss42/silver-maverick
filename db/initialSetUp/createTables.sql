@@ -18,9 +18,8 @@ create table user_login (
 
 create table trip (
   trip_id serial primary key,
-  group_leader boolean,
   name varChar(50),
-  user_id int references users(user_id)
+  user_id references users(user_id)
 );
 
 create table pin (
