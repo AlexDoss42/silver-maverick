@@ -10,7 +10,8 @@ class Invite extends Component {
 
     this.state = {
       users: [],
-      invited: []
+      invited: [],
+      search_input: ''
     }
   }
 
@@ -21,10 +22,8 @@ class Invite extends Component {
         let findMyUser = usersCopy.filter(user => (this.props.user_id === user.user_id))       
         if(findMyUser.length === 1) {
           const myUserIndex = usersCopy.indexOf(findMyUser[0])
-
           usersCopy.splice(myUserIndex, 1)
         }
-
         this.setState({
           users: [...usersCopy]
         })
@@ -59,7 +58,15 @@ class Invite extends Component {
     axios.post('/auth/invite', {invited, trip_id})
   }
 
+  handleSearchInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
   render() {
+
+    const { search_input } = this.state
 
     const { name, handleClick } = this.props
 
@@ -71,11 +78,30 @@ class Invite extends Component {
       />
     ))
 
+    const filteredUsers = Users.filter(user => {
+      const lowerCaseUsername = user.props.user.username.toLocaleLowerCase()
+      const lowerCaseFirstName = user.props.user.firstname.toLocaleLowerCase()
+      const lowerCaseLastName = user.props.user.lastname.toLocaleLowerCase()
+      const lowerCaseSearch_input = search_input.toLocaleLowerCase()
+      if(search_input !== ''){
+        return (
+          lowerCaseUsername.includes(lowerCaseSearch_input) || lowerCaseFirstName.includes(lowerCaseSearch_input) || lowerCaseLastName.includes(lowerCaseSearch_input) 
+          )
+        } else {
+          return Users
+        }
+    })
+
 
     return (
       <div>
         <h2>Whose coming with you on {name}?</h2>
-        {Users}
+        <input
+        name='search_input'
+        value={this.state.search_input}
+        placeholder='Search for your adventure buddies'
+        onChange = {this.handleSearchInput}></input>
+        {filteredUsers}
         <button
           onClick={() => {
             handleClick();

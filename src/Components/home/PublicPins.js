@@ -46,8 +46,7 @@ class PublicPins extends Component {
       [e.target.name]: e.target.value,
     })
   }
-
-
+  
   render() {
 
     const { search_input } = this.state
