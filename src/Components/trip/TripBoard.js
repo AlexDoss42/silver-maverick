@@ -19,10 +19,8 @@ class TripBoard extends Component {
   componentDidMount() {
 
     const { trip_id } = this.state
-    console.log('trip_id from CDM in TripBoard.js: ', trip_id)
     axios.get(`/pin/tripPins/${trip_id}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           pinboard: res.data
         })

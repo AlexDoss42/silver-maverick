@@ -1,4 +1,4 @@
-create table user (
+create table users (
   user_id serial primary key,
   firstName varChar(50),
   lastName varChar(50),

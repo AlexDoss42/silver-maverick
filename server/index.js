@@ -42,6 +42,9 @@ app.get('/auth/details', accCtrl.getDetails)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 app.get('/auth/allUsers', accCtrl.getAllUsers)
+
+// Group Controller requests (Currently on accCtrl due to laziness)
+app.get('/group/members/:trip_id', accCtrl.getTripGroupMembers)
 app.post('/auth/invite', accCtrl.inviteToTrip)
 
 

@@ -15,8 +15,10 @@ class Trip extends Component {
   constructor(props) {
     super(props)
 
+    const { trip_id } = this.props
+
     this.state = {
-      trip_id: null,
+      trip_id,
       // group_leader: true,
       name: '',
       user_id: null,
@@ -28,16 +30,12 @@ class Trip extends Component {
     axios.get(`/trip/${this.props.trip_id}`)
       .then(res => {
         this.setState({
-          trip_id: res.data[0].trip_id,
           // group_leader: res.data[0].group_leader,
           name: res.data[0].name,
           user_id: res.data[0].user_id
         })
+        console.log('this.state on trip.js: ', this.state)
       })
-  }
-
-  handleInvite(email, user_id, trip_id) {
-    
   }
 
   handleClick = () => {
@@ -50,6 +48,8 @@ class Trip extends Component {
 
     const { name, invite, trip_id, user_id } = this.state
 
+    console.log('trip_id destructured off off of this.state in Trip.js: ', trip_id)
+
     if (invite === false) {
       return (
         <div>
@@ -60,7 +60,8 @@ class Trip extends Component {
             onClick={() => this.handleClick()}>Invite</button>
           <Calendar />
           <Weather />
-          <Group />
+          <Group 
+          trip_id={trip_id}/>
           <TodoList />
           <Gear />
           <Chat />

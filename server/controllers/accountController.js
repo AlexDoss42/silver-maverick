@@ -152,8 +152,18 @@ module.exports = {
     const { invited, trip_id } = req.body
     for(let i = 0; i < invited.length; i++){
       let user_id = invited[i].user_id
-      await db.account.inviteToTrip({ user_id, trip_id })
+      await db.group.inviteToTrip({ user_id, trip_id })
     }
     res.sendStatus(200)
+  },
+
+  getTripGroupMembers: (req, res) => {
+    const db = req.app.get('db')
+    const { trip_id } = req.params
+    db.group.getAllGroupMembers({trip_id})
+    .then((data) => {
+      res.status(200).send(data)
+    })
+    .catch(err => console.log(err))
   }
 }
