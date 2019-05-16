@@ -24,11 +24,11 @@ class SavePin extends Component {
   }
 
   render(){
-    console.log('this.props.Pin_id at savePin.js', this.props.pin_id)
-    const Trips = this.state.myTrips.map((trip) => (
+
+    const Trips = this.state.myTrips.map((trip, i) => (
       <PickATrip
       trip = {trip}
-      key = {trip.trip_id}
+      key = {i}
       pin_id = {this.props.pin_id}
       handleSave = {this.props.handleSave}
       />

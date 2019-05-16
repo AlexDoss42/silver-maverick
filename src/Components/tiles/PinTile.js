@@ -66,7 +66,7 @@ class PinTile extends Component {
   }
 
   handleSave = (pin_id, trip_id) => {
-    console.log('handleSave Pin_id on pintile.js', pin_id)
+
     axios.put('/pinToTrip', { pin_id, trip_id })
     this.setState({
       save: false

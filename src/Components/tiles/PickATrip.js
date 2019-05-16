@@ -22,7 +22,6 @@ class PickATrip extends Component {
   render() {
 
     const { name, pin_id, trip_id } = this.state
-    console.log('Pin_id destructured at PickATrip.js', pin_id)
 
     return (
       <div>

@@ -8,42 +8,67 @@ class Invite extends Component {
   constructor(props) {
     super(props)
 
-    const { user_id } = this.props
-
     this.state = {
-      user_id,
-      users: []
+      users: [],
+      invited: []
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get(`/auth/allUsers`)
-    .then(res => {
-      this.setState({
-        users: res.data
+      .then(res => {
+        this.setState({
+          users: res.data
+        })
       })
-    })
-    .catch(() => console.log('You have an error in your CDM for Invite.js'))
+      .catch(() => console.log('You have an error in your CDM for Invite.js'))
   }
 
-  render(){
-    
-    const Users = this.state.users.map((user) => (
+  addToInvitedList = (user) => {
+    const invitedCopy = [...this.state.invited]
+
+    const CheckIfAlreadyInvited = invitedCopy.filter(invitedUser => (
+      user.user_id === invitedUser.user_id
+    ))
+
+    if (CheckIfAlreadyInvited.length === 1) {
+      const duplicateUser = invitedCopy.indexOf(user)
+
+      invitedCopy.splice(duplicateUser, 1)
+
+      this.setState({
+        invited: [...invitedCopy]
+      })
+    } else {
+      this.setState({
+        invited: [...invitedCopy, user]
+      })
+    }
+  }
+
+  render() {
+
+    const { trip_id, name, user_id, handleClick, handleInvite } = this.props
+
+    const Users = this.state.users.map((user, i) => (
       <PickAUser
-      user = {user}
-      key = {user.user_id}
-      trip_id = {this.props.trip_id}
-      handleInvite = {this.props.handleInvite}
+        user={user}
+        key={i}
+        trip_id={trip_id}
+        user_id={user_id}
+        handleInvite={handleInvite}
+        handleClick={handleClick}
+        addToInvitedList = {this.addToInvitedList}
       />
     ))
 
 
-    return(
+    return (
       <div>
-        <h2>Whose coming on this adventure?</h2>
+        <h2>Whose coming with you on {name}?</h2>
         {Users}
         <button
-        onClick = {this.props.handleCancelSave}>Cancel</button>
+          onClick={handleClick}>Done</button>
       </div>
     )
   }

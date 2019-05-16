@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
+import Invite from './Invite'
 import Calendar from './Calendar'
 import Weather from './Weather'
 import Group from './Group'
@@ -19,7 +19,8 @@ class Trip extends Component {
       trip_id: null,
       // group_leader: true,
       name: '',
-      user_id: null
+      user_id: null,
+      invite: false
     }
   }
 
@@ -35,27 +36,54 @@ class Trip extends Component {
       })
   }
 
-  render() {
-
-    const { name } = this.state
-    return (
-      <div>
-        <h1> TRIP Name: {name}</h1>
-        <Link to = '/trip/invite'>
-          <button>Invite</button>
-        </Link>
-        <Calendar />
-        <Weather />
-        <Group />
-        <TodoList />
-        <Gear />
-        <Chat />
-        <TripBoard
-          trip_id={this.props.trip_id} />
-      </div>
-    )
+  handleInvite(email, user_id, trip_id) {
+    
   }
 
+  handleClick = () => {
+    this.setState({
+      invite: !this.state.invite
+    })
+  }
+
+  render() {
+
+    const { name, invite, trip_id, user_id } = this.state
+
+    if (invite === false) {
+      return (
+        <div>
+
+          {/* YOU NEED TO CONDITIONALLY RENDER THE INVITE COMPONENT THEN LINK NOT LINK TO IT RIGHT OFF THE BAT. THIS IS HOW YOU PASS ALL THE STATE TO PROPS THEN MAP ALL THE USERS TO PICKAUSER.JS SO YOU CAN PASS PROPS */}
+          <h1> TRIP Name: {name}</h1>
+
+          <button
+            onClick={() => this.handleClick()}>Invite</button>
+          <Calendar />
+          <Weather />
+          <Group />
+          <TodoList />
+          <Gear />
+          <Chat />
+          <TripBoard
+            trip_id={trip_id}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Invite
+            trip_id={trip_id}
+            name={name}
+            user_id={user_id}
+            handleInvite={this.handleInvite}
+            handleClick={this.handleClick}
+          />
+        </div >
+      )
+    }
+  }
 }
 
 const mapStateToProps = (reduxState, ownProps) => {
