@@ -5,7 +5,7 @@ class PickATrip extends Component {
   constructor(props) {
     super(props)
 
-    const { trip_id, group_leader, name, user_id } = this.props.trip
+    const { trip_id, name, user_id } = this.props.trip
 
     const { pin_id } = this.props
 
@@ -13,7 +13,6 @@ class PickATrip extends Component {
 
     this.state = {
       trip_id,
-      group_leader,
       name,
       user_id,
       pin_id

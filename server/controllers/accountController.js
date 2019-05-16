@@ -137,5 +137,13 @@ module.exports = {
   logout: (req, res) => {
     req.session.destroy()
     res.sendStatus(200)
-  }
+  },
+
+  getAllUsers: (req, res) => {
+    const db = req.app.get('db')
+    db.account.getAllUsers().then((data) => {
+      res.status(200).send(data)
+    })
+    .catch(() => console.log('err with getAllUsers in accCtrl'))
+  },
 }

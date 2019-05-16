@@ -31,7 +31,8 @@ class PlanATrip extends Component {
     .catch(() => console.log('you did NOT create a trip'))
 
 
-    // PUSH THIS TO THE TRIP PAGE YOU CAN DO THIS. YOU DID THIS WITH OWNPROPS ONCE. YOU CAN DO IT AGAIN
+    // PUSH THIS TO THE TRIP PAGE YOU CAN DO THIS. YOU DID THIS WITH OWNPROPS ONCE. YOU CAN DO IT AGAIN THIS TECHNOLOGY IS LOCATED IN MYTRIPS.JS and TRIP.JS 
+    
     this.props.history.push('/profile')
 
   }

@@ -6,6 +6,7 @@ import Login from './Components/account/Login'
 import SignUp from './Components/account/SignUp'
 import Profile from './Components/profile/Profile'
 import Trip from './Components/trip/Trip'
+import Invite from './Components/trip/Invite'
 import CreatePin from './Components/tiles/CreatePin'
 import PlanATrip from './Components/trip/PlanATrip';
 
@@ -18,5 +19,6 @@ export default (
       <Route path='/pin/create' component = {CreatePin} />
       <Route path='/trip/plan' component = {PlanATrip} />
       <Route path='/trip/:user_id/:trip_id' component = {Trip} />
+      <Route path='/trip/invite' component = {Invite} />
   </Switch>
 )

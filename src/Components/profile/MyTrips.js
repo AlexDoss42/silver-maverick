@@ -43,7 +43,9 @@ class MyTrips extends Component {
       <div
       style={{border: '1px solid black'}}>
         <h1>Where you have been, where you are, and where you are going</h1>
+
         {Trips}
+        
       </div>
     )
   }

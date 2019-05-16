@@ -6,11 +6,13 @@ class TripTile extends Component {
   constructor(props) {
     super(props)
 
-    const { trip_id, group_leader, name, user_id } = this.props.trip
+    const { trip_id, 
+      // group_leader, 
+      name, user_id } = this.props.trip
 
     this.state = {
       trip_id,
-      group_leader,
+      // group_leader,
       name,
       user_id
     }
