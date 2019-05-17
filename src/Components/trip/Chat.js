@@ -95,13 +95,6 @@ class Chat extends Component {
         <div id="chat-window">
           <div id="output">
           {Messages}
-            {/* {conversation.map((data) => {
-              return (
-                <>
-                  <p><em>{data.username}</em>: {data.message}</p>
-                  <button>x</button>
-                </>)
-            } */}
             </div>
         </div>
 

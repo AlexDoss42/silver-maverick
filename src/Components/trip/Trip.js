@@ -34,7 +34,6 @@ class Trip extends Component {
           name: res.data[0].name,
           user_id: res.data[0].user_id
         })
-        console.log('this.state on trip.js: ', this.state)
       })
   }
 
@@ -47,8 +46,6 @@ class Trip extends Component {
   render() {
 
     const { name, invite, trip_id, user_id } = this.state
-
-    console.log('trip_id destructured off off of this.state in Trip.js: ', trip_id)
 
     if (invite === false) {
       return (
@@ -64,7 +61,8 @@ class Trip extends Component {
           <button
             onClick={() => this.handleClick()}>Invite</button>
           {/* <TodoList /> */}
-          <Gear />
+          <Gear 
+          trip_id = {trip_id}/>
           <Chat
             trip_id={trip_id} />
           <TripBoard

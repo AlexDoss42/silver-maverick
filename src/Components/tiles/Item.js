@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-class Message extends Component {
+class Item extends Component {
   constructor(props) {
     super(props)
 
-    const { username, message } = this.props.message
+    const { name , quantity } = this.props.item
     const { deleteId } = this.props
 
     this.state = {
-      message,
-      username,
+      name,
+      quantity,
       deleteId
     }
 
@@ -17,11 +17,11 @@ class Message extends Component {
 
   render() {
 
-    let { message, username, deleteId } = this.state
+    let { name, quantity, deleteId } = this.state
 
     return (
       <div>
-        <p><em>{username}</em>: {message}</p>
+        <p><em>{name}</em>: {quantity}</p>
         <span
         onClick={() => {
           this.props.handleDelete(deleteId)
@@ -31,4 +31,4 @@ class Message extends Component {
   }
 }
 
-export default Message
+export default Item

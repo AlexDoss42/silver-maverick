@@ -19,7 +19,6 @@ class Group extends Component {
     const { trip_id } = this.state
     axios.get(`/group/members/${trip_id}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           group: res.data
         })
