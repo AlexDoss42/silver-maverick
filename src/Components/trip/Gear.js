@@ -63,10 +63,10 @@ class Gear extends Component {
     const { trip_id } = this.props
 
     await axios.delete(`/gear/delete/${deleteId}`)
-    axios.get(`/gear/triplist/${trip_id}`)
+    axios.get(`/gear/tripGear/${trip_id}`)
       .then(res => {
         this.setState({
-          gear: res.data
+          gearlist: res.data
         })
       })
   }
