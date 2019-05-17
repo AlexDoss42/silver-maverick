@@ -1,20 +1,23 @@
 import io from 'socket.io-client';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import axios from 'axios';
+import Message from '../tiles/Message';
 
 class Chat extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
       conversation: [],
       message: '',
       feedback: '',
-      username: ''
+      username: '',
+      user_id: this.props.user_id
     }
 
     this.socket = io.connect('http://localhost:4242');
-    
+
     this.socket.on('room response', data => this.addMessage(data));
 
   }
@@ -22,9 +25,16 @@ class Chat extends Component {
   componentDidMount = () => {
     const { trip_id } = this.props
     //join the room for this trip
-    this.socket.emit('join room', { room: trip_id })
+    this.socket.emit('join room', { trip_id })
 
     //axios.get for the conversations previous message
+
+    axios.get(`/chat/tripConversation/${trip_id}`)
+      .then(res => {
+        this.setState({
+          conversation: res.data
+        })
+      })
   }
 
   addMessage = (data) => {
@@ -41,39 +51,72 @@ class Chat extends Component {
     this.socket.emit(`chat in room`, {
       message: this.state.message,
       username: this.props.username,
-      room: trip_id
+      trip_id,
     })
-
+    axios.post('/chat/message', {
+      message: this.state.message,
+      username: this.props.username,
+      user_id: this.props.user_id,
+      trip_id,
+    })
   }
 
-  handleOnChange = (e) =>{
+  handleOnChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
+  handleDelete = async (deleteId) => {
+    const { trip_id } = this.props
+
+    await axios.delete(`/chat/delete/${deleteId}`)
+    axios.get(`/chat/tripConversation/${trip_id}`)
+      .then(res => {
+        this.setState({
+          conversation: res.data
+        })
+      })
+  }
+
   render() {
     const { conversation } = this.state
+
+    const Messages = conversation.map((message) => (
+      <Message
+      message={message}
+      key={message.chat_id}
+      deleteId={message.chat_id}
+      handleDelete = {this.handleDelete}
+      />
+    ))
     return (
       <div id="adventure-chat">
         <div id="chat-window">
-          <div id="output">{ conversation.map((data) => {
-            return (<p><em>{data.username}</em>: {data.message}</p>)
-          }) }</div>
+          <div id="output">
+          {Messages}
+            {/* {conversation.map((data) => {
+              return (
+                <>
+                  <p><em>{data.username}</em>: {data.message}</p>
+                  <button>x</button>
+                </>)
+            } */}
+            </div>
         </div>
 
-        <input 
-        id='message' 
-        name='message' 
-        type="text" 
-        placeholder="Message" 
-        value={ this.state.message }
-        onChange = { this.handleOnChange }/>
-        
-        <button 
-        id='send'
-        onClick={ this.handleOnClick }>
-        Send</button>
+        <input
+          id='message'
+          name='message'
+          type="text"
+          placeholder="Message"
+          value={this.state.message}
+          onChange={this.handleOnChange} />
+
+        <button
+          id='send'
+          onClick={this.handleOnClick}>
+          Send</button>
 
       </div>
     )
@@ -81,8 +124,8 @@ class Chat extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-  const { username } = reduxState.account
-  return { username }
+  const { username, user_id } = reduxState.account
+  return { username, user_id }
 }
 
 

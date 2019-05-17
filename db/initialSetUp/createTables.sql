@@ -38,9 +38,10 @@ create table pin (
 
 create table chat (
   chat_id serial primary key,
+  ts timestamptz, 
   message varChar(350),
-  ts timestamp, 
-  user_id int references users(user_id),
+  username varChar(50),
+  user_id varChar references users(user_id),
   trip_id int references trip(trip_id)
 );
 
@@ -49,7 +50,7 @@ create table comment (
   comment varChar(350),
   vote int,
   global boolean,
-  ts timestamp,
+  ts timestamptz,
   pin_id int references pins(pin_id),
   user_id int references users(user_id),
   trip_id int references trip(trip_id)

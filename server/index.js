@@ -7,6 +7,7 @@ const socket = require('socket.io')
 const accCtrl = require('./controllers/accountController')
 const pinCtrl = require('./controllers/pinController')
 const tripCtrl = require('./controllers/tripController')
+const chatCtrl = require('./controllers/chatController')
 // const todoCtrl = require('./controllers/todoController')
 // const gearCtrl = require('./controllers/gearController')
 
@@ -72,6 +73,12 @@ app.get('/trip/:id', tripCtrl.getATrip)
 app.get('/trip/mytrips/:user_id', tripCtrl.getMyTrips)
 app.delete('/trip/:id', tripCtrl.deleteTrip)
 
+// Chat Controller requests
+
+app.get('/chat/tripConversation/:trip_id', chatCtrl.getTripConversation)
+app.post('/chat/message', chatCtrl.addMessage)
+app.delete('/chat/delete/:chat_id', chatCtrl.deleteMessage)
+
 
 // Sockets stuff
 
@@ -88,13 +95,13 @@ io.on('connection', function (socket) {
 
   //Joins to the trip's room
   socket.on('join room', data => {
-    socket.join(data.room)
+    socket.join(data.trip_id)
   });
 
   //Handle Chat Event
   socket.on(`chat in room`, function (data) {
     //Should add the db.something right here for full stack chat and enable persistence 
-    io.to(data.room).emit('room response', data);
+    io.to(data.trip_id).emit('room response', data);
   });
 
 });

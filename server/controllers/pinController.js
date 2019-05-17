@@ -34,7 +34,7 @@ module.exports = {
 
     db.pins.createPin({title, media, description, url, price, address, city, state, country})
     .then(() => res.sendStatus(200))
-    .catch(err => console.log)
+    .catch(err => console.log(err))
   },
 
   updatePin: (req, res) => {
