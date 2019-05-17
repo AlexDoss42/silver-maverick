@@ -22,10 +22,14 @@ class Item extends Component {
     return (
       <div>
         <p><em>{name}</em>: {quantity}</p>
-        <span
+        <button
+        onClick={() => {
+          this.props.handleOnClickEdit()
+        }}>edit </button>
+        <button
         onClick={() => {
           this.props.handleDelete(deleteId)
-        }}>x</span>
+        }}> delete</button>
       </div>
     )
   }
