@@ -28,8 +28,6 @@ class TripBoard extends Component {
       .catch(() => console.log('You have an error in your CDM for TripBoard.js'))
   }
 
-  //FIX THIS SO IT DOESN'T DELETE PIN JUST REMOVES IT FROM THE TRIP!!!!!
-
   handleRemove = async (pin_id, trip_id) => {
     await axios.delete(`/pin/trip/${pin_id}/${trip_id}`)
     axios.get(`/pin/tripPins/${trip_id}`)

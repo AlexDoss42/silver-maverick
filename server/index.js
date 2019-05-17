@@ -9,7 +9,7 @@ const pinCtrl = require('./controllers/pinController')
 const tripCtrl = require('./controllers/tripController')
 const chatCtrl = require('./controllers/chatController')
 // const todoCtrl = require('./controllers/todoController')
-// const gearCtrl = require('./controllers/gearController')
+const gearCtrl = require('./controllers/gearController')
 
 const app = express()
 
@@ -78,6 +78,13 @@ app.delete('/trip/:id', tripCtrl.deleteTrip)
 app.get('/chat/tripConversation/:trip_id', chatCtrl.getTripConversation)
 app.post('/chat/message', chatCtrl.addMessage)
 app.delete('/chat/delete/:chat_id', chatCtrl.deleteMessage)
+
+// Gear Controller requests
+
+app.get('/gear/tripGear/:trip_id', gearCtrl.getTripGear)
+app.post('/gear/item', gearCtrl.createGear)
+app.put('/gear/update', gearCtrl.updateGear)
+app.delete('/gear/delete/:gear_id', gearCtrl.deleteGear)
 
 
 // Sockets stuff

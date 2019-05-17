@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 import Invite from './Invite'
-import Calendar from './Calendar'
-import Weather from './Weather'
+// import Calendar from './Calendar'
+// import Weather from './Weather'
 import Group from './Group'
-import TodoList from './TodoList'
+// import TodoList from './TodoList'
 import Gear from './Gear'
 import TripBoard from './TripBoard'
 import Chat from './Chat'
@@ -57,13 +57,13 @@ class Trip extends Component {
           <h1>{name}</h1>
 
 
-          <Calendar />
-          <Weather />
+          {/* <Calendar /> */}
+          {/* <Weather /> */}
           <Group
             trip_id={trip_id} />
           <button
             onClick={() => this.handleClick()}>Invite</button>
-          <TodoList />
+          {/* <TodoList /> */}
           <Gear />
           <Chat
             trip_id={trip_id} />

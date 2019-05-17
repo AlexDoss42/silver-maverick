@@ -52,7 +52,7 @@ class Group extends Component {
     return (
 
       <div>
-        <h1>ALL YOUR FRIENDS FOR THE ADVENTURE</h1>
+        <h4>Your Adventure Buddies</h4>
         {members}
       </div>
     )
