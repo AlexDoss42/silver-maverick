@@ -144,7 +144,7 @@ class Gear extends Component {
           </form>
             <button
             onClick={()=> {
-              this.handleOnClickCreate()
+              this.handleAddClick()
             }}>Cancel</button>
           {Items}
         </>
