@@ -56,11 +56,12 @@ class Gear extends Component {
     let { name, quantity, trip_id } = this.state
     axios.post('/gear/item', { name, quantity, trip_id })
     .then(res => {
-
       this.componentDidUpdate()
     })
 
     this.setState({
+      name: '',
+      quantity: '',
       addGear: !this.state.addGear
     })
   }
