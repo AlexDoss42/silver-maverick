@@ -20,17 +20,17 @@ app.use(session({
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-   cookie: {
-     maxAge: 1000 * 60 * 60 * 24 * 365
-   }
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 365
+  }
 }))
 
 massive(CONNECTION_STRING)
-.then((db) => {
-  app.set('db', db)
-  console.log(`It's working! IT'S WORKING!!!!`);
-  console.log(db.listTables())
-})
+  .then((db) => {
+    app.set('db', db)
+    console.log(`It's working! IT'S WORKING!!!!`);
+    console.log(db.listTables())
+  })
 
 const server = app.listen(SERVER_PORT, () => console.log(`It's over Anakin. I have the ${SERVER_PORT} port`))
 
@@ -77,18 +77,24 @@ app.delete('/trip/:id', tripCtrl.deleteTrip)
 
 const io = socket(server);
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
   console.log('Made contact with the socket', socket.id);
 
-  //Handle Chat Event
-  socket.on('chat', function(data){
-    //Should add the db.something right here for full stack chat and enable persistence 
-    io.sockets.emit('chat', data);
-  });
 
   //Handle Typing Event
-  socket.on('typing', function(data){
+  socket.on('typing', function (data) {
     socket.broadcast.emit('typing', data)
+  });
+
+  //Joins to the trip's room
+  socket.on('join room', data => {
+    socket.join(data.room)
+  });
+
+  //Handle Chat Event
+  socket.on(`chat in room`, function (data) {
+    //Should add the db.something right here for full stack chat and enable persistence 
+    io.to(data.room).emit('room response', data);
   });
 
 });

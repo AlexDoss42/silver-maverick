@@ -56,19 +56,19 @@ class Trip extends Component {
 
           <h1>{name}</h1>
 
-          
+
           <Calendar />
           <Weather />
-          <Group 
-          trip_id={trip_id}/>
+          <Group
+            trip_id={trip_id} />
           <button
             onClick={() => this.handleClick()}>Invite</button>
           <TodoList />
           <Gear />
-          <Chat />
+          <Chat
+            trip_id={trip_id} />
           <TripBoard
-            trip_id={trip_id}
-          />
+            trip_id={trip_id} />
         </div>
       )
     } else {

@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
 class Chat extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       conversation: [],
@@ -15,8 +15,16 @@ class Chat extends Component {
 
     this.socket = io.connect('http://localhost:4242');
     
-    this.socket.on('chat',data => this.addMessage(data));
+    this.socket.on('room response', data => this.addMessage(data));
 
+  }
+
+  componentDidMount = () => {
+    const { trip_id } = this.props
+    //join the room for this trip
+    this.socket.emit('join room', { room: trip_id })
+
+    //axios.get for the conversations previous message
   }
 
   addMessage = (data) => {
@@ -29,9 +37,11 @@ class Chat extends Component {
   }
 
   handleOnClick = () => {
-    this.socket.emit('chat', {
+    const { trip_id } = this.props
+    this.socket.emit(`chat in room`, {
       message: this.state.message,
-      username: this.props.username
+      username: this.props.username,
+      room: trip_id
     })
 
   }

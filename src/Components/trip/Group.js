@@ -27,16 +27,11 @@ class Group extends Component {
       .catch(() => console.log('You have an error in your CDM for Group.js'))
   }
 
-  //FIX THIS SO IT DOESN'T DELETE USER JUST REMOVES IT FROM THE TRIP!!!!!
-
   handleRemove = async (user_id, trip_id) => {
-    console.log('user_id from handleRemove: ', user_id, 'trip_id from handleremove: ', trip_id)
     await axios.delete(`/group/members/${user_id}/${trip_id}`)
-    // this.componentDidMount()
     
     await axios.get(`/group/members/${trip_id}`)
       .then(res => {
-        console.log('res.data from HandleRemove on Group.js: ', res.data)
         this.setState({
           group: res.data
         })
@@ -44,7 +39,6 @@ class Group extends Component {
   }
 
   render() {
-    console.log('this needs to happen', 'This.state.group from render: ', this.state.group)
 
     let members = this.state.group.map((member) => (
       <GroupMember
@@ -55,7 +49,6 @@ class Group extends Component {
       />
     ))
 
-    console.log('members in render: ', members)
     return (
 
       <div>
