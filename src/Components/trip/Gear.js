@@ -31,19 +31,6 @@ class Gear extends Component {
       .catch(() => console.log('you have an error in your CDM for Gear.js'))
   }
 
-  componentDidUpdate() {
-    const { trip_id } = this.state
-
-    axios.get(`/gear/tripGear/${trip_id}`)
-      .then(res => {
-        this.setState({
-          gearlist: res.data
-        })
-      })
-      .catch(() => console.log('you have an error in your CDM for Gear.js'))
-  
-  }
-
   handleAddClick() {
     this.setState({
       addGear: !this.state.addGear
@@ -56,7 +43,7 @@ class Gear extends Component {
     let { name, quantity, trip_id } = this.state
     axios.post('/gear/item', { name, quantity, trip_id })
     .then(res => {
-      this.componentDidUpdate()
+      this.componentDidMount()
     })
 
     this.setState({
