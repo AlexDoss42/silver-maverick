@@ -83,7 +83,7 @@ app.delete('/chat/delete/:chat_id', chatCtrl.deleteMessage)
 
 app.get('/gear/tripGear/:trip_id', gearCtrl.getTripGear)
 app.post('/gear/item', gearCtrl.createGear)
-app.put('/gear/update', gearCtrl.updateGear)
+app.put('/gear/update/:gear_id', gearCtrl.updateGear)
 app.delete('/gear/delete/:gear_id', gearCtrl.deleteGear)
 
 

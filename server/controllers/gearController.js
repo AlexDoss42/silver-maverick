@@ -1,6 +1,6 @@
 module.exports = {
 
-  getTripPins: (req, res) => {
+  getTripGear: (req, res) => {
     const db = req.app.get('db')
     const { trip_id } = req.params
     db.gear.getAllGear({trip_id})
@@ -27,7 +27,6 @@ module.exports = {
     db.gear.updateGear({ name, quantity, gear_id })
     .then(() => res.sendStatus(200))
     .catch(err => res.status(500).send(err))
-
   },
 
   deleteGear: (req, res) => {
