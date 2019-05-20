@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer')
 
 const { GOOGLE } = process.env
 
@@ -6,40 +7,40 @@ module.exports = {
 
   register: async (req, res) => {
 
-//  Gets database instance into the register function
+    //  Gets database instance into the register function
 
     const db = req.app.get('db')
 
-// Gives you all the goodies you need to set up the account 
+    // Gives you all the goodies you need to set up the account 
 
     const { firstname, lastname, email, username, password, phone, facebook, instagram, profilePic } = req.body
 
-// Set up a session
+    // Set up a session
 
     const { session } = req
 
-// Checks to see if the email is already in the system
-    
-    let emailTaken = await db.account.verifyEmail({email})
-    .catch(err => console.log(33333, err))
+    // Checks to see if the email is already in the system
+
+    let emailTaken = await db.account.verifyEmail({ email })
+      .catch(err => console.log(33333, err))
     emailTaken = +emailTaken[0].count
-    
-    if(emailTaken !== 0) {
+
+    if (emailTaken !== 0) {
       return res.sendStatus(409)
     }
-    
-// Transforms password into hash for security purposes
+
+    // Transforms password into hash for security purposes
 
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
 
-// Registers a new user
-    
+    // Registers a new user
+
     const user_id = await db.account.signUp({
-      firstname, 
-      lastname, 
-      email, 
-      username, 
+      firstname,
+      lastname,
+      email,
+      username,
       hash,
       phone,
       facebook,
@@ -47,7 +48,7 @@ module.exports = {
       profilePic
     }).catch(err => console.log(err))
 
-// Creates a sesion user to avoid having to login
+    // Creates a sesion user to avoid having to login
 
     session.user = {
       email,
@@ -62,32 +63,32 @@ module.exports = {
     const db = req.app.get('db')
     const { session } = req
 
-//   pulls loginEmail as email off the req body
+    //   pulls loginEmail as email off the req body
 
-    const { loginEmail : email } = req.body
+    const { loginEmail: email } = req.body
 
     // Bryan uses 'try' but it works so we are going with it
 
     try {
-      let user = await db.account.login({email})
-      
+      let user = await db.account.login({ email })
+
       // Sets the user's session
 
       session.user = user[0]
 
-// Uses bcypt magic to see if the password is the right one with it's hash and salting
+      // Uses bcypt magic to see if the password is the right one with it's hash and salting
 
       const authenticated = bcrypt.compareSync(req.body.loginPassword, user[0].password)
-      
-// If the password matches it logs them in
-// Or it throws the error if the password doesn't match
 
-      if(authenticated){
-        res.status(200).send({authenticated, user_id: user[0].login_id, loginEmail: user[0].email})
+      // If the password matches it logs them in
+      // Or it throws the error if the password doesn't match
+
+      if (authenticated) {
+        res.status(200).send({ authenticated, user_id: user[0].login_id, loginEmail: user[0].email })
       } else {
         throw new Error(401)
       }
-    } catch(err) {
+    } catch (err) {
       res.sendStatus(401)
     }
   },
@@ -97,9 +98,9 @@ module.exports = {
     const { session } = req
     try {
       const { email } = session.user
-      const data = await db.account.getDetails({email})
+      const data = await db.account.getDetails({ email })
       res.status(200).send(data[0])
-    } catch(err) {
+    } catch (err) {
       res.sendStatus(500)
     }
   },
@@ -112,28 +113,28 @@ module.exports = {
 
     const db = req.app.get('db')
 
-// Gives you the id of the User you want to update from params
+    // Gives you the id of the User you want to update from params
 
     const { id } = req.params
 
-// Gives you all the goodies you need to update the account 
+    // Gives you all the goodies you need to update the account 
 
     const { email, firstname, lastname, phone, facebook, instagram, profilePic } = req.body
 
-// updates the user info
-    
-   db.account.updateUser({
+    // updates the user info
+
+    db.account.updateUser({
       id,
-      firstname, 
-      lastname, 
-      email, 
+      firstname,
+      lastname,
+      email,
       phone,
       facebook,
       instagram,
       profilePic
     })
-    .then(() => res.sendStatus(200))
-    .catch(err => console.log(err))
+      .then(() => res.sendStatus(200))
+      .catch(err => console.log(err))
   },
 
   logout: (req, res) => {
@@ -146,13 +147,13 @@ module.exports = {
     db.account.getAllUsers().then((data) => {
       res.status(200).send(data)
     })
-    .catch(() => console.log('err with getAllUsers in accCtrl'))
+      .catch(() => console.log('err with getAllUsers in accCtrl'))
   },
 
   inviteToTrip: async (req, res) => {
     const db = req.app.get('db')
     const { invited, trip_id } = req.body
-    for(let i = 0; i < invited.length; i++){
+    for (let i = 0; i < invited.length; i++) {
       let user_id = invited[i].user_id
       await db.group.inviteToTrip({ user_id, trip_id })
     }
@@ -162,11 +163,11 @@ module.exports = {
   getTripGroupMembers: (req, res) => {
     const db = req.app.get('db')
     const { trip_id } = req.params
-    db.group.getAllGroupMembers({trip_id})
-    .then((data) => {
-      res.status(200).send(data)
-    })
-    .catch(err => console.log(err))
+    db.group.getAllGroupMembers({ trip_id })
+      .then((data) => {
+        res.status(200).send(data)
+      })
+      .catch(err => console.log(err))
   },
 
   removeFromGroup: (req, res) => {
@@ -174,46 +175,43 @@ module.exports = {
     const { user_id, trip_id } = req.params
 
     db.group.removeFromGroup({ user_id, trip_id })
-    .then(()=>res.sendStatus(200))
-    .catch(err => console.log(err))
+      .then(() => res.sendStatus(200))
+      .catch(err => console.log(err))
   },
 
-  inviteEmail: async (req, res)=> {
+  inviteEmail: async (req, res) => {
 
-    let dbinstance=req.app.get('db')
-    let { firstName, lastName, invite_email, invite_name }= req.body
+    let { username, invite_email, invite_name } = req.body
 
-try {
+    try {
 
-  console.log('hit try')
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'tripdaddyinviteafriend@gmail.com',
+          pass: GOOGLE
+        }
+      });
 
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'tripdaddyinviteafriend@gmail.com',
-      pass: GOOGLE
-    }
-  });
-
-  var mailOptions = {
-    from: 'tripdaddyinviteafriend@gmail.com',
-    to: `${invite_email}`,
-    subject: `Come on an adventure with ${firstName} ${lastName} & TripDaddy`,
-    text: `Hey ${invite_name}! ${firstName} ${lastName} wants you to come on a trip using TripDaddy! click on the link below to register!
+      var mailOptions = {
+        from: 'tripdaddyinviteafriend@gmail.com',
+        to: `${invite_email}`,
+        subject: `Come on an adventure with ${username} & TripDaddy`,
+        text: `Hey ${invite_name}! ${username} wants you to come on a trip using TripDaddy! click on the link below to register!
     
     http://localhost:3000/#/signup
     `
-  };
+      };
 
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      })
+    } catch (err) {
+      console.log('err in catch for inviteEmail', err)
     }
-  })
-} catch (err) {
-  console.log('err in catch for inviteEmail', err)
-}
-
+  }
 }

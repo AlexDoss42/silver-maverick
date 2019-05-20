@@ -8,12 +8,15 @@ class Invite extends Component {
   constructor(props) {
     super(props)
 
+    const { username } = this.props
+
     this.state = {
       users: [],
       invited: [],
       search_input: '',
       invite_email: '',
-      invite_name: ''
+      invite_name: '',
+      username
     }
   }
 
@@ -21,8 +24,8 @@ class Invite extends Component {
     axios.get(`/auth/allUsers`)
       .then(res => {
         let usersCopy = [...res.data]
-        let findMyUser = usersCopy.filter(user => (this.props.user_id === user.user_id))       
-        if(findMyUser.length === 1) {
+        let findMyUser = usersCopy.filter(user => (this.props.user_id === user.user_id))
+        if (findMyUser.length === 1) {
           const myUserIndex = usersCopy.indexOf(findMyUser[0])
           usersCopy.splice(myUserIndex, 1)
         }
@@ -57,14 +60,35 @@ class Invite extends Component {
 
   AddUsersToTrip = (invited) => {
     const { trip_id } = this.props
-    axios.post('/auth/invite', {invited, trip_id})
+    axios.post('/auth/invite', { invited, trip_id })
   }
 
-  handleSearchInput = (e) => {
+  handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
+
+handleInviteEmail = () => {
+  const { username, invite_email, invite_name } = this.state
+
+  console.log( 
+  "username: ", username,
+  "invite_email: ", invite_email,
+  "invite_Name: ", invite_name
+  )
+
+  axios.post('/auth/newUser', { username, invite_email, invite_name })
+  .then(() => {
+    
+  })
+  .catch(err => console.log('err in handleInviteEmail in Invite.js: ', err))
+
+  this.setState({
+    invite_email: '',
+    invite_name: ''
+  })
+}
 
   render() {
 
@@ -76,7 +100,7 @@ class Invite extends Component {
       <PickAUser
         user={user}
         key={i}
-        addToInvitedList = {this.addToInvitedList}
+        addToInvitedList={this.addToInvitedList}
       />
     ))
 
@@ -85,52 +109,55 @@ class Invite extends Component {
       const lowerCaseFirstName = user.props.user.firstname.toLocaleLowerCase()
       const lowerCaseLastName = user.props.user.lastname.toLocaleLowerCase()
       const lowerCaseSearch_input = search_input.toLocaleLowerCase()
-      if(search_input !== ''){
+      if (search_input !== '') {
         return (
-          lowerCaseUsername.includes(lowerCaseSearch_input) || lowerCaseFirstName.includes(lowerCaseSearch_input) || lowerCaseLastName.includes(lowerCaseSearch_input) 
-          )
-        } else {
-          return Users
-        }
+          lowerCaseUsername.includes(lowerCaseSearch_input) || lowerCaseFirstName.includes(lowerCaseSearch_input) || lowerCaseLastName.includes(lowerCaseSearch_input)
+        )
+      } else {
+        return Users
+      }
     })
-
 
     return (
       <div>
         <h2>Whose coming with you on {name}?</h2>
         <input
-        name='search_input'
-        value={this.state.search_input}
-        placeholder='Search for your adventure buddies'
-        onChange = {this.handleSearchInput}></input>
+          name='search_input'
+          value={this.state.search_input}
+          placeholder='Search for your adventure buddies'
+          onChange={this.handleInput}></input>
         {filteredUsers}
         <button
           onClick={() => {
             handleClick();
-          this.AddUsersToTrip(this.state.invited)}}>Done</button>
+            this.AddUsersToTrip(this.state.invited)
+          }}>Done</button>
         <h4>Couldn't find your adventure buddy? Invite them to join TripDaddy</h4>
 
         <input
-        name='invite_name'
-        value={this.state.invite_name}
-        placeholder="Your adventure buddy's name"
-        onChange = {this.handleSearchInput}></input>
+          name='invite_name'
+          value={this.state.invite_name}
+          placeholder="Your adventure buddy's name"
+          onChange={this.handleInput}></input>
 
         <input
-        name='invite_email'
-        value={this.state.invite_email}
-        placeholder="Your adventure buddy's email"
-        onChange = {this.handleSearchInput}></input>
+          name='invite_email'
+          value={this.state.invite_email}
+          placeholder="Your adventure buddy's email"
+          onChange={this.handleInput}></input>
 
-        <button>Send</button>
+        <button
+        onClick={() => {
+          this.handleInviteEmail()
+        }}>Send</button>
       </div>
     )
   }
 }
 
 const mapStateToProps = (reduxState) => {
-  const { user_id } = reduxState.account
-  return { user_id }
+  const { user_id, username } = reduxState.account
+  return { user_id, username }
 }
 
 export default connect(mapStateToProps)(Invite)

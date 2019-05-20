@@ -4,6 +4,7 @@ const massive = require('massive')
 const session = require('express-session')
 const socket = require('socket.io')
 
+
 const accCtrl = require('./controllers/accountController')
 const pinCtrl = require('./controllers/pinController')
 const tripCtrl = require('./controllers/tripController')
@@ -43,7 +44,7 @@ app.get('/auth/details', accCtrl.getDetails)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 app.get('/auth/allUsers', accCtrl.getAllUsers)
-app.post('auth/invite', accCtrl.inviteEmail)
+app.post('/auth/newUser', accCtrl.inviteEmail)
 
 // Group Controller requests (Currently on accCtrl due to laziness)
 
