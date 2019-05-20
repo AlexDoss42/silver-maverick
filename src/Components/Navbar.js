@@ -21,7 +21,9 @@ class Navbar extends Component {
     }
 
     render() {
-        const { email, username } = this.props
+        const { email, username
+            // , profilePic 
+        } = this.props
         return (
             <nav>
                 <span>TripDaddy</span>
@@ -48,6 +50,10 @@ class Navbar extends Component {
                     <h3>
                         Welcome, {username}
                     </h3>
+                    {/* <img 
+                    src={`${profilePic}`}
+                    alt='profile pic'
+                    style={{height: '150px'}}/> */}
                     <ul>
                         <li>
                             <Link to='/'>Home</Link>
@@ -70,8 +76,8 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { email, username } = reduxState.account
-    return { email, username }
+    const { email, username, profilePic } = reduxState.account
+    return { email, username, profilePic }
 }
 
 const mapDispatchToProps = {

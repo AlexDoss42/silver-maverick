@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import store from '../../redux/store'
 
 class PlanATrip extends Component {
   constructor(props) {
@@ -12,6 +13,23 @@ class PlanATrip extends Component {
       user_id: this.props.user_id,
       name: ''
     }
+  }
+
+  componentDidMount() {
+
+    axios.get('/auth/session').then(res => {
+
+      if (!res.data.email) {
+        this.props.history.push('/')
+      }
+
+      store.dispatch(
+        {
+          type: 'REFRESH_SESSION',
+          payload: res.data.user
+        }
+      )
+    })
   }
 
   handleFormInputUpdate = (e) => {

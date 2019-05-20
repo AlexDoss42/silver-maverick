@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import store from '../../redux/store'
 
 
 import MyTrips from './MyTrips'
 
 class Profile extends Component {
 
+  componentDidMount() {
+    axios.get('/auth/session').then(res => {
+      if (!res.data.email) {
+        this.props.history.push('/')
+      }
+
+      store.dispatch(
+        {
+          type: 'REFRESH_SESSION',
+          payload: res.data.user
+        }
+      )
+    })
+  }
+  
   render() {
     return (
       <div>
@@ -20,7 +37,7 @@ class Profile extends Component {
         </Link>
 
         <MyTrips />
-        
+
       </div>
     )
   }

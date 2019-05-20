@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
+import store from '../../redux/store'
 
 class CreatePin extends Component {
   constructor() {
@@ -17,6 +18,23 @@ class CreatePin extends Component {
       state: '',
       country: ''
     }
+  }
+
+  componentDidMount() {
+
+    axios.get('/auth/session').then(res => {
+
+      if (!res.data.email) {
+        this.props.history.push('/')
+      }
+
+      store.dispatch(
+        {
+          type: 'REFRESH_SESSION',
+          payload: res.data.user
+        }
+      )
+    })
   }
 
   handleFormInputUpdate = (e) => {

@@ -10,6 +10,7 @@ import TripBoard from './TripBoard'
 import Chat from './Chat'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import store from '../../redux/store'
 
 class Trip extends Component {
   constructor(props) {
@@ -27,6 +28,21 @@ class Trip extends Component {
   }
 
   componentDidMount() {
+
+    axios.get('/auth/session').then(res => {
+
+      if (!res.data.email) {
+        this.props.history.push('/')
+      }
+
+      store.dispatch(
+        {
+          type: 'REFRESH_SESSION',
+          payload: res.data.user
+        }
+      )
+    })
+
     axios.get(`/trip/${this.props.trip_id}`)
       .then(res => {
         this.setState({

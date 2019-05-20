@@ -45,6 +45,10 @@ class SignUpForm extends Component {
       alert('Password is required')
     } else if (phone === '') {
       alert('Phone is required')
+    } else if (profilePic === '') {
+      this.setState({
+        profilePic: 'https://i.stack.imgur.com/IHLNO.jpg'
+      })
     } else {
 
       try {
