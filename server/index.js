@@ -8,7 +8,7 @@ const accCtrl = require('./controllers/accountController')
 const pinCtrl = require('./controllers/pinController')
 const tripCtrl = require('./controllers/tripController')
 const chatCtrl = require('./controllers/chatController')
-// const todoCtrl = require('./controllers/todoController')
+const todoCtrl = require('./controllers/todoController')
 const gearCtrl = require('./controllers/gearController')
 
 const app = express()
@@ -45,6 +45,7 @@ app.get('/auth/logout', accCtrl.logout)
 app.get('/auth/allUsers', accCtrl.getAllUsers)
 
 // Group Controller requests (Currently on accCtrl due to laziness)
+
 app.get('/group/members/:trip_id', accCtrl.getTripGroupMembers)
 app.post('/auth/invite', accCtrl.inviteToTrip)
 app.delete('/group/members/:user_id/:trip_id', accCtrl.removeFromGroup)
@@ -85,6 +86,14 @@ app.get('/gear/tripGear/:trip_id', gearCtrl.getTripGear)
 app.post('/gear/item', gearCtrl.createGear)
 app.put('/gear/update/:gear_id', gearCtrl.updateGear)
 app.delete('/gear/delete/:gear_id', gearCtrl.deleteGear)
+
+
+// Todo Controller requests
+
+app.get('/todo/tripTodos/:trip_id', todoCtrl.getTripTodos)
+app.post('/todo/task', todoCtrl.createTodo)
+app.put('/todo/update/:todo_id', todoCtrl.updateTodo)
+app.delete('/todo/delete/:todo_id', todoCtrl.deleteTodo)
 
 
 // Sockets stuff

@@ -4,7 +4,7 @@ import Invite from './Invite'
 // import Calendar from './Calendar'
 // import Weather from './Weather'
 import Group from './Group'
-// import TodoList from './TodoList'
+import TodoList from './TodoList'
 import Gear from './Gear'
 import TripBoard from './TripBoard'
 import Chat from './Chat'
@@ -60,7 +60,8 @@ class Trip extends Component {
             trip_id={trip_id} />
           <button
             onClick={() => this.handleClick()}>Invite</button>
-          {/* <TodoList /> */}
+          <TodoList 
+          trip_id = {trip_id}/>
           <Gear 
           trip_id = {trip_id}/>
           <Chat
