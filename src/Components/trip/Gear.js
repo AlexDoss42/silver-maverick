@@ -13,7 +13,6 @@ class Gear extends Component {
       name: '',
       quantity: '',
       trip_id,
-      edit: false,
       addGear: false
     }
 
@@ -71,8 +70,8 @@ class Gear extends Component {
       })
   }
 
-  handleEditPinSubmit = async (name, quantity, gear_id) => {
-
+  handleEditSubmit = async (name, quantity, gear_id) => {
+    console.log(gear_id)
     axios.put(`/gear/update/${gear_id}`, { name, quantity })
       .then(res => {
         this.componentDidMount()
