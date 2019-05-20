@@ -43,6 +43,7 @@ app.get('/auth/details', accCtrl.getDetails)
 app.post('/auth/update/:id', accCtrl.updateUser)
 app.get('/auth/logout', accCtrl.logout)
 app.get('/auth/allUsers', accCtrl.getAllUsers)
+app.post('auth/invite', accCtrl.inviteEmail)
 
 // Group Controller requests (Currently on accCtrl due to laziness)
 
@@ -105,19 +106,20 @@ io.on('connection', function (socket) {
 
 
   //Handle Typing Event
+
   socket.on('typing', function (data) {
     socket.broadcast.emit('typing', data)
   });
 
   //Joins to the trip's room
+
   socket.on('join room', data => {
     socket.join(data.trip_id)
   });
 
   //Handle Chat Event
+
   socket.on(`chat in room`, function (data) {
-    //Should add the db.something right here for full stack chat and enable persistence 
     io.to(data.trip_id).emit('room response', data);
   });
-
 });

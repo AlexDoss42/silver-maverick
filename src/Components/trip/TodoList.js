@@ -14,19 +14,16 @@ class TodoList extends Component {
       trip_id,
       addTodo: false
     }
-
   }
 
   componentDidMount() {
     const { trip_id } = this.state
 
-    console.log('trip_id from CDM TodoList.js: ', trip_id)
     axios.get(`/todo/tripTodos/${trip_id}`)
       .then(res => {
         this.setState({
           todolist: res.data
         })
-        console.log('state from CDM TodoList.js: ', this.state)
       })
       .catch(() => console.log('you have an error in your CDM for TodoList.js'))
   }

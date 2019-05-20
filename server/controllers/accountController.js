@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs')
 
+const { GOOGLE } = process.env
+
 module.exports = {
 
   register: async (req, res) => {
@@ -174,5 +176,44 @@ module.exports = {
     db.group.removeFromGroup({ user_id, trip_id })
     .then(()=>res.sendStatus(200))
     .catch(err => console.log(err))
-  }
+  },
+
+  inviteEmail: async (req, res)=> {
+
+    let dbinstance=req.app.get('db')
+    let { firstName, lastName, invite_email, invite_name }= req.body
+
+try {
+
+  console.log('hit try')
+
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'tripdaddyinviteafriend@gmail.com',
+      pass: GOOGLE
+    }
+  });
+
+  var mailOptions = {
+    from: 'tripdaddyinviteafriend@gmail.com',
+    to: `${invite_email}`,
+    subject: `Come on an adventure with ${firstName} ${lastName} & TripDaddy`,
+    text: `Hey ${invite_name}! ${firstName} ${lastName} wants you to come on a trip using TripDaddy! click on the link below to register!
+    
+    http://localhost:3000/#/signup
+    `
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  })
+} catch (err) {
+  console.log('err in catch for inviteEmail', err)
+}
+
 }

@@ -11,7 +11,9 @@ class Invite extends Component {
     this.state = {
       users: [],
       invited: [],
-      search_input: ''
+      search_input: '',
+      invite_email: '',
+      invite_name: ''
     }
   }
 
@@ -106,6 +108,21 @@ class Invite extends Component {
           onClick={() => {
             handleClick();
           this.AddUsersToTrip(this.state.invited)}}>Done</button>
+        <h4>Couldn't find your adventure buddy? Invite them to join TripDaddy</h4>
+
+        <input
+        name='invite_name'
+        value={this.state.invite_name}
+        placeholder="Your adventure buddy's name"
+        onChange = {this.handleSearchInput}></input>
+
+        <input
+        name='invite_email'
+        value={this.state.invite_email}
+        placeholder="Your adventure buddy's email"
+        onChange = {this.handleSearchInput}></input>
+
+        <button>Send</button>
       </div>
     )
   }
