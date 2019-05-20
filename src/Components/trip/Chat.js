@@ -23,8 +23,11 @@ class Chat extends Component {
   }
 
   componentDidMount = () => {
+
     const { trip_id } = this.props
+
     //join the room for this trip
+
     this.socket.emit('join room', { trip_id })
 
     //axios.get for the conversations previous message
@@ -39,7 +42,6 @@ class Chat extends Component {
 
   addMessage = (data) => {
     const newConvo = this.state.conversation.slice()
-    console.log(newConvo)
     newConvo.push(data)
     this.setState({
       conversation: newConvo
@@ -47,18 +49,26 @@ class Chat extends Component {
   }
 
   handleOnClick = () => {
+
     const { trip_id } = this.props
-    this.socket.emit(`chat in room`, {
-      message: this.state.message,
-      username: this.props.username,
-      trip_id,
-    })
-    axios.post('/chat/message', {
-      message: this.state.message,
-      username: this.props.username,
-      user_id: this.props.user_id,
-      trip_id,
-    })
+
+    if (this.state.message === '') {
+      alert('You need to type a message')
+    } else {
+
+
+      this.socket.emit(`chat in room`, {
+        message: this.state.message,
+        username: this.props.username,
+        trip_id,
+      })
+      axios.post('/chat/message', {
+        message: this.state.message,
+        username: this.props.username,
+        user_id: this.props.user_id,
+        trip_id,
+      })
+    }
   }
 
   handleOnChange = (e) => {
@@ -84,18 +94,18 @@ class Chat extends Component {
 
     const Messages = conversation.map((message) => (
       <Message
-      message={message}
-      key={message.chat_id}
-      deleteId={message.chat_id}
-      handleDelete = {this.handleDelete}
+        message={message}
+        key={message.chat_id}
+        deleteId={message.chat_id}
+        handleDelete={this.handleDelete}
       />
     ))
     return (
       <div id="adventure-chat">
         <div id="chat-window">
           <div id="output">
-          {Messages}
-            </div>
+            {Messages}
+          </div>
         </div>
 
         <input

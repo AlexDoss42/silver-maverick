@@ -13,7 +13,7 @@ module.exports = {
 
     // Gives you all the goodies you need to set up the account 
 
-    const { firstname, lastname, email, username, password, phone, facebook, instagram, profilePic } = req.body
+    const { firstname, lastname, email, username, password, phone, venmo, profilePic } = req.body
 
     // Set up a session
 
@@ -43,8 +43,7 @@ module.exports = {
       username,
       hash,
       phone,
-      facebook,
-      instagram,
+      venmo,
       profilePic
     }).catch(err => console.log(err))
 
@@ -119,7 +118,7 @@ module.exports = {
 
     // Gives you all the goodies you need to update the account 
 
-    const { email, firstname, lastname, phone, facebook, instagram, profilePic } = req.body
+    const { email, firstname, lastname, phone, venmo, profilePic } = req.body
 
     // updates the user info
 
@@ -129,8 +128,7 @@ module.exports = {
       lastname,
       email,
       phone,
-      facebook,
-      instagram,
+      venmo,
       profilePic
     })
       .then(() => res.sendStatus(200))

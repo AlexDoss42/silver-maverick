@@ -40,16 +40,24 @@ class Gear extends Component {
     e.preventDefault()
 
     let { name, quantity, trip_id } = this.state
-    axios.post('/gear/item', { name, quantity, trip_id })
-    .then(res => {
-      this.componentDidMount()
-    })
 
-    this.setState({
-      name: '',
-      quantity: '',
-      addGear: !this.state.addGear
-    })
+    if(name === '') {
+      alert('Gear name is required')
+    } else if(quantity === '') {
+      alert('You need to put a quantity on that item')
+    } else {
+
+      axios.post('/gear/item', { name, quantity, trip_id })
+        .then(res => {
+          this.componentDidMount()
+        })
+
+      this.setState({
+        name: '',
+        quantity: '',
+        addGear: !this.state.addGear
+      })
+    }
   }
 
   handleFormInputUpdate = (e) => {
@@ -96,14 +104,14 @@ class Gear extends Component {
         handleOnClickEdit={this.handleOnClickEdit}
       />
     ))
-    if(this.state.addGear === false) {
+    if (this.state.addGear === false) {
       return (
         <>
           <h4>Gear for the trip</h4>
           <button
-          onClick={()=> {
-            this.handleAddClick()
-          }}>Add Gear</button>
+            onClick={() => {
+              this.handleAddClick()
+            }}>Add Gear</button>
           {Items}
         </>
       )
@@ -113,30 +121,30 @@ class Gear extends Component {
           <h4>Gear for the trip</h4>
           <form onSubmit={this.handleCreateGearSubmit}>
             <input
-            type='text'
-            name='name'
-            placeholder='Gear name'
-            value={this.state.name}
-            onChange={this.handleFormInputUpdate}
+              type='text'
+              name='name'
+              placeholder='Gear name'
+              value={this.state.name}
+              onChange={this.handleFormInputUpdate}
             />
             <input
-            type='number'
-            name='quantity'
-            placeholder='Quantity'
-            value={this.state.quantity}
-            onChange={this.handleFormInputUpdate}
+              type='number'
+              name='quantity'
+              placeholder='Quantity'
+              value={this.state.quantity}
+              onChange={this.handleFormInputUpdate}
             />
             <button>Submit</button>
           </form>
-            <button
-            onClick={()=> {
+          <button
+            onClick={() => {
               this.handleAddClick()
             }}>Cancel</button>
           {Items}
         </>
       )
     }
-    
+
   }
 }
 export default Gear

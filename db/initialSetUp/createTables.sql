@@ -4,8 +4,7 @@ create table users (
   lastName varChar(50),
   email varChar(50),
   phone varChar(20),
-  facebook varChar(50),
-  instagram varChar(50),
+  venmo varChar(50),
   username varChar(50),
   profilePic text
 );

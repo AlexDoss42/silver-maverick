@@ -32,10 +32,27 @@ class CreatePin extends Component {
       title, media, description, url, price, address, city, state, country
     } = this.state
 
-    axios.post('/pin', {title, media, description, url, price, address, city, state, country})
+    if (title === '') {
+      alert('Pin title is required')
+    } else if (media === '') {
+      alert('Image url is required')
+    } else if (description === '') {
+      alert('A brief description is required')
+    } else if (address === '') {
+      alert('Address is required')
+    } else if (city === '') {
+      alert('City or location name is required')
+    } else if (state === '') {
+      alert('state/Providence is required')
+    } else if (country === '') {
+      alert('Country is required')
+    } else {
 
-    this.props.history.push('/')
+      axios.post('/pin', { title, media, description, url, price, address, city, state, country })
 
+      this.props.history.push('/')
+
+    }
   }
 
   handleCancel = (e) => {
@@ -116,7 +133,7 @@ class CreatePin extends Component {
 
           <button>Submit</button>
         </form>
-          <button
+        <button
           onClick={this.handleCancel}>Cancel</button>
 
       </div>

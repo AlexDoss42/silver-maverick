@@ -38,15 +38,21 @@ class TodoList extends Component {
     e.preventDefault()
 
     let { task, trip_id } = this.state
-    axios.post('/todo/task', { task, trip_id })
-    .then(res => {
-      this.componentDidMount()
-    })
 
-    this.setState({
-      task: '',
-      addTodo: !this.state.addTodo
-    })
+    if (task === '') {
+      alert('Task is required')
+    } else {
+
+      axios.post('/todo/task', { task, trip_id })
+        .then(res => {
+          this.componentDidMount()
+        })
+
+      this.setState({
+        task: '',
+        addTodo: !this.state.addTodo
+      })
+    }
   }
 
   handleFormInputUpdate = (e) => {
@@ -92,14 +98,14 @@ class TodoList extends Component {
         handleOnClickEdit={this.handleOnClickEdit}
       />
     ))
-    if(this.state.addTodo === false) {
+    if (this.state.addTodo === false) {
       return (
         <>
           <h4>Task for the trip</h4>
           <button
-          onClick={()=> {
-            this.handleAddClick()
-          }}>Add a Todo</button>
+            onClick={() => {
+              this.handleAddClick()
+            }}>Add a Todo</button>
           {Tasks}
         </>
       )
@@ -109,24 +115,24 @@ class TodoList extends Component {
           <h4>Todos for the trip</h4>
           <form onSubmit={this.handleCreateGearSubmit}>
             <input
-            type='text'
-            name='task'
-            placeholder='Task'
-            value={this.state.task}
-            onChange={this.handleFormInputUpdate}
+              type='text'
+              name='task'
+              placeholder='Task'
+              value={this.state.task}
+              onChange={this.handleFormInputUpdate}
             />
-            
+
             <button>Submit</button>
           </form>
-            <button
-            onClick={()=> {
+          <button
+            onClick={() => {
               this.handleAddClick()
             }}>Cancel</button>
           {Tasks}
         </>
       )
     }
-    
+
   }
 }
 export default TodoList

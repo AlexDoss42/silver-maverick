@@ -27,14 +27,18 @@ class PlanATrip extends Component {
       group_leader, name, user_id
     } = this.state
 
-    axios.post('/trip', { group_leader, name, user_id })
-    .catch(() => console.log('you did NOT create a trip'))
+    if (name === '') {
+      alert('Name is required')
+    } else {
+
+      axios.post('/trip', { group_leader, name, user_id })
+        .catch(() => console.log('you did NOT create a trip'))
 
 
-    // PUSH THIS TO THE TRIP PAGE YOU CAN DO THIS. YOU DID THIS WITH OWNPROPS ONCE. YOU CAN DO IT AGAIN THIS TECHNOLOGY IS LOCATED IN MYTRIPS.JS and TRIP.JS 
-    
-    this.props.history.push('/profile')
+      // PUSH THIS TO THE TRIP PAGE YOU CAN DO THIS. YOU DID THIS WITH OWNPROPS ONCE. YOU CAN DO IT AGAIN THIS TECHNOLOGY IS LOCATED IN MYTRIPS.JS and TRIP.JS 
 
+      this.props.history.push('/profile')
+    }
   }
 
   handleCancel = (e) => {
@@ -56,10 +60,10 @@ class PlanATrip extends Component {
             value={this.state.name}
             onChange={this.handleFormInputUpdate}
           />
-          
+
           <button>Submit</button>
         </form>
-          <button
+        <button
           onClick={this.handleCancel}>Cancel</button>
 
       </div>

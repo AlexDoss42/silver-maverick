@@ -14,8 +14,7 @@ class SignUpForm extends Component {
       username: '',
       password: '',
       phone: '',
-      facebook: '',
-      instagram: '',
+      venmo: '',
       profilePic: '',
       signupError: false,
       signupErrorMessage: 'That email has been taken'
@@ -32,29 +31,43 @@ class SignUpForm extends Component {
   handleSignUpFormSubmit = async (e) => {
     e.preventDefault()
 
-    const { firstname, lastname, email, username, password, phone, facebook, instagram, profilePic } = this.state
+    const { firstname, lastname, email, username, password, phone, venmo, profilePic } = this.state
 
-    try {
-      const res = await axios.post('/auth/register', { firstname, lastname, email, username, password, phone, facebook, instagram, profilePic })
+    if (firstname === '') {
+      alert('First Name is required')
+    } else if (lastname === '') {
+      alert('Last Name is required')
+    } else if (email === '') {
+      alert('Email is required')
+    } else if (username === '') {
+      alert('Username is required')
+    } else if (password === '') {
+      alert('Password is required')
+    } else if (phone === '') {
+      alert('Phone is required')
+    } else {
 
-      const { user_id } = res.data[0]
+      try {
+        const res = await axios.post('/auth/register', { firstname, lastname, email, username, password, phone, venmo, profilePic })
 
-      this.props.updateUserDetails({ user_id, firstname, lastname, email, username, password, phone, facebook, instagram, profilePic })
-      this.props.history.push('/')
+        const { user_id } = res.data[0]
 
-    } catch (err) {
-      this.setState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        username: '',
-        password: '',
-        phone: '',
-        facebook: '',
-        instagram: '',
-        profilePic: '',
-        loginError: true
-      })
+        this.props.updateUserDetails({ user_id, firstname, lastname, email, username, password, phone, venmo, profilePic })
+        this.props.history.push('/')
+
+      } catch (err) {
+        this.setState({
+          firstname: '',
+          lastname: '',
+          email: '',
+          username: '',
+          password: '',
+          phone: '',
+          venmo: '',
+          profilePic: '',
+          loginError: true
+        })
+      }
     }
   }
 
@@ -79,16 +92,16 @@ class SignUpForm extends Component {
           />
           <input
             type='text'
-            name='email'
-            placeholder='Email'
-            value={this.state.email}
+            name='username'
+            placeholder='Username'
+            value={this.state.username}
             onChange={this.handleFormInputUpdate}
           />
           <input
             type='text'
-            name='username'
-            placeholder='Username'
-            value={this.state.username}
+            name='email'
+            placeholder='Email'
+            value={this.state.email}
             onChange={this.handleFormInputUpdate}
           />
           <input
@@ -107,16 +120,9 @@ class SignUpForm extends Component {
           />
           <input
             type='text'
-            name='facebook'
-            placeholder='Facebook Profile'
-            value={this.state.facebook}
-            onChange={this.handleFormInputUpdate}
-          />
-          <input
-            type='text'
-            name='instagram'
-            placeholder='Instagram Handle'
-            value={this.state.instagram}
+            name='venmo'
+            placeholder='Venmo Handle'
+            value={this.state.venmo}
             onChange={this.handleFormInputUpdate}
           />
           <input

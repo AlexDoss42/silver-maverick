@@ -5,8 +5,7 @@ const initialState = {
   firstname: '',
   lastname: '',
   phone: '',
-  facebook: '',
-  instagram: '',
+  venmo: '',
   profilePic: '',
   authenticated: false
 }
@@ -47,8 +46,8 @@ export default function reducer(state = initialState, action){
       return { ...state, email: payload }
 
     case UPDATE_USER_DETAILS:
-    const { user_id, email, firstname, lastname, username, phone, facebook, instagram, profilePic, authenticated} = payload
-      return { ...state, user_id, email, firstname, username, lastname, phone, facebook, instagram, profilePic, authenticated }
+    const { user_id, email, firstname, lastname, username, phone, venmo, profilePic, authenticated} = payload
+      return { ...state, user_id, email, firstname, username, lastname, phone, venmo, profilePic, authenticated }
     
     default: 
       return state

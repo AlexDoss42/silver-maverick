@@ -4,8 +4,7 @@ set firstname = ${firstname},
     lastname = ${lastname},
     email = ${email},
     phone = ${phone},
-    facebook = ${facebook},
-    instagram = ${instagram},
+    venmo = ${venmo}
     profilePic = ${profilePic}
 
 where user_id = ${id}

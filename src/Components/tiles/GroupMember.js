@@ -4,7 +4,7 @@ class GroupMember extends Component {
   constructor(props) {
     super(props)
 
-    const { user_id, firstName, lastName, email, phone, facebook, instagram, username, profilePic } = this.props.member
+    const { user_id, firstName, lastName, email, phone, venmo, username, profilePic } = this.props.member
     const { trip_id } = this.props
 
     this.state = {
@@ -14,15 +14,14 @@ class GroupMember extends Component {
       lastName, 
       email, 
       phone, 
-      facebook, 
-      instagram, 
+      venmo, 
       username, 
       profilePic
     }
   }
 
   render() {
-    const { trip_id, user_id, firstName, lastName, email, phone, facebook, instagram, username, profilePic } = this.state
+    const { trip_id, user_id, firstName, lastName, email, phone, venmo, username, profilePic } = this.state
 
     return (
       <div
@@ -34,8 +33,7 @@ class GroupMember extends Component {
         <h5>Full Name: {firstName} {lastName}</h5>
         <h5>Phone: {phone}</h5>
         <h5>Email: {email}</h5>
-        <h5>Facebook Profile: {facebook}</h5>
-        <h5>Instagram Handle: {instagram}</h5>
+        <h5>Venmo Handle: {venmo}</h5>
         <div>
 
           <button

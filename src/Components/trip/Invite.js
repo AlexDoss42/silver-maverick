@@ -69,26 +69,27 @@ class Invite extends Component {
     })
   }
 
-handleInviteEmail = () => {
-  const { username, invite_email, invite_name } = this.state
+  handleInviteEmail = () => {
+    const { username, invite_email, invite_name } = this.state
 
-  console.log( 
-  "username: ", username,
-  "invite_email: ", invite_email,
-  "invite_Name: ", invite_name
-  )
+    if (invite_email === '') {
+      alert('Email is required')
+    } else if (invite_name === '') {
+      alert('Name is required')
+    } else {
 
-  axios.post('/auth/newUser', { username, invite_email, invite_name })
-  .then(() => {
-    
-  })
-  .catch(err => console.log('err in handleInviteEmail in Invite.js: ', err))
+      axios.post('/auth/newUser', { username, invite_email, invite_name })
+        .then(() => {
 
-  this.setState({
-    invite_email: '',
-    invite_name: ''
-  })
-}
+        })
+        .catch(err => console.log('err in handleInviteEmail in Invite.js: ', err))
+
+      this.setState({
+        invite_email: '',
+        invite_name: ''
+      })
+    }
+  }
 
   render() {
 
@@ -147,9 +148,9 @@ handleInviteEmail = () => {
           onChange={this.handleInput}></input>
 
         <button
-        onClick={() => {
-          this.handleInviteEmail()
-        }}>Send</button>
+          onClick={() => {
+            this.handleInviteEmail()
+          }}>Send</button>
       </div>
     )
   }

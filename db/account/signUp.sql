@@ -12,8 +12,7 @@ insert into users (
   username, 
   email,
   phone,
-  facebook,
-  instagram,
+  venmo,
   profilePic
 ) values (
   ${firstname},
@@ -21,8 +20,7 @@ insert into users (
   ${username},
   ${email},
   ${phone},
-  ${facebook},
-  ${instagram},
+  ${venmo},
   ${profilePic}
 )returning user_id;
 
