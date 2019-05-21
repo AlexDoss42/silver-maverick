@@ -21,54 +21,54 @@ class Navbar extends Component {
     }
 
     render() {
-        const { email, username
-            // , profilePic 
-        } = this.props
+        const { email, username } = this.props
         return (
             <nav>
-                <span>TripDaddy</span>
+                <span className='logo'>TripDaddy</span>
 
                 {/* Render the login/register upon landing on the site */}
 
-                {!email && 
-                <div>
-                    <ul>
-                        <li>
-                            <Link to='/login'>Login</Link>
-                        </li>
-                        <li>
-                            <Link to='/signup'>Sign up</Link>
-                        </li>
-                    </ul>
-                </div>}
-
+                {!email &&
+                    <div className='notLoggedIn'>
+                        <ul>
+                            <li>
+                                <Link to='/login'><button>Login</button></Link>
+                            </li>
+                            <li>
+                                <Link to='/signup'><button>Sign up</button></Link>
+                            </li>
+                        </ul>
+                    </div>}
 
                 {/* Render these once you have logged in */}
 
-                {email && 
-                <div>
-                    <h3>
-                        Welcome, {username}
-                    </h3>
-                    {/* <img 
-                    src={`${profilePic}`}
+                {email &&
+
+                    <div className='loggedIn'>
+                        <h3>
+                            Welcome, {username}
+                        </h3>
+                        <div>
+                            {/* <img
+                    src={``}
                     alt='profile pic'
                     style={{height: '150px'}}/> */}
-                    <ul>
-                        <li>
-                            <Link to='/'>Home</Link>
-                        </li>
-                        <li>
-                            <Link to='/profile'>Profile</Link>
-                        </li>
-                        <li>
+                            <ul>
+                                <li>
+                                    <Link to='/'><button>Home</button></Link>
+                                </li>
+                                <li>
+                                    <Link to='/profile'><button>Profile</button></Link>
+                                </li>
+                                <li>
 
-                            <button
-                                onClick={this.handleLogoutSubmit}
-                            >Logout</button>
-                        </li>
-                    </ul>
-                </div>
+                                    <button
+                                        onClick={this.handleLogoutSubmit}
+                                    >Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 }
             </nav>
         )

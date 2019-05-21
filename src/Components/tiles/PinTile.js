@@ -60,7 +60,7 @@ class PinTile extends Component {
   }
 
   handleCancelSave = () => {
-    this.setState ({
+    this.setState({
       save: false
     })
   }
@@ -74,41 +74,45 @@ class PinTile extends Component {
   }
 
   render() {
-    const { title, media_url, description, url, price, address, city, state, country } = this.props.pin
+    const { title, media_url, description,
+      // url, price, address,
+      city, state, country } = this.props.pin
 
     if (this.state.save === false) {
 
       if (this.state.edit === false) {
 
         return (
-          <div
-            style={{ border: '1px solid black' }}>
-            <a
+          <div className='pinTile'
+            style={{ borderRadius: '10px' }}>
+            {/* <a
               href={`${url}`}
               target='_blank'
-              rel="noopener noreferrer"><h2>{title}</h2></a>
-            <h4>${price}</h4>
+              rel="noopener noreferrer"> */}
+            <h2>{title}</h2>
+            {/* </a> */}
+            {/* <h4>${price}</h4> */}
             <h4>{city}, {state}, {country}</h4>
             <img src={media_url}
               alt={title}
-              style={{ width: '200px' }} />
-            <h4>{address}</h4>
+              style={{ width: 'inherit' }} />
+            {/* <h4>{address}</h4> */}
             <p>{description}</p>
-            <div>
+            <div className='pinTileButtons'>
 
-              <button
+              {/* <button
                 onClick={() => {
                   this.setState({
                     edit: true
                   })
-                }}>Edit</button>
+                }}>Edit</button> */}
 
               <button
-              onClick={() => {
-                this.setState({
-                  save: true
-                })
-              }}>Save to Trip</button>
+                onClick={() => {
+                  this.setState({
+                    save: true
+                  })
+                }}>Save to Trip</button>
 
             </div>
           </div>
@@ -116,6 +120,7 @@ class PinTile extends Component {
       } else {
         return (
           <div
+            className='editPinTile'
             style={{ border: '1px solid black' }}>
             <h1>Create a Pin</h1>
 
@@ -197,15 +202,15 @@ class PinTile extends Component {
         )
       }
     } else {
-      return(
+      return (
         <div>
-          <SavePin 
-          title = {this.state.title}
-          media_url = {this.state.media_url}
-          description = {this.state.description}
-          pin_id = {this.state.pin_id}
-          handleSave = {this.handleSave}
-          handleCancelSave = {this.handleCancelSave}
+          <SavePin
+            title={this.state.title}
+            media_url={this.state.media_url}
+            description={this.state.description}
+            pin_id={this.state.pin_id}
+            handleSave={this.handleSave}
+            handleCancelSave={this.handleCancelSave}
           />
         </div>
       )

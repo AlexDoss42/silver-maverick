@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { updateUserId, updateEmail } from '../../redux/reducers/accountReducer'
 import axios from 'axios'
+
+import { updateUserId, updateEmail } from '../../redux/reducers/accountReducer'
 
 class LoginForm extends Component {
     constructor() {
@@ -37,7 +38,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <>
+            <div className='loginForm'>
                 <h1>Login</h1>
                 <form onSubmit= {this.handleLoginFormSubmit}>
                     <input
@@ -59,7 +60,7 @@ class LoginForm extends Component {
 
                 </form>
         {this.state.loginError && <h3>{this.state.loginErrorMessage}</h3>}
-            </>
+            </div>
         )
     }
 }

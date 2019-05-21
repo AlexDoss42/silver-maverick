@@ -24,12 +24,12 @@ class PickATrip extends Component {
     const { name, pin_id, trip_id } = this.state
 
     return (
-      <div>
+      <div className='tripOptionTiles'>
           <h4>{name}</h4>
-        <img
+        {/* <img
           src='http://s3.amazonaws.com/ht-images.couchsurfing.com/u/4318879/871d1646-2e2b-4907-87cb-7b57a248ef5d'
           alt='Dope Waterfall'
-          style={{ width: '40px' }} />
+          style={{ width: '40px' }} /> */}
           <button onClick = {() => this.props.handleSave(pin_id, trip_id)}>Save</button>
       </div>
     )

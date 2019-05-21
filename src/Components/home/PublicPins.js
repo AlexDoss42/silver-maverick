@@ -12,33 +12,33 @@ class PublicPins extends Component {
       search_input: ''
     }
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
     axios.get('/pin')
-    .then(res => {
-      this.setState({
-        pinboard: res.data
+      .then(res => {
+        this.setState({
+          pinboard: res.data
+        })
       })
-    })
-    .catch(() => console.log('You have an error in your CDM for PublicPins.js'))
+      .catch(() => console.log('You have an error in your CDM for PublicPins.js'))
   }
 
   handleDelete = async (deleteId) => {
     await axios.delete(`/pin/${deleteId}`)
     axios.get('/pin')
-    .then(res => {
-      this.setState({
-        pinboard: res.data
+      .then(res => {
+        this.setState({
+          pinboard: res.data
+        })
       })
-    })
   }
 
   handleEditPinSubmit = async (pin_id, title, media_url, description, url, price, address, city, state, country) => {
 
-    axios.put(`/pin/${pin_id}`, {title, media_url, description, url, price, address, city, state, country})
-    .then(res => {
-      this.componentDidMount()
-    })
+    axios.put(`/pin/${pin_id}`, { title, media_url, description, url, price, address, city, state, country })
+      .then(res => {
+        this.componentDidMount()
+      })
   }
 
   handleSearchInput = (e) => {
@@ -46,18 +46,18 @@ class PublicPins extends Component {
       [e.target.name]: e.target.value,
     })
   }
-  
+
   render() {
 
     const { search_input } = this.state
 
     const Pins = this.state.pinboard.map((pin) => (
-        <PinTile 
+      <PinTile
         pin={pin}
         key={pin.pin_id}
-        deleteId = {pin.pin_id}
-        handleDelete = {this.handleDelete}
-        handleEdit = {this.handleEditPinSubmit} />
+        deleteId={pin.pin_id}
+        handleDelete={this.handleDelete}
+        handleEdit={this.handleEditPinSubmit} />
     ))
 
     const filteredPins = Pins.filter(pin => {
@@ -67,27 +67,31 @@ class PublicPins extends Component {
       const lowerCaseState = pin.props.pin.state.toLocaleLowerCase()
       const lowerCaseCountry = pin.props.pin.country.toLocaleLowerCase()
       const lowerCaseSearch_input = search_input.toLocaleLowerCase()
-      if(search_input !== ''){
+      if (search_input !== '') {
         return (
-          lowerCaseTitle.includes(lowerCaseSearch_input) || lowerCaseDescription.includes(lowerCaseSearch_input) || lowerCaseCity.includes(lowerCaseSearch_input) || lowerCaseState.includes(lowerCaseSearch_input) || lowerCaseCountry.includes(lowerCaseSearch_input) 
-          )
-        } else {
-          return Pins
-        }
-      })
+          lowerCaseTitle.includes(lowerCaseSearch_input) || lowerCaseDescription.includes(lowerCaseSearch_input) || lowerCaseCity.includes(lowerCaseSearch_input) || lowerCaseState.includes(lowerCaseSearch_input) || lowerCaseCountry.includes(lowerCaseSearch_input)
+        )
+      } else {
+        return Pins
+      }
+    })
 
     return (
-      <div>
+      <div className='publicPins'>
         <h1>Need Inspiration?</h1>
-        <Link to='/pin/create'>
-          <button>Create a Pin</button>
-        </Link>
-        <input
-        name='search_input'
-        value={this.state.search_input}
-        placeholder='Search for your next adventure'
-        onChange = {this.handleSearchInput}></input>
-        {filteredPins}
+        <div className='pinboardPseudoNav'>
+          <Link to='/pin/create'>
+            <button>Create a Pin</button>
+          </Link>
+          <input
+            name='search_input'
+            value={this.state.search_input}
+            placeholder='Search for your next adventure'
+            onChange={this.handleSearchInput}></input>
+        </div>
+        <div className='publicPinBoard'>
+          {filteredPins}
+        </div>
 
       </div>
     )

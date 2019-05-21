@@ -1,0 +1,40 @@
+nav {
+  background: rgba($color: darkgreen, $alpha: .85);
+  display: flex;
+  color: whitesmoke;
+  justify-content: space-between;
+  align-content: center;
+  height: 8vh;
+  padding: 2vh 2.5vw
+}
+
+nav {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .notLoggedIn {
+    width: 20vw;
+  }
+
+  .loggedIn {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between
+  }
+
+  ul {
+    width: 20vw;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    padding-top: .8vh
+  }
+}

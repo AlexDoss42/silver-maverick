@@ -1,0 +1,56 @@
+.pinTile {
+  width: 22vw;
+  height: 45vh;
+  margin: 5vh 1vw;
+  background: rgba($color: whitesmoke, $alpha: .85);
+  text-align: center;
+  color: forestgreen;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+    padding-top: .5vh;
+  }
+
+  h4 {
+    font-size: .7rem;
+    padding-top: .5vh;
+  }
+
+  p {
+    height: 15%;
+    width: 96%;
+    margin: 1% 2%;
+    overflow: scroll;
+    font-size: .7rem;
+    text-transform: none
+  }
+
+  img {
+    height: 60%;
+  }
+
+  .pinTileButtons {
+    width: 96%;
+    margin: 0 2%;
+    display: flex;
+    justify-content: space-around;
+    
+    button {
+      color: forestgreen;
+      border-color: forestgreen;
+    }
+  }
+}
+
+// .editPinTile {
+//   @extend .pinTile;
+//   overflow: scroll;
+
+//   input {
+//     width: 96%;
+//     height: 10%;
+//     font-size: .6rem;
+//   }
+// }

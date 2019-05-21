@@ -13,34 +13,36 @@ class SavePin extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get(`/trip/mytrips/${this.props.user_id}`)
-    .then(res => {
-      this.setState({
-        myTrips: res.data
+      .then(res => {
+        this.setState({
+          myTrips: res.data
+        })
       })
-    })
-    .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
+      .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
   }
 
-  render(){
+  render() {
 
     const Trips = this.state.myTrips.map((trip, i) => (
       <PickATrip
-      trip = {trip}
-      key = {i}
-      pin_id = {this.props.pin_id}
-      handleSave = {this.props.handleSave}
+        trip={trip}
+        key={i}
+        pin_id={this.props.pin_id}
+        handleSave={this.props.handleSave}
       />
     ))
 
 
-    return(
-      <div>
+    return (
+      <div className='saveToTripMenu'>
         <h2>Choose a Trip</h2>
-        {Trips}
+        <div className='tripOptions'>
+          {Trips}
+        </div>
         <button
-        onClick = {this.props.handleCancelSave}>Cancel</button>
+          onClick={this.props.handleCancelSave}>Cancel</button>
       </div>
     )
   }

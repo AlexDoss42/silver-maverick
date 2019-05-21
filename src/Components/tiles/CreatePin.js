@@ -80,7 +80,7 @@ class CreatePin extends Component {
 
   render() {
     return (
-      <div>
+      <div className='createAPinForm'>
         <h1>Create a Pin</h1>
 
         <form onSubmit={this.handleCreatePinSubmit}>

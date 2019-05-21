@@ -1,0 +1,43 @@
+.publicPins {
+  width: 96vw;
+  height: 85vh;
+  // background: rgba($color:green, $alpha: .7);
+  margin: 2vh 2vw;
+  overflow: hidden;
+  border-radius: 10px;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: forestgreen;
+  }
+  .pinboardPseudoNav {
+    display: flex;
+    justify-content: space-between;
+    width: 94vw;
+    margin: 0 1vw;
+    position: sticky;
+
+    button {
+      width: 8vw;
+      color: forestgreen;
+      border-color: forestgreen;
+    }
+
+    input {
+      width: 84vw;
+      border-color: forestgreen;
+    }
+
+    input::placeholder {
+      color: forestgreen;
+    }
+  }
+
+  .publicPinBoard {
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+  }
+}

@@ -45,10 +45,6 @@ class SignUpForm extends Component {
       alert('Password is required')
     } else if (phone === '') {
       alert('Phone is required')
-    } else if (profilePic === '') {
-      this.setState({
-        profilePic: 'https://i.stack.imgur.com/IHLNO.jpg'
-      })
     } else {
 
       try {
@@ -77,7 +73,8 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <>
+      <div 
+      className='signUpForm'>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSignUpFormSubmit}>
           <input
@@ -140,7 +137,7 @@ class SignUpForm extends Component {
 
         </form>
         {this.state.signUpError && <h3>{this.state.signUpErrorMessage}</h3>}
-      </>
+      </div>
     )
   }
 }

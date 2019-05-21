@@ -1,0 +1,18 @@
+.createAPinForm {
+  height: 75vh;
+  width: 40vw;
+  background: rgba($color:darkgreen, $alpha: .85);
+  margin: 11vh 30vw; 
+  border-radius: 5px;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    padding-top: 1vh;
+  }
+
+  button {
+    width: 35vw;
+    margin: 1.5vh 2.5vw;
+  }
+}
