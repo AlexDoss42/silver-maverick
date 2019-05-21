@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import Invite from './Invite'
 // import Calendar from './Calendar'
 // import Weather from './Weather'
+import Invite from './Invite'
 import Group from './Group'
 import TodoList from './TodoList'
 import Gear from './Gear'

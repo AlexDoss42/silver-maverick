@@ -21,9 +21,11 @@ class PickAUser extends Component {
 
     if (this.state.personClicked === false) {
       return (
-        <div>
-          <h4>{username}</h4>
-          <h6>{`${firstname} ${lastname}`}</h6>
+        <div className='inviteTile'>
+        <div className='names'>
+          <h4>Username: {username}</h4>
+          <h6>Full name: {`${firstname} ${lastname}`}</h6>
+        </div>
 
           <button onClick={() => {
             this.props.addToInvitedList(this.props.user);
@@ -35,9 +37,11 @@ class PickAUser extends Component {
       )
     } else {
       return (
-        <div>
-          <h4>{username}</h4>
-          <h6>{`${firstname} ${lastname}`}</h6>
+        <div className='remove'>
+          <div className='names'>
+          <h4>Username: {username}</h4>
+          <h6>Full name: {`${firstname} ${lastname}`}</h6>
+        </div>
 
           <button onClick={() => {
             this.props.addToInvitedList(this.props.user);

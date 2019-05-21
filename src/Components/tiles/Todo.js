@@ -34,8 +34,7 @@ class Todo extends Component {
     })
   }
 
-  handleCancel = (e) => {
-    e.preventDefault()
+  handleCancel = () => {
     this.setState({
       edit: false
     })
@@ -76,7 +75,7 @@ class Todo extends Component {
           </form>
             <button
             onClick={()=> {
-              this.handleAddClick()
+              this.handleCancel()
             }}>Cancel</button>
         </div>
       )

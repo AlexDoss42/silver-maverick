@@ -1,0 +1,79 @@
+.invitePage {
+  height: 72vh;
+  width: 40vw;
+  background: rgba($color:darkgreen, $alpha: .85);
+  margin: 10vh 30vw; 
+  border-radius: 5px;
+  color: whitesmoke;
+
+  h2{
+    font-size: 1.1rem;
+    text-align: center;
+    color: whitesmoke;
+    height: 5%;
+    padding: 1%;
+  }
+
+  input {
+    width: 98%;
+    margin: 1%;
+    font-size: .8rem
+  }
+
+  .listOfInvitees {
+    height: 45%;
+    width: 98%;
+    margin: 1%;
+    overflow: scroll;
+  }
+
+  button {
+    width: 50%;
+    margin: 1% 25%;
+  }
+
+  h4 {
+    font-size: .8rem;
+    text-align: center;
+    margin-top: 1%;
+  }
+}
+
+.inviteTile {
+  border: 1px whitesmoke solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25%;
+  margin: 1%;
+
+  .names {
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  h4 {
+    text-align: left;
+    font-size: .8rem;
+    margin-bottom: 5%;
+  }
+
+  h6 {
+    text-align: left;
+    font-size: .6rem;
+  }
+
+  button {
+    height: 55%;
+    width: 12%;
+    margin: 0 2%;
+    padding: 0;
+    border: none;
+  }
+}
+
+.remove {
+  @extend .inviteTile
+}

@@ -43,7 +43,7 @@ class TripTile extends Component {
         </Link>
         <img
           src={`${tripPic}`}
-          alt='first photo from pins' />
+          alt='first pic from pintile' />
         <button
           onClick={() => this.props.handleDelete(this.props.deleteId)}>Delete</button>
       </div>

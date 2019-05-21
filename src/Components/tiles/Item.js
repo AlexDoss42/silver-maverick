@@ -35,8 +35,7 @@ class Item extends Component {
     })
   }
 
-  handleCancel = (e) => {
-    e.preventDefault()
+  handleCancel = () => {
     this.setState({
       edit: false
     })
@@ -84,7 +83,7 @@ class Item extends Component {
           </form>
             <button
             onClick={()=> {
-              this.handleAddClick()
+              this.handleCancel()
             }}>Cancel</button>
         </div>
       )

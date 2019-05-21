@@ -120,19 +120,26 @@ class Invite extends Component {
     })
 
     return (
-      <div>
+      <div className='invitePage'>
         <h2>Whose coming with you on {name}?</h2>
+
         <input
           name='search_input'
           value={this.state.search_input}
           placeholder='Search for your adventure buddies'
-          onChange={this.handleInput}></input>
+          onChange={this.handleInput} />
+          
+       <div className='listOfInvitees'>
         {filteredUsers}
+       </div>
+
         <button
           onClick={() => {
             handleClick();
             this.AddUsersToTrip(this.state.invited)
           }}>Done</button>
+
+
         <h4>Couldn't find your adventure buddy? Invite them to join TripDaddy</h4>
 
         <input
