@@ -78,7 +78,9 @@ class PublicPins extends Component {
 
     return (
       <div className='publicPins'>
+
         <h1>Need Inspiration?</h1>
+
         <div className='pinboardPseudoNav'>
           <Link to='/pin/create'>
             <button>Create a Pin</button>
@@ -89,6 +91,7 @@ class PublicPins extends Component {
             placeholder='Search for your next adventure'
             onChange={this.handleSearchInput}></input>
         </div>
+        
         <div className='publicPinBoard'>
           {filteredPins}
         </div>

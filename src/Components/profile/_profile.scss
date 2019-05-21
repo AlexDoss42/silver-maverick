@@ -1,0 +1,45 @@
+.profilePage {
+  width: 96vw;
+  height: 85vh;
+  margin: 2vh 2vw;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: forestgreen;
+  }
+
+  .profilePageBtnContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    width: 8vw;
+    margin: 2vh 5vw;
+    color: forestgreen;
+    border-color: forestgreen;
+  }
+
+}
+
+.myTripsBoard {
+  width: 100%;
+  height: 85%;  
+
+  h2{
+    color: forestgreen;
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 2%;
+  }
+
+  .tripTilesOnBoard {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: scroll;
+  }
+}

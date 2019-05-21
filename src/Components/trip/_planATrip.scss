@@ -1,19 +1,19 @@
-.createAPinForm {
-  height: 75vh;
+.planATrip {
+  height: 30vh;
   width: 40vw;
   background: rgba($color:darkgreen, $alpha: .85);
-  margin: 11vh 30vw; 
+  margin: 31vh 30vw; 
   border-radius: 5px;
   color: whitesmoke;
 
   h1 {
     font-size: 2rem;
     text-align: center;
-    padding-top: 1vh;
+    padding: 1vh;
   }
 
   button {
     width: 35vw;
-    margin: 1.5vh 2.5vw;
+    margin: 3vh 2.5vw 0vh 2.5vw;
   }
 }

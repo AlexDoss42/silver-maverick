@@ -1,11 +1,20 @@
 @import '../src/reset';
+
 @import '../src/Components/navbar';
+
 @import '../src/Components/account/loginForm';
 @import '../src/Components/account/signUpForm';
 @import '../src/Components/home/publicPins';
+
 @import '../src/Components/tiles/createPin';
 @import '../src/Components/tiles/pinTile';
+@import '../src/Components/tiles/tripTile';
 @import '../src/Components/tiles/savePin';
+
+@import '../src/Components/profile/profile';
+
+@import '../src/Components/trip/planATrip';
+
 
 body {
    font-family: 'Raleway', sans-serif;
@@ -19,7 +28,7 @@ body {
   max-width: 600px;
   margin: 30px auto;
   border: 1px solid #ddd;
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.5);
   border-radius: 2px;
 }
 

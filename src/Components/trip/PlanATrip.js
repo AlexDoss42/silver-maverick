@@ -66,7 +66,7 @@ class PlanATrip extends Component {
 
   render() {
     return (
-      <div>
+      <div className='planATrip'>
         <h1>Plan A Trip</h1>
 
         <form onSubmit={this.handleCreateTripSubmit}>

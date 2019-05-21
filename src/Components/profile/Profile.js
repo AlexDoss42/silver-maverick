@@ -22,18 +22,19 @@ class Profile extends Component {
       )
     })
   }
-  
+
   render() {
     return (
-      <div>
-        <h1>PROFILE PAGE</h1>
-        <h2>Where to next {this.props.username}?</h2>
-        <Link to='/trip/plan'>
-          <button>Plan a Trip</button>
-        </Link>
-        <Link to='/pin/create'>
-          <button>Create a Pin</button>
-        </Link>
+      <div className='profilePage'>
+        <h1>Where to next {this.props.username}?</h1>
+        <div className='profilePageBtnContainer'>
+          <Link to='/trip/plan'>
+            <button>Plan a Trip</button>
+          </Link>
+          <Link to='/pin/create'>
+            <button>Create a Pin</button>
+          </Link>
+        </div>
 
         <MyTrips />
 

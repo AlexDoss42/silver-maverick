@@ -12,14 +12,14 @@ class MyTrips extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get(`/trip/mytrips/${this.props.user_id}`)
-    .then(res => {
-      this.setState({
-        tripboard: res.data
+      .then(res => {
+        this.setState({
+          tripboard: res.data
+        })
       })
-    })
-    .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
+      .catch(() => console.log('You have an error in your CDM for MyTrips.js'))
   }
 
   handleDelete = async (deleteId) => {
@@ -31,21 +31,23 @@ class MyTrips extends Component {
 
     const Trips = this.state.tripboard.map((trip) => (
       <TripTile
-      trip = {trip}
-      key = {trip.trip_id}
-      deleteId = {trip.trip_id}
-      handleDelete = {this.handleDelete}
+        trip={trip}
+        key={trip.trip_id}
+        deleteId={trip.trip_id}
+        handleDelete={this.handleDelete}
       />
     ))
 
 
     return (
       <div
-      style={{border: '1px solid black'}}>
-        <h1>Where you have been, where you are, and where you are going</h1>
+        className='myTripsBoard'>
 
-        {Trips}
-        
+
+        <h2>Where you have been, where you are, and where you are going</h2>
+        <div className='tripTilesOnBoard'>
+          {Trips}
+        </div>
       </div>
     )
   }
@@ -53,7 +55,7 @@ class MyTrips extends Component {
 
 const mapStateToProps = (reduxState) => {
   const { username, user_id } = reduxState.account
-  return { username, user_id}
+  return { username, user_id }
 }
 
 

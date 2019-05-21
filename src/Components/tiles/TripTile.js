@@ -37,14 +37,13 @@ class TripTile extends Component {
     const { name, user_id, trip_id, tripPic } = this.state
     
     return (
-      <div>
+      <div className='tripTile'>
         <Link to = {`/trip/${user_id}/${trip_id}`}>
-          <h1>{name}</h1>
+          <h3>{name}</h3>
         </Link>
         <img
           src={`${tripPic}`}
-          alt='Dope Waterfall'
-          style={{ width: '200px' }} />
+          alt='first photo from pins' />
         <button
           onClick={() => this.props.handleDelete(this.props.deleteId)}>Delete</button>
       </div>
