@@ -4,14 +4,14 @@ class PinnedPin extends Component {
   constructor(props) {
     super(props)
 
-    const { pin_id, title, media, description, url, price, address, city, state, country } = this.props.pin
+    const { pin_id, title, media_url, description, url, price, address, city, state, country } = this.props.pin
     const { trip_id } = this.props
 
     this.state = {
       trip_id,
       pin_id,
       title,
-      media,
+      media_url,
       description,
       url,
       price,
@@ -23,7 +23,7 @@ class PinnedPin extends Component {
   }
 
   render() {
-    const { trip_id, pin_id, title, media, description, url, price, address, city, state, country } = this.state
+    const { trip_id, pin_id, title, media_url, description, url, price, address, city, state, country } = this.state
 
     return (
       <div
@@ -34,7 +34,7 @@ class PinnedPin extends Component {
           rel="noopener noreferrer"><h2>{title}</h2></a>
         <h4>${price}</h4>
         <h4>{city}, {state}, {country}</h4>
-        <img src={media}
+        <img src={media_url}
           alt={title}
           style={{ width: '200px' }} />
         <h4>{address}</h4>

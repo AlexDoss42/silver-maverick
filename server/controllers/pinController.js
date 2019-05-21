@@ -30,9 +30,9 @@ module.exports = {
 
   createPin: (req, res) => {
     const db = req.app.get('db')
-    const {title, media, description, url, price, address, city, state, country} = req.body
+    const {title, media_url, description, url, price, address, city, state, country} = req.body
 
-    db.pins.createPin({title, media, description, url, price, address, city, state, country})
+    db.pins.createPin({title, media_url, description, url, price, address, city, state, country})
     .then(() => res.sendStatus(200))
     .catch(err => console.log(err))
   },
@@ -40,9 +40,9 @@ module.exports = {
   updatePin: (req, res) => {
     const db = req.app.get('db')
     const { id } = req.params
-    const {title, media, description, url, price, address, city, state, country} = req.body
+    const {title, media_url, description, url, price, address, city, state, country} = req.body
 
-    db.pins.updatePin({id, title, media, description, url, price, address, city, state, country})
+    db.pins.updatePin({id, title, media_url, description, url, price, address, city, state, country})
     .then(() => res.sendStatus(200))
     .catch(err => res.status(500).send(err))
 

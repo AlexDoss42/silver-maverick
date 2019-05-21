@@ -33,9 +33,9 @@ class PublicPins extends Component {
     })
   }
 
-  handleEditPinSubmit = async (pin_id, title, media, description, url, price, address, city, state, country) => {
+  handleEditPinSubmit = async (pin_id, title, media_url, description, url, price, address, city, state, country) => {
 
-    axios.put(`/pin/${pin_id}`, {title, media, description, url, price, address, city, state, country})
+    axios.put(`/pin/${pin_id}`, {title, media_url, description, url, price, address, city, state, country})
     .then(res => {
       this.componentDidMount()
     })

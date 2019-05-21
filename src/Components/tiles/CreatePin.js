@@ -9,7 +9,7 @@ class CreatePin extends Component {
 
     this.state = {
       title: '',
-      media: '',
+      media_url: '',
       description: '',
       url: '',
       price: '',
@@ -47,12 +47,12 @@ class CreatePin extends Component {
     e.preventDefault()
 
     const {
-      title, media, description, url, price, address, city, state, country
+      title, media_url, description, url, price, address, city, state, country
     } = this.state
 
     if (title === '') {
       alert('Pin title is required')
-    } else if (media === '') {
+    } else if (media_url === '') {
       alert('Image url is required')
     } else if (description === '') {
       alert('A brief description is required')
@@ -66,7 +66,7 @@ class CreatePin extends Component {
       alert('Country is required')
     } else {
 
-      axios.post('/pin', { title, media, description, url, price, address, city, state, country })
+      axios.post('/pin', { title, media_url, description, url, price, address, city, state, country })
 
       this.props.history.push('/')
 
@@ -94,9 +94,9 @@ class CreatePin extends Component {
           />
           <input
             type='text'
-            name='media'
+            name='media_url'
             placeholder='Image URL'
-            value={this.state.media}
+            value={this.state.media_url}
             onChange={this.handleFormInputUpdate}
           />
           <input

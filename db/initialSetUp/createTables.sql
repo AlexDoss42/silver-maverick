@@ -24,7 +24,7 @@ create table trip (
 create table pin (
   pin_id serial primary key,
   title varChar(50),
-  media text,
+  media_url text,
   description varChar(400),
   url text,
   price int,

@@ -1,7 +1,7 @@
 update pin
 
 set title = ${title},
-    media = ${media},
+    media_url = ${media_url},
     description = ${description},
     url = ${url},
     price = ${price},

@@ -1,6 +1,6 @@
 insert into pin (
   title,
-  media,
+  media_url,
   description,
   url,
   price,

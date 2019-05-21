@@ -7,19 +7,19 @@ class PinTile extends Component {
   constructor(props) {
     super(props)
 
-    const { pin_id, title, media, description, url, price, address, city, state, country } = this.props.pin
+    const { pin_id, title, media_url, description, url, price, address, city, state, country } = this.props.pin
 
     this.state = {
-      pin_id: pin_id,
-      title: title,
-      media: media,
-      description: description,
-      url: url,
-      price: price,
-      address: address,
-      city: city,
-      state: state,
-      country: country,
+      pin_id,
+      title,
+      media_url,
+      description,
+      url,
+      price,
+      address,
+      city,
+      state,
+      country,
       edit: false,
       save: false
     }
@@ -35,10 +35,10 @@ class PinTile extends Component {
     e.preventDefault()
 
     const {
-      pin_id, title, media, description, url, price, address, city, state, country
+      pin_id, title, media_url, description, url, price, address, city, state, country
     } = this.state
 
-    this.props.handleEdit(pin_id, title, media, description, url, price, address, city, state, country)
+    this.props.handleEdit(pin_id, title, media_url, description, url, price, address, city, state, country)
 
     this.setState({
       edit: false
@@ -74,7 +74,7 @@ class PinTile extends Component {
   }
 
   render() {
-    const { title, media, description, url, price, address, city, state, country } = this.props.pin
+    const { title, media_url, description, url, price, address, city, state, country } = this.props.pin
 
     if (this.state.save === false) {
 
@@ -89,7 +89,7 @@ class PinTile extends Component {
               rel="noopener noreferrer"><h2>{title}</h2></a>
             <h4>${price}</h4>
             <h4>{city}, {state}, {country}</h4>
-            <img src={media}
+            <img src={media_url}
               alt={title}
               style={{ width: '200px' }} />
             <h4>{address}</h4>
@@ -130,9 +130,9 @@ class PinTile extends Component {
               />
               <input
                 type='text'
-                name='media'
-                placeholder={this.state.media}
-                value={this.state.media}
+                name='media_url'
+                placeholder={this.state.media_url}
+                value={this.state.media_url}
                 onChange={this.handleFormInputUpdate}
               />
               <input
@@ -201,7 +201,7 @@ class PinTile extends Component {
         <div>
           <SavePin 
           title = {this.state.title}
-          media = {this.state.media}
+          media_url = {this.state.media_url}
           description = {this.state.description}
           pin_id = {this.state.pin_id}
           handleSave = {this.handleSave}

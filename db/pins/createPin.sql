@@ -1,6 +1,6 @@
 insert into pin (
   title,
-  media,
+  media_url,
   description,
   url,
   price,
@@ -10,7 +10,7 @@ insert into pin (
   country
 ) values (
   ${title},
-  ${media},
+  ${media_url},
   ${description},
   ${url},
   ${price},
