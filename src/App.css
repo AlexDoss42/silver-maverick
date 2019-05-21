@@ -1,5 +1,12 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
+}
+
 body{
-  font-family: 'Nunito';
+   font-family: 'Raleway', sans-serif;
 }
 
 h2{
@@ -54,7 +61,7 @@ input{
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #eee;
-  font-family: Nunito;
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
 }
 
