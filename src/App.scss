@@ -10,11 +10,14 @@
 @import '../src/Components/tiles/pinTile';
 @import '../src/Components/tiles/tripTile';
 @import '../src/Components/tiles/savePin';
+@import '../src/Components/tiles/pinnedPins';
 
 @import '../src/Components/profile/profile';
 
 @import '../src/Components/trip/planATrip';
 @import '../src/Components/trip/invite';
+@import '../src/Components/trip/trip';
+@import '../src/Components/trip/tripBoard';
 
 
 body {
@@ -27,16 +30,17 @@ body {
 
 #adventure-chat {
   max-width: 600px;
-  margin: 30px auto;
+  // margin: 30px auto;
   border: 1px solid #ddd;
   box-shadow: 1px 3px 5px rgba(0,0,0,0.5);
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 #chat-window{
-  height: 400px;
+  height: 88%;
   overflow: auto;
   background: #f9f9f9;
+  border-radius: 10px;
 }
 
 #output p{

@@ -23,21 +23,25 @@ class PinnedPin extends Component {
   }
 
   render() {
-    const { trip_id, pin_id, title, media_url, description, url, price, address, city, state, country } = this.state
+    const { trip_id, pin_id, title, media_url, description, 
+      // url, price, address, 
+      city, state, country } = this.state
 
     return (
       <div
-        style={{ border: '1px solid black' }}>
-        <a
+        className='pinnedPins'>
+        {/* <a
           href={`${url}`}
           target='_blank'
-          rel="noopener noreferrer"><h2>{title}</h2></a>
-        <h4>${price}</h4>
+          rel="noopener noreferrer"> */}
+          <h2>{title}</h2>
+          {/* </a> */}
+        {/* <h4>${price}</h4> */}
         <h4>{city}, {state}, {country}</h4>
         <img src={media_url}
           alt={title}
-          style={{ width: '200px' }} />
-        <h4>{address}</h4>
+           />
+        {/* <h4>{address}</h4> */}
         <p>{description}</p>
         <div>
 

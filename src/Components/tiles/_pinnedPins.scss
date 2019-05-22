@@ -1,5 +1,5 @@
-.pinTile {
-  width: 22vw;
+.pinnedPins {
+  width: 31%;
   height: 45vh;
   margin: 1%;
   background: rgba($color: whitesmoke, $alpha: .85);
@@ -45,14 +45,3 @@
     }
   }
 }
-
-// .editPinTile {
-//   @extend .pinTile;
-//   overflow: scroll;
-
-//   input {
-//     width: 96%;
-//     height: 10%;
-//     font-size: .6rem;
-//   }
-// }

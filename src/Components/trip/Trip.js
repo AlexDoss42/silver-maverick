@@ -23,7 +23,9 @@ class Trip extends Component {
       // group_leader: true,
       name: '',
       user_id: null,
-      invite: false
+      invite: false,
+      lists: false,
+      Dashboard: true,
     }
   }
 
@@ -59,33 +61,82 @@ class Trip extends Component {
     })
   }
 
+  handlePageShiftToLists = () => {
+    this.setState({
+      lists: true,
+      Dashboard: false
+    })
+  }
+
+  handlePageShiftToDashboard = () => {
+    this.setState({
+      lists: false,
+      Dashboard: true
+    })
+  }
+
   render() {
 
-    const { name, invite, trip_id, user_id } = this.state
+    const { name, invite, trip_id, user_id, lists } = this.state
 
     if (invite === false) {
-      return (
-        <div>
 
-          <h1>{name}</h1>
+      if (lists === false) {
+        return (
+          <div className='tripPage'>
+            <h1>{name}</h1>
+
+            <div className='tripPseudoNav'>
+              {/* <Weather /> */}
+              <button
+                onClick={() => {
+                  this.handlePageShiftToDashboard()
+                }}>Dashboard</button>
+              <button
+                onClick={() => {
+                  this.handlePageShiftToLists()
+                }}>Lists</button>
+            </div>
+            <div className="dashboardHero">
+              {/* <Calendar /> */}
+              <TripBoard
+                trip_id={trip_id} />
+              <Chat
+                trip_id={trip_id} />
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className='tripPage'>
+
+            <h1>{name}</h1>
+
+            <div className='tripPseudoNav'>
+              {/* <Weather /> */}
+              <button
+                onClick={() => {
+                  this.handlePageShiftToDashboard()
+                }}>Dashboard</button>
+              <button
+                onClick={() => {
+                  this.handlePageShiftToLists()
+                }}>Lists</button>
+            </div>
 
 
-          {/* <Calendar /> */}
-          {/* <Weather /> */}
-          <Group
-            trip_id={trip_id} />
-          <button
-            onClick={() => this.handleClick()}>Invite</button>
-          <TodoList 
-          trip_id = {trip_id}/>
-          <Gear 
-          trip_id = {trip_id}/>
-          <Chat
-            trip_id={trip_id} />
-          <TripBoard
-            trip_id={trip_id} />
-        </div>
-      )
+            <Group
+              trip_id={trip_id} />
+            <button
+              onClick={() => this.handleClick()}>Invite</button>
+            <TodoList
+              trip_id={trip_id} />
+            <Gear
+              trip_id={trip_id} />
+
+          </div>
+        )
+      }
     } else {
       return (
         <div>

@@ -1,0 +1,30 @@
+.tripPage {
+  color: black;
+  height: 91vh;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1%;
+  }
+  
+  .tripPseudoNav {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    margin: 1% 30%;
+  }
+
+  button {
+    color: forestgreen;
+    border-color: forestgreen;
+  }
+
+  .dashboardHero {
+    display: flex;
+    justify-content: space-between;
+    height: 78vh;
+    width: 96vw;
+    margin: 0 2vw;
+  }
+}

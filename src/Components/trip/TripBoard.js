@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import PinnedPin from '../tiles/PinnedPins'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
+// import { Link } from 'react-router-dom'
 // import { connect } from 'react-redux'
+
+import PinnedPin from '../tiles/PinnedPins'
 
 class TripBoard extends Component {
   constructor(props) {
@@ -52,12 +53,17 @@ class TripBoard extends Component {
 
 
     return (
-      <div>
-        <h1>Ideas for your Adventure</h1>
-        <Link to='/pin/create'>
-          <button>Create a Pin</button>
-        </Link>
-        {Pins}
+      <div className='tripBoard'>
+        <div className='tripBoardPseudoNav'>
+          <h1>Ideas for your Adventure</h1>
+          {/* <Link to='/pin/create'>
+            <button>Create a Pin</button>
+          </Link> */}
+        </div>
+
+        <div className='tripPinBoard'>
+          {Pins}
+        </div>
 
       </div>
     )

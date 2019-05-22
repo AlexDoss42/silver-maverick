@@ -40,6 +40,11 @@ class Chat extends Component {
       })
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevState.conversation !== this.state.conversation)
+
+  // }
+
   addMessage = (data) => {
     const newConvo = this.state.conversation.slice()
     newConvo.push(data)
