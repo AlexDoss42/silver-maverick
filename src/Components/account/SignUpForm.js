@@ -65,7 +65,7 @@ class SignUpForm extends Component {
           phone: '',
           venmo: '',
           profilePic: '',
-          loginError: true
+          signupError: true
         })
       }
     }
@@ -136,7 +136,7 @@ class SignUpForm extends Component {
           <button>Sign Up</button>
 
         </form>
-        {this.state.signUpError && <h3>{this.state.signUpErrorMessage}</h3>}
+        {this.state.signupError && <h3>{this.state.signupErrorMessage}</h3>}
       </div>
     )
   }
