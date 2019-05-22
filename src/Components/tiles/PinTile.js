@@ -121,7 +121,7 @@ class PinTile extends Component {
         return (
           <div
             className='editPinTile'
-            style={{ border: '1px solid black' }}>
+            >
             <h1>Create a Pin</h1>
 
             <form onSubmit={this.handleEditPinSubmit}>

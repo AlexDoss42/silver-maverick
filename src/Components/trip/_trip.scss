@@ -1,5 +1,5 @@
 .tripPage {
-  color: black;
+  color: #121212;
   height: 91vh;
 
   h1 {
@@ -27,4 +27,9 @@
     width: 96vw;
     margin: 0 2vw;
   }
+}
+
+.listsHero {
+  @extend .dashboardHero;
+  border: 1px red solid;
 }
