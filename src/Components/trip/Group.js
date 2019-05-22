@@ -28,7 +28,7 @@ class Group extends Component {
 
   handleRemove = async (user_id, trip_id) => {
     await axios.delete(`/group/members/${user_id}/${trip_id}`)
-    
+
     await axios.get(`/group/members/${trip_id}`)
       .then(res => {
         this.setState({
@@ -50,9 +50,11 @@ class Group extends Component {
 
     return (
 
-      <div>
+      <div className='group'>
         <h4>Your Adventure Buddies</h4>
-        {members}
+        <div className='membersList'>
+          {members}
+        </div>
       </div>
     )
   }

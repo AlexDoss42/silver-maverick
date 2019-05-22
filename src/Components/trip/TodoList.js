@@ -102,11 +102,11 @@ class TodoList extends Component {
       return (
         <>
           <h4>Task for the trip</h4>
+          {Tasks}
           <button
             onClick={() => {
               this.handleAddClick()
             }}>Add a Todo</button>
-          {Tasks}
         </>
       )
     } else {

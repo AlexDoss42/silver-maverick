@@ -108,11 +108,11 @@ class Gear extends Component {
       return (
         <>
           <h4>Gear for the trip</h4>
+          {Items}
           <button
             onClick={() => {
               this.handleAddClick()
             }}>Add Gear</button>
-          {Items}
         </>
       )
     } else {
