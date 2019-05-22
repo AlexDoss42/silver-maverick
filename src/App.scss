@@ -27,6 +27,21 @@ body {
   background: #e9e9e9
 }
 
+input{
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 0;
+  display: block;
+  width: 99%;
+  margin: .5%;
+  color: whitesmoke;
+  background: rgba($color:#eeeeee, $alpha: 0);
+  border-bottom: 1px solid whitesmoke;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
 input::placeholder {
   color: whitesmoke;
 }

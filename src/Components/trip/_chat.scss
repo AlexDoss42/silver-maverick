@@ -9,9 +9,9 @@
     width: 80%;
     margin: 1% 10% 0 10%;
     background: rgba($color: #eeeeee, $alpha: 0);
-    color: forestgreen;
+    color: #0b2b13;
     font-size: 1rem;
-    border: 1px forestgreen solid;
+    border: 1px #0b2b13 solid;
     border-radius: 4px;
     text-transform: uppercase;
   }
@@ -51,7 +51,7 @@ label{
 }
 
 input::placeholder {
-  color: forestgreen;
+  color: #0b2b13;
 }
 
 input{
@@ -62,7 +62,7 @@ input{
   width: 100%;
   color: black;
   background: rgba($color:#eeeeee, $alpha: 0);
-  border-bottom: 1px solid forestgreen;
+  border-bottom: 1px solid #0b2b13;
   font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
   font-size: .75rem;

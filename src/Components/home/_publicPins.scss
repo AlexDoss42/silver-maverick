@@ -9,7 +9,7 @@
   h1 {
     font-size: 2rem;
     text-align: center;
-    color: forestgreen;
+    color: #0b2b13;
   }
   .pinboardPseudoNav {
     display: flex;
@@ -20,17 +20,17 @@
 
     button {
       width: 8vw;
-      color: forestgreen;
-      border-color: forestgreen;
+      color: #0b2b13;
+      border-color: #0b2b13;
     }
 
     input {
       width: 84vw;
-      border-color: forestgreen;
+      border-color: #0b2b13;
     }
 
     input::placeholder {
-      color: forestgreen;
+      color: #0b2b13;
     }
   }
 
