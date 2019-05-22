@@ -41,9 +41,9 @@ class Gear extends Component {
 
     let { name, quantity, trip_id } = this.state
 
-    if(name === '') {
+    if (name === '') {
       alert('Gear name is required')
-    } else if(quantity === '') {
+    } else if (quantity === '') {
       alert('You need to put a quantity on that item')
     } else {
 
@@ -106,14 +106,17 @@ class Gear extends Component {
     ))
     if (this.state.addGear === false) {
       return (
-        <>
+        <div className='gearList'>
           <h4>Gear for the trip</h4>
-          {Items}
+          <div className="items">
+            {Items}
+          </div>
           <button
+          className='addBtn'
             onClick={() => {
               this.handleAddClick()
             }}>Add Gear</button>
-        </>
+        </div>
       )
     } else {
       return (

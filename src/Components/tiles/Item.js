@@ -4,7 +4,7 @@ class Item extends Component {
   constructor(props) {
     super(props)
 
-    const { name , quantity, gear_id } = this.props.item
+    const { name, quantity, gear_id } = this.props.item
     const { deleteId } = this.props
 
     this.state = {
@@ -45,51 +45,53 @@ class Item extends Component {
 
     let { name, quantity, deleteId } = this.state
 
-    if(this.state.edit === false) {
+    if (this.state.edit === false) {
       return (
-        <div>
+        <div className='item'>
           <p><em>{name}</em>: {quantity}</p>
-          <button
-          onClick={() => {
-            this.setState({
-              edit: true
-            })
-          }}>edit </button>
-          <button
-          onClick={() => {
-            this.props.handleDelete(deleteId)
-          }}> delete</button>
+          <div>
+            <button
+              onClick={() => {
+                this.setState({
+                  edit: true
+                })
+              }}>edit </button>
+            <button
+              onClick={() => {
+                this.props.handleDelete(deleteId)
+              }}> delete</button>
+          </div>
         </div>
       )
     } else {
-      return(
+      return (
         <div>
           <form onSubmit={this.handleEditItemSubmit}>
             <input
-            type='text'
-            name='name'
-            placeholder='Gear name'
-            value={this.state.name}
-            onChange={this.handleFormInputUpdate}
+              type='text'
+              name='name'
+              placeholder='Gear name'
+              value={this.state.name}
+              onChange={this.handleFormInputUpdate}
             />
             <input
-            type='number'
-            name='quantity'
-            placeholder='Quantity'
-            value={this.state.quantity}
-            onChange={this.handleFormInputUpdate}
+              type='number'
+              name='quantity'
+              placeholder='Quantity'
+              value={this.state.quantity}
+              onChange={this.handleFormInputUpdate}
             />
             <button>Submit</button>
           </form>
-            <button
-            onClick={()=> {
+          <button
+            onClick={() => {
               this.handleCancel()
             }}>Cancel</button>
         </div>
       )
-      
+
     }
-    
+
   }
 }
 

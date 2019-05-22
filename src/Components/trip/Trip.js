@@ -128,7 +128,7 @@ class Trip extends Component {
               <div className='lists'>
                 <Group
                   trip_id={trip_id} />
-                <button
+                <button className='inviteBtn'
                   onClick={() => this.handleClick()}>Invite</button>
                 <TodoList
                   trip_id={trip_id} />

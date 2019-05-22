@@ -100,18 +100,21 @@ class TodoList extends Component {
     ))
     if (this.state.addTodo === false) {
       return (
-        <>
+        <div className='todos'>
           <h4>Task for the trip</h4>
-          {Tasks}
+          <div className='taskList'>
+            {Tasks}
+          </div>
           <button
+          className='addBtn'
             onClick={() => {
               this.handleAddClick()
             }}>Add a Todo</button>
-        </>
+        </div>
       )
     } else {
       return (
-        <>
+        <div className='todos'>
           <h4>Todos for the trip</h4>
           <form onSubmit={this.handleCreateGearSubmit}>
             <input
@@ -129,7 +132,7 @@ class TodoList extends Component {
               this.handleAddClick()
             }}>Cancel</button>
           {Tasks}
-        </>
+        </div>
       )
     }
 

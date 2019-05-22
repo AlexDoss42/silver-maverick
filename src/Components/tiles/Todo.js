@@ -44,44 +44,46 @@ class Todo extends Component {
 
     let { task, deleteId } = this.state
 
-    if(this.state.edit === false) {
+    if (this.state.edit === false) {
       return (
-        <div>
-          <p><em>{task}</em></p>
-          <button
-          onClick={() => {
-            this.setState({
-              edit: true
-            })
-          }}>edit </button>
-          <button
-          onClick={() => {
-            this.props.handleDelete(deleteId)
-          }}> delete</button>
+        <div className='task'>
+          <p><em>Todo: {task}</em></p>
+          <div>
+            <button
+              onClick={() => {
+                this.setState({
+                  edit: true
+                })
+              }}>edit </button>
+            <button
+              onClick={() => {
+                this.props.handleDelete(deleteId)
+              }}> delete</button>
+          </div>
         </div>
       )
     } else {
-      return(
+      return (
         <div>
           <form onSubmit={this.handleEditItemSubmit}>
             <input
-            type='text'
-            name='task'
-            placeholder='Task'
-            value={this.state.task}
-            onChange={this.handleFormInputUpdate}
+              type='text'
+              name='task'
+              placeholder='Task'
+              value={this.state.task}
+              onChange={this.handleFormInputUpdate}
             />
             <button>Submit</button>
           </form>
-            <button
-            onClick={()=> {
+          <button
+            onClick={() => {
               this.handleCancel()
             }}>Cancel</button>
         </div>
       )
-      
+
     }
-    
+
   }
 }
 
