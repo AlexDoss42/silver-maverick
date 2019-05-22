@@ -65,7 +65,7 @@ class Item extends Component {
       )
     } else {
       return (
-        <div>
+        <div className='item'>
           <form onSubmit={this.handleEditItemSubmit}>
             <input
               type='text'

@@ -64,7 +64,7 @@ class Todo extends Component {
       )
     } else {
       return (
-        <div>
+        <div  className='task'>
           <form onSubmit={this.handleEditItemSubmit}>
             <input
               type='text'

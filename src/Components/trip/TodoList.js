@@ -98,6 +98,7 @@ class TodoList extends Component {
         handleOnClickEdit={this.handleOnClickEdit}
       />
     ))
+
     if (this.state.addTodo === false) {
       return (
         <div className='todos'>
@@ -114,7 +115,7 @@ class TodoList extends Component {
       )
     } else {
       return (
-        <div className='todos'>
+        <>
           <h4>Todos for the trip</h4>
           <form onSubmit={this.handleCreateGearSubmit}>
             <input
@@ -127,12 +128,12 @@ class TodoList extends Component {
 
             <button>Submit</button>
           </form>
+
           <button
             onClick={() => {
               this.handleAddClick()
             }}>Cancel</button>
-          {Tasks}
-        </div>
+        </>
       )
     }
 

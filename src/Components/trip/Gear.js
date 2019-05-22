@@ -104,6 +104,7 @@ class Gear extends Component {
         handleOnClickEdit={this.handleOnClickEdit}
       />
     ))
+
     if (this.state.addGear === false) {
       return (
         <div className='gearList'>
@@ -143,7 +144,6 @@ class Gear extends Component {
             onClick={() => {
               this.handleAddClick()
             }}>Cancel</button>
-          {Items}
         </>
       )
     }
