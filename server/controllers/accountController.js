@@ -197,7 +197,7 @@ module.exports = {
         subject: `Come on an adventure with ${username} & TripDaddy`,
         text: `Hey ${invite_name}! ${username} wants you to come on a trip using TripDaddy! click on the link below to register!
     
-    http://localhost:3000/#/signup
+        http://tripdaddy.business/#/signup
     `
       };
 
