@@ -73,6 +73,9 @@ class Chat extends Component {
         user_id: this.props.user_id,
         trip_id,
       })
+      this.setState({
+        message: ''
+      })
     }
   }
 

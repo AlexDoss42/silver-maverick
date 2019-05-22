@@ -21,11 +21,12 @@ class Message extends Component {
 
     return (
       <div>
-        <p><em>{username}</em>: {message}</p>
+        <p>{username}: {message}
         <span
         onClick={() => {
           this.props.handleDelete(deleteId)
         }}>x</span>
+        </p>
       </div>
     )
   }

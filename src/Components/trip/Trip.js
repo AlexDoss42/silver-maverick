@@ -124,15 +124,21 @@ class Trip extends Component {
                 }}>Lists</button>
             </div>
 
+            <div className='listsHero'>
+              <div className='lists'>
+                <Group
+                  trip_id={trip_id} />
+                <button
+                  onClick={() => this.handleClick()}>Invite</button>
+                <TodoList
+                  trip_id={trip_id} />
+                <Gear
+                  trip_id={trip_id} />
+              </div>
 
-            <Group
-              trip_id={trip_id} />
-            <button
-              onClick={() => this.handleClick()}>Invite</button>
-            <TodoList
-              trip_id={trip_id} />
-            <Gear
-              trip_id={trip_id} />
+              <Chat
+                trip_id={trip_id} />
+            </div>
 
           </div>
         )
