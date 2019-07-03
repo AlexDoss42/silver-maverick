@@ -16,7 +16,7 @@ class Chat extends Component {
       user_id: this.props.user_id
     }
 
-    this.socket = io.connect('http://localhost:4242');
+    this.socket = io.connect(process.env.REACT_APP_SOCKET_HOST);
 
     this.socket.on('room response', data => this.addMessage(data));
 

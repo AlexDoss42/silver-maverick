@@ -85,6 +85,4 @@ const mapDispatchToProps = {
     updateEmail
 }
 
-// export default Navbar
-
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
