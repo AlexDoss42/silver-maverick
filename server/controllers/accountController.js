@@ -22,7 +22,7 @@ module.exports = {
     // Checks to see if the email is already in the system
 
     let emailTaken = await db.account.verifyEmail({ email })
-      .catch(err => console.log(33333, err))
+      .catch(err => console.log(err))
     emailTaken = +emailTaken[0].count
 
     if (emailTaken !== 0) {
@@ -47,7 +47,7 @@ module.exports = {
       profilePic
     }).catch(err => console.log(err))
 
-    // Creates a sesion user to avoid having to login
+    // Creates a session user to avoid having to login
 
     session.user = {
       email,
